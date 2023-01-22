@@ -1,0 +1,10 @@
+Endpoint listado All:
+
+https://api.themoviedb.org/3/movie/popular?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&page=1
+
+Detalle peli:
+https://api.themoviedb.org/3/movie/899112?api_key=80ff9fee839cee60957533079f03548c&language=en-US
+
+Imagen
+https://image.tmdb.org/t/p/ w500/ kqjL17yufvn9OVLyXYpvtyrFfak.jpg
+

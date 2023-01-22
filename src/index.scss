@@ -1,0 +1,38 @@
+@import '~sass-reset';
+* {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.navbar {
+    color: #ffffff;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    background-color: #24292f;
+    &__list {
+        display: flex;
+    }
+    &__logo {
+        height: 2.5rem;
+        width: 2.5rem;
+        background-color: #ffffff;
+        margin-right: 2rem;
+        border-radius: 2rem;
+        padding: 0.2rem;
+    }
+
+    &__element {
+        margin-right: 1rem;
+    }
+
+    &__element:hover {
+        color: rgb(163, 163, 163);
+    }
+
+    &__login {
+        margin-left: auto;
+    }
+    &__login:hover {
+        color: rgb(163, 163, 163);
+    }
+}
