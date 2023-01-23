@@ -1,3 +1,3 @@
 export function Footer() {
-    return <footer>"footer"</footer>;
+    return <footer>Final Project of the ISDI Coders Bootcamp by Michael Damiani</footer>;
 }
