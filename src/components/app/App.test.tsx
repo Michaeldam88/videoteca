@@ -12,10 +12,10 @@ describe('Given App component', () => {
     });
     describe('When it has been render', () => {
         test('Then its child components should be render also with its title', () => {
-            const headerTitle = screen.getByRole('heading', {
-                name: 'Calculadora Transporte',
+            const loginBtn = screen.getByRole('button', {
+                name: 'Login',
             });
-            expect(headerTitle).toBeInTheDocument();
+            expect(loginBtn).toBeInTheDocument();
         });
         
     });
