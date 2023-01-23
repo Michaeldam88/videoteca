@@ -2,7 +2,7 @@
 
 # Videoteca
 
-Para el proyecto final de mi bootcamp en ISDI Coders he decidido desarrollar una web donde podremos buscar películas y series. Ahí veremos los detalles y también podremos añadir a nuestros favoritos los que más nos guste. Seguramente nos vendrá bien en esos días en que no sepamos que escoger.
+Para el proyecto final de mi bootcamp en ISDI Coders he decidido desarrollar una web donde podremos buscar películas y series. Ahí veremos los detalles y también podremos añadir a nuestros favoritos las que más nos gusten. Seguramente nos vendrá bien en esos días en que no sepamos que escoger.
 
 Requisitos del proyecto:
 
@@ -23,7 +23,7 @@ Para su desarrollo he intentado utilizar todas las tecnologías adquiridas duran
 -   Para el código: Typescrip,
 -   Para el css: Sass y BEM
 -   Para los tests: Jest
--   Como api pública: The movie databesa API
+-   Como api pública: The movie database API
 -   Para la persistencia: Firebase Realtime Database
 -   Para el login: Firebase Authentication
 -   Para comprobar la calidad del código: Git Action y Sonar (https://sonarcloud.io/project/overview?id=Michaeldam88_videoteca)
