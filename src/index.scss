@@ -4,7 +4,12 @@
     font-family: 'Lato', sans-serif;
 }
 
+%custom-container {
+    padding: 1rem;
+}
+
 .header {
+    @extend %custom-container;
     height: 3.16rem;
     background: rgb(61, 78, 169);
     background: linear-gradient(
@@ -15,7 +20,6 @@
     color: white;
     display: flex;
     align-items: center;
-    padding: 1rem;
     &__logo-container {
         display: flex;
         align-items: center;
@@ -46,7 +50,7 @@
 
 .tabs {
     margin-top: 0.8rem;
-    border-bottom: 2px solid #E7ECFF;
+    border-bottom: 2px solid #e7ecff;
     &__movie {
         color: #1976d2;
         font-size: 1.8rem;
@@ -58,14 +62,13 @@
 }
 
 .home {
+    @extend %custom-container;
     color: #a8a8a8;
     &__search-container {
         display: flex;
-        width: 80%;
         margin: auto;
-        align-items: center;        
-        margin-top: 2rem;        
-        
+        align-items: center;
+        margin-top: 1rem;
     }
 
     &__search-box {
@@ -77,15 +80,29 @@
         width: 100%;
         margin-right: 0.4rem;
     }
-    &__search{
+    &__search {
         margin-left: 0.5rem;
     }
 
-
-    &__filter{
+    &__filter {
         border: 2px solid #e0e0e0;
         padding: 0.4rem;
         border-radius: 0.5rem;
     }
+}
 
+footer {
+    @extend %custom-container;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #537ce8;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
