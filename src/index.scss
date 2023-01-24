@@ -20,16 +20,15 @@
         display: flex;
         align-items: center;
     }
-    &__logo-container:hover{
+    &__logo-container:hover {
         cursor: pointer;
     }
     &__logo {
         transform: rotate(-15deg);
         margin-right: 0.6rem;
         font-size: 1.85rem;
-        
     }
-    &__text{
+    &__text {
         font-weight: 600;
         letter-spacing: 1px;
     }
@@ -40,7 +39,23 @@
         border-radius: 1rem;
         padding: 0.4rem;
     }
-    &__login:hover{
+    &__login:hover {
         cursor: pointer;
     }
+}
+
+.tabs {
+    margin-top: 0.8rem;
+    &__movie {
+        color: #1976d2;
+        font-size: 1.8rem;
+    }
+    &__star {
+        color: #ffcd17;
+        font-size: 1.8rem;
+    }
+}
+
+.home{
+    color: #A8A8A8;
 }

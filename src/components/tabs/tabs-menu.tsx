@@ -12,19 +12,34 @@ export function TabsMenu() {
 
     return (
         <nav className="tabs">
-            <ul className="tabs__list">
-                <li className="tabs__element">
-                    <Link to={'/home'}>{'Videoteca'}</Link>
-                </li>
-
-                <li className="tabs__element">
-                    <Link to={'/favorites'}>{'Favoritos'}</Link>
-                </li>
-            </ul>
-            <Tabs value={value} onChange={handleChange} centered>
-                <Tab label="Item One" />
-                <Tab label="Item Two" />
-                <Tab label="Item Three" />
+            <Tabs
+                value={value}
+                variant="fullWidth"
+                onChange={handleChange}
+                centered
+            >
+                <Tab
+                    label={
+                        <Link to={'/home'}>
+                            {
+                                <span className="tabs__movie material-symbols-outlined">
+                                    movie_filter
+                                </span>
+                            }
+                        </Link>
+                    }
+                />
+                <Tab
+                    label={
+                        <Link to={'/favorites'}>
+                            {
+                                <span className="tabs__star material-symbols-outlined">
+                                    hotel_class
+                                </span>
+                            }
+                        </Link>
+                    }
+                />
             </Tabs>
         </nav>
     );
