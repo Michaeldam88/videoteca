@@ -46,6 +46,7 @@
 
 .tabs {
     margin-top: 0.8rem;
+    border-bottom: 2px solid #E7ECFF;
     &__movie {
         color: #1976d2;
         font-size: 1.8rem;
@@ -56,6 +57,35 @@
     }
 }
 
-.home{
-    color: #A8A8A8;
+.home {
+    color: #a8a8a8;
+    &__search-container {
+        display: flex;
+        width: 80%;
+        margin: auto;
+        align-items: center;        
+        margin-top: 2rem;        
+        
+    }
+
+    &__search-box {
+        border: 2px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        padding: 0.4rem 0.6rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        margin-right: 0.4rem;
+    }
+    &__search{
+        margin-left: 0.5rem;
+    }
+
+
+    &__filter{
+        border: 2px solid #e0e0e0;
+        padding: 0.4rem;
+        border-radius: 0.5rem;
+    }
+
 }
