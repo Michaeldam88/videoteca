@@ -2,6 +2,11 @@
 
 * {
     font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+body {
+    min-width: 310px;
 }
 
 %custom-container {
@@ -63,8 +68,8 @@
 
 .home {
     @extend %custom-container;
-    color: #a8a8a8;
     &__search-container {
+        color: #a8a8a8;
         display: flex;
         margin: auto;
         align-items: center;
@@ -89,6 +94,18 @@
         padding: 0.4rem;
         border-radius: 0.5rem;
     }
+    &__filter:hover {
+        cursor: pointer;
+    }
+    &__title {
+        margin-top: 1.5rem;
+        font-size: 1.4rem;
+        color: #3d3d3d;
+    }
+}
+
+.movies-list {
+    display: flex
 }
 
 footer {
@@ -99,7 +116,7 @@ footer {
     width: 100%;
     height: 2.5rem;
     background-color: #537ce8;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-style: italic;
     color: white;
     position: absolute;
