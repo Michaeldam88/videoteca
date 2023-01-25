@@ -12,11 +12,10 @@ describe('Given App component', () => {
     });
     describe('When it has been render', () => {
         test('Then its child components should be render also with its title', () => {
-            const loginBtn = screen.getByRole('button', {
-                name: 'Login',
+            const loginBtn = screen.getByRole('link', {
+                name: 'movie_filter',
             });
             expect(loginBtn).toBeInTheDocument();
         });
-        
     });
 });

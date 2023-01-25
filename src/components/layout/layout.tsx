@@ -1,13 +1,13 @@
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
-import { Tabs } from '../tabs/tabs';
+import { TabsMenu } from '../tabs/tabs-menu';
 
 export function Layout({ children }: { children: JSX.Element }) {
     return (
         <>
             <Header></Header>
-            <Tabs></Tabs>
-            <main>{children}</main>
+            <TabsMenu></TabsMenu>
+            {children}
             <Footer></Footer>
         </>
     );

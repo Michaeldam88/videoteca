@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
-
 export function Header() {
     return (
         <header className="header">
-            <img className="header__logo" alt="logo" />
-            <button className="header__login">
-                <Link to={'/login'}>{'Login'}</Link>
-            </button>
+            <div className="header__logo-container">
+                <span className="header__logo material-symbols-outlined">
+                    theaters
+                </span>
+                <p className="header__text">Videoteca</p>
+            </div>
+
+            <span className="header__login material-symbols-outlined">
+                person
+            </span>
         </header>
     );
 }

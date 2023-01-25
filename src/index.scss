@@ -2,4 +2,227 @@
 
 * {
     font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+body {
+    min-width: 390px;
+}
+
+#root {
+    position: relative;
+}
+
+%custom-container {
+    padding: 1.5rem;
+}
+
+.header {
+    @extend %custom-container;
+    height: 3.16rem;
+    background: rgb(61, 78, 169);
+    background: linear-gradient(
+        180deg,
+        rgba(61, 78, 169, 1) 0%,
+        rgba(63, 105, 212, 1) 100%
+    );
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    &__logo-container {
+        display: flex;
+        align-items: center;
+    }
+    &__logo-container:hover {
+        cursor: pointer;
+    }
+    &__logo {
+        transform: rotate(-15deg);
+        margin-right: 0.6rem;
+        font-size: 1.85rem;
+    }
+    &__text {
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    &__login {
+        font-size: 1.3rem;
+        margin-left: auto;
+        background-color: #586fc5;
+        border-radius: 1rem;
+        padding: 0.4rem;
+    }
+    &__login:hover {
+        cursor: pointer;
+    }
+}
+
+.tabs {
+    //border-bottom: 2px solid #e7ecff;
+    position: fixed;
+    padding: 0.4rem 0 1.4rem 0;
+    top: 3.16rem;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.199) 15%,
+        rgba(255, 255, 255, 1) 30%
+    );
+    &__movie {
+        color: #1976d2;
+        font-size: 1.8rem;
+    }
+    &__star {
+        color: #ffcd17;
+        font-size: 1.8rem;
+    }
+}
+
+.home {
+    @extend %custom-container;
+    position: relative;
+    top: 7.5rem;
+    z-index: -1;
+    &__search-container {
+        color: #a8a8a8;
+        display: flex;
+        margin: auto;
+        align-items: center;
+    }
+
+    &__search-box {
+        border: 2px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        padding: 0.4rem 0.6rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        margin-right: 0.4rem;
+    }
+    &__search {
+        margin-left: 0.5rem;
+    }
+
+    &__filter {
+        border: 2px solid #e0e0e0;
+        padding: 0.4rem;
+        border-radius: 0.5rem;
+    }
+    &__filter:hover {
+        cursor: pointer;
+    }
+    &__title {
+        margin-top: 1.5rem;
+        font-size: 1.4rem;
+        color: #3d3d3d;
+    }
+}
+
+.movies-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-right: -1rem;
+}
+
+.movie-card {
+    display: flex;
+    position: relative;
+    color: white;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    &__img {
+        border-radius: 1rem;
+        width: 160px;
+    }
+    &__top {
+        position: absolute;
+        height: 3rem;
+        width: 100%;
+        top: 0rem;
+        right: 0rem;
+        text-align: right;
+        padding: 0.5rem;
+        color: #ffcd17;
+        background: rgb(0, 0, 0);
+        background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+    &__tag {
+        position: absolute;
+        left: 1rem;
+        bottom: 4rem;
+        background-color: #3c3939;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
+    }
+    &__bottom {
+        position: absolute;
+        bottom: 0;
+        background: rgb(0, 0, 0);
+        height: 4.5rem;
+        width: 100%;
+        background: linear-gradient(
+            0deg,
+            rgb(0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 1.2rem 1rem;
+    }
+    &__title {
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+    }
+    &__year {
+        font-size: 0.8rem;
+    }
+}
+
+.MuiTablePagination-root {
+    margin-bottom: 1rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+    padding-left: 0 !important;
+}
+
+.css-16c50h-MuiInputBase-root-MuiTablePagination-select {
+    margin-right: 0.2rem !important;
+}
+
+footer {
+    @extend %custom-container;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    background-color: #537ce8;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
