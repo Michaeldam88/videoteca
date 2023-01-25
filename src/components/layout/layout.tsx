@@ -7,7 +7,7 @@ export function Layout({ children }: { children: JSX.Element }) {
         <>
             <Header></Header>
             <TabsMenu></TabsMenu>
-            <main>{children}</main>
+            {children}
             <Footer></Footer>
         </>
     );
