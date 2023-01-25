@@ -26,6 +26,9 @@ body {
         rgba(61, 78, 169, 1) 0%,
         rgba(63, 105, 212, 1) 100%
     );
+    position: fixed;
+    top: 0;
+    width: 100%;
     color: white;
     display: flex;
     align-items: center;
@@ -58,8 +61,18 @@ body {
 }
 
 .tabs {
-    margin-top: 0.8rem;
-    border-bottom: 2px solid #e7ecff;
+    //border-bottom: 2px solid #e7ecff;
+    position: fixed;
+    padding: 0.4rem 0 1.4rem 0;
+    top: 3.16rem;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.199) 15%,
+        rgba(255, 255, 255, 1) 30%
+    );
     &__movie {
         color: #1976d2;
         font-size: 1.8rem;
@@ -72,12 +85,14 @@ body {
 
 .home {
     @extend %custom-container;
+    position: relative;
+    top: 7.5rem;
+    z-index: -1;
     &__search-container {
         color: #a8a8a8;
         display: flex;
         margin: auto;
         align-items: center;
-        margin-top: 1rem;
     }
 
     &__search-box {
