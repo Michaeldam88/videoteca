@@ -3,7 +3,6 @@ import React from 'react';
 import { Search } from '../../components/search/search';
 
 export default function Home() {
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -20,7 +19,6 @@ export default function Home() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-
 
     return (
         <main className="home">
@@ -132,17 +130,7 @@ export default function Home() {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
             <div className="modal">
-                <div className="filter-modal">
-                    <h2 className="filter-modal__title">Selecciona Genero</h2>
-                    <ul className="filter-modal__list">
-                        <li className="filter-modal__list-element filter-modal__list-element-all">
-                            All
-                        </li>
-                        <li className="filter-modal__list-element">Terror</li>
-                        <li className="filter-modal__list-element">Actión</li>
-                    </ul>
-                    <button className="filter-modal__btn">Filtra</button>
-                </div>
+                
             </div>
             <article></article>
         </main>

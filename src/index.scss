@@ -273,12 +273,82 @@ footer {
         border: none;
     }
 
-    &__btn{
-        background-color: #537CE8;
+    &__btn {
+        background-color: #537ce8;
         width: 100%;
         padding: 0.8rem;
         color: white;
         border-radius: 0.3rem;
         font-size: 1rem;
     }
+}
+
+.details-modal {
+    position: relative;
+    background-color: white;
+    border-radius: 0.4rem;
+    padding: 1.2rem 1.5rem;
+    width: 100%;
+    max-height: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    overflow-y: auto;
+    color: #8e8e8e;
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: #f1f1f1;
+        border-radius: 1rem;
+        padding: 0.2rem;
+        color: #3c3939;
+    }
+    &__main-info {
+        display: flex;
+        align-items: end;
+        margin-top: 1rem;
+    }
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #3c3939;
+    }
+    &__age {
+        margin: 0 0.6rem 0 0.4rem;
+    }
+    &__star {
+        font-size: 2rem;
+        color: #ffcd17;
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+        span{
+            margin: 0 0.2rem;
+        }
+        p{
+            font-size: 0.9rem;
+        }
+    }
+    &__img {
+        border-radius: 1rem;
+        width: 200px;
+    }
+    h3{
+        margin-top: 1rem;
+        color: black;
+        font-size: 1.2rem;
+    }
+
+    h4{        
+        color: black;
+        font-size: 1rem;
+    }
+    &__role{
+        margin-top: 0.1rem;
+        font-size: 0.8rem;
+    }
+
 }
