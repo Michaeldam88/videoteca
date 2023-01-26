@@ -210,6 +210,17 @@ body {
     margin-right: 0.2rem !important;
 }
 
+.favorites {
+    @extend %custom-container;
+    position: relative;
+    top: 5.5rem;
+    &__title {
+        margin-top: 1.5rem;
+        font-size: 1.4rem;
+        color: #3d3d3d;
+    }
+}
+
 footer {
     @extend %custom-container;
     display: flex;
@@ -325,10 +336,10 @@ footer {
     &__info {
         display: flex;
         align-items: center;
-        span{
+        span {
             margin: 0 0.2rem;
         }
-        p{
+        p {
             font-size: 0.9rem;
         }
     }
@@ -336,19 +347,18 @@ footer {
         border-radius: 1rem;
         width: 200px;
     }
-    h3{
+    h3 {
         margin-top: 1rem;
         color: black;
         font-size: 1.2rem;
     }
 
-    h4{        
+    h4 {
         color: black;
         font-size: 1rem;
     }
-    &__role{
+    &__role {
         margin-top: 0.1rem;
         font-size: 0.8rem;
     }
-
 }
