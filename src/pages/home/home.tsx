@@ -1,5 +1,6 @@
 import TablePagination from '@mui/material/TablePagination';
 import React from 'react';
+import { DetailsModal } from '../../components/details-modal/details-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 
@@ -42,7 +43,9 @@ export default function Home() {
                 rowsPerPage={rowsPerPage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            {/* <div className="modal"></div> */}
+            <div className="modal">
+                <DetailsModal />
+            </div>
         </main>
     );
 }
