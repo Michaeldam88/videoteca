@@ -5,16 +5,13 @@
     letter-spacing: 0.5px;
 }
 
-body {
-    min-width: 390px;
-}
-
 #root {
     position: relative;
 }
 
 %custom-container {
     padding: 1.5rem;
+    min-width: 390px;
 }
 
 .header {
@@ -106,6 +103,7 @@ body {
     }
     &__search {
         margin-left: 0.5rem;
+        width: 100%;
     }
 
     &__filter {
@@ -137,6 +135,7 @@ body {
     color: white;
     margin-bottom: 1rem;
     margin-right: 1rem;
+    cursor: pointer;
 
     &__img {
         border-radius: 1rem;
@@ -172,7 +171,7 @@ body {
     }
     &__bottom {
         position: absolute;
-        bottom: 0;        
+        bottom: 0;
         height: 4.5rem;
         width: 100%;
         background: rgb(0, 0, 0);
@@ -363,18 +362,46 @@ footer {
     }
 }
 
-@media all and (min-width: 38rem){
-    .movie-card__img{
-        border-radius: 1rem;
-        width: 220px;
+@media all and (min-width: 38rem) {
+    .movie-card {
+        &__img {
+            border-radius: 1rem;
+            width: 220px;
+        }
+        &__top {
+            height: 4rem;
+            padding: 0.8rem;
+            span {
+                font-size: 2rem;
+            }
+        }
+        &__tag {
+            bottom: 5rem;
+            font-size: 1rem;
+        }
+        &__bottom {
+            height: 5.5rem;
+            padding: 1.2rem 1rem;
+        }
+        &__title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+        &__year {
+            font-size: 0.9rem;
+        }
     }
-	
 }
 
-@media all and (min-width: 75rem){
+@media all and (min-width: 76rem) {
     #root {
         margin: 0 auto;
-        width: 75rem;
+        max-width: 76rem;
     }
-	
+    .header,
+    footer,
+    .tabs {
+        max-width: 76rem;
+    }
 }
