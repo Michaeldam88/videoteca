@@ -172,10 +172,10 @@ body {
     }
     &__bottom {
         position: absolute;
-        bottom: 0;
-        background: rgb(0, 0, 0);
+        bottom: 0;        
         height: 4.5rem;
         width: 100%;
+        background: rgb(0, 0, 0);
         background: linear-gradient(
             0deg,
             rgb(0, 0, 0) 0%,
@@ -361,4 +361,20 @@ footer {
         margin-top: 0.1rem;
         font-size: 0.8rem;
     }
+}
+
+@media all and (min-width: 38rem){
+    .movie-card__img{
+        border-radius: 1rem;
+        width: 220px;
+    }
+	
+}
+
+@media all and (min-width: 75rem){
+    #root {
+        margin: 0 auto;
+        width: 75rem;
+    }
+	
 }

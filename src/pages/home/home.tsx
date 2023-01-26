@@ -1,5 +1,6 @@
 import TablePagination from '@mui/material/TablePagination';
 import React from 'react';
+import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 
 export default function Home() {
@@ -24,7 +25,14 @@ export default function Home() {
         <main className="home">
             <Search></Search>
             <h1 className="home__title">Peliculas Populares</h1>
-            <ul className="movies-list"></ul>
+            <ul className="movies-list">
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+            </ul>
 
             <TablePagination
                 component="div"
