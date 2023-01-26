@@ -131,13 +131,15 @@ export default function Home() {
                 rowsPerPage={rowsPerPage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            <div className="filter-modal__container">
-                <div className="filter-modal__box">
+            <div className="modal">
+                <div className="filter-modal">
                     <h2 className="filter-modal__title">Selecciona Genero</h2>
                     <ul className="filter-modal__list">
-                        <li>All</li>
-                        <li>Terror</li>
-                        <li>Actión</li>
+                        <li className="filter-modal__list-element filter-modal__list-element-all">
+                            All
+                        </li>
+                        <li className="filter-modal__list-element">Terror</li>
+                        <li className="filter-modal__list-element">Actión</li>
                     </ul>
                     <button className="filter-modal__btn">Filtra</button>
                 </div>
