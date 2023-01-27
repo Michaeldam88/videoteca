@@ -1,3 +1,5 @@
+import { login } from "../../services/firebaseAuth";
+
 export function Header() {
     return (
         <header className="header">
@@ -8,7 +10,7 @@ export function Header() {
                 <p className="header__text">Videoteca</p>
             </div>
 
-            <span className="header__login material-symbols-outlined">
+            <span className="header__login material-symbols-outlined" onClick={() => login()}>
                 person
             </span>
         </header>
