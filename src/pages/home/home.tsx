@@ -43,9 +43,10 @@ export default function Home() {
                 rowsPerPage={rowsPerPage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            <div className="modal">
+            {/* <div className="modal">
                 <DetailsModal />
-            </div>
+            </div> */}
+            
         </main>
     );
 }

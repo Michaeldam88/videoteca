@@ -126,15 +126,13 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 1.5rem;
-    margin-right: -1rem;
+    gap: 1rem 1rem;
 }
 
 .movie-card {
     display: flex;
     position: relative;
     color: white;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
     cursor: pointer;
 
     &__img {
@@ -327,6 +325,7 @@ footer {
         border-radius: 1rem;
         padding: 0.2rem;
         color: #3c3939;
+        cursor: pointer;
     }
     &__main-info {
         display: flex;
@@ -344,6 +343,7 @@ footer {
     &__star {
         font-size: 2rem;
         color: #ffcd17;
+        cursor: pointer;
     }
     &__info {
         display: flex;
@@ -411,6 +411,64 @@ footer {
     .details-modal{
         width: 80%;
         max-width: 60rem;
+        display:inline-flex;
+        &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: #f1f1f1;
+        border-radius: 1rem;
+        padding: 0.2rem;
+        color: #3c3939;
+        cursor: pointer;
+    }
+    &__main-info {
+        display: flex;
+        align-items: end;
+        margin-top: 1rem;
+    }
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #3c3939;
+    }
+    &__age {
+        margin: 0 0.6rem 0 0.4rem;
+    }
+    &__star {
+        font-size: 2rem;
+        color: #ffcd17;
+        cursor: pointer;
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+        span {
+            margin: 0 0.2rem;
+        }
+        p {
+            font-size: 0.9rem;
+        }
+    }
+    &__img {
+        border-radius: 1rem;
+        width: 220px;
+        
+    }
+    h3 {
+        margin-top: 1rem;
+        color: black;
+        font-size: 1.2rem;
+    }
+
+    h4 {
+        color: black;
+        font-size: 1rem;
+    }
+    &__role {
+        margin-top: 0.1rem;
+        font-size: 0.8rem;
+    }
     }
 }
 
