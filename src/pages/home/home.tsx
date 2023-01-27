@@ -1,12 +1,19 @@
 import TablePagination from '@mui/material/TablePagination';
-import React from 'react';
-import { DetailsModal } from '../../components/details-modal/details-modal';
+import React, { useContext, useEffect } from 'react';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
+import { MovieContext } from '../../context/movie.context';
+
 
 export default function Home() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const { getPopularMovies, movies } = useContext(MovieContext);
+
+    useEffect(() => {
+        getPopularMovies();
+    }, [getPopularMovies]);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -27,12 +34,12 @@ export default function Home() {
             <Search></Search>
             <h1 className="home__title">Peliculas Populares</h1>
             <ul className="movies-list">
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
+                {movies.map((element) => (
+                    <MovieCard
+                        key={element.id}
+                        movie={element}
+                    />
+                ))}
             </ul>
 
             <TablePagination
@@ -46,7 +53,6 @@ export default function Home() {
             {/* <div className="modal">
                 <DetailsModal />
             </div> */}
-            
         </main>
     );
 }
