@@ -5,16 +5,13 @@
     letter-spacing: 0.5px;
 }
 
-body {
-    min-width: 390px;
-}
-
 #root {
     position: relative;
 }
 
 %custom-container {
     padding: 1.5rem;
+    min-width: 390px;
 }
 
 .header {
@@ -87,7 +84,7 @@ body {
 .home {
     @extend %custom-container;
     position: relative;
-    top: 7.5rem;
+    top: 7rem;
     &__search-container {
         color: #a8a8a8;
         display: flex;
@@ -106,6 +103,7 @@ body {
     }
     &__search {
         margin-left: 0.5rem;
+        width: 100%;
     }
 
     &__filter {
@@ -117,7 +115,7 @@ body {
         cursor: pointer;
     }
     &__title {
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
         font-size: 1.4rem;
         color: #3d3d3d;
     }
@@ -128,15 +126,14 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 1.5rem;
-    margin-right: -1rem;
+    gap: 1rem 1rem;
 }
 
 .movie-card {
     display: flex;
     position: relative;
     color: white;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+    cursor: pointer;
 
     &__img {
         border-radius: 1rem;
@@ -173,9 +170,9 @@ body {
     &__bottom {
         position: absolute;
         bottom: 0;
-        background: rgb(0, 0, 0);
         height: 4.5rem;
         width: 100%;
+        background: rgb(0, 0, 0);
         background: linear-gradient(
             0deg,
             rgb(0, 0, 0) 0%,
@@ -213,7 +210,7 @@ body {
 .favorites {
     @extend %custom-container;
     position: relative;
-    top: 5.5rem;
+    top: 5rem;
     &__title {
         margin-top: 1.5rem;
         font-size: 1.4rem;
@@ -247,17 +244,19 @@ footer {
     background-color: #00000051;
     padding: 1rem 0.75rem;
     display: flex;
+    justify-content: center;
 }
 .filter-modal {
     background-color: white;
     border-radius: 0.4rem;
     padding: 1.2rem 1.5rem 1rem 1.5rem;
-    width: 100%;
+    width: 90%;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: flex-end;
+    min-width: 300px;
 
     &__title {
         font-weight: 600;
@@ -279,7 +278,17 @@ footer {
         border-top: 1px solid #eaeaea;
         width: 100%;
         text-align: center;
+        cursor: pointer;
     }
+
+    &__list-element:hover {
+        background-color: #eaeaea;
+    }
+
+    &__list-element:active {
+        background-color: #c1c1c1;
+    }
+
     &__list-element-all {
         border: none;
     }
@@ -307,6 +316,7 @@ footer {
     align-self: center;
     overflow-y: auto;
     color: #8e8e8e;
+    min-width: 300px;
     &__close {
         position: absolute;
         top: 1rem;
@@ -315,6 +325,7 @@ footer {
         border-radius: 1rem;
         padding: 0.2rem;
         color: #3c3939;
+        cursor: pointer;
     }
     &__main-info {
         display: flex;
@@ -332,6 +343,7 @@ footer {
     &__star {
         font-size: 2rem;
         color: #ffcd17;
+        cursor: pointer;
     }
     &__info {
         display: flex;
@@ -360,5 +372,56 @@ footer {
     &__role {
         margin-top: 0.1rem;
         font-size: 0.8rem;
+    }
+}
+
+@media all and (min-width: 38rem) {
+    .movie-card {
+        &__img {
+            border-radius: 1rem;
+            width: 210px;
+        }
+        &__top {
+            height: 4rem;
+            padding: 0.8rem;
+            span {
+                font-size: 2rem;
+            }
+        }
+        &__tag {
+            bottom: 5rem;
+            font-size: 1rem;
+        }
+        &__bottom {
+            height: 5.5rem;
+            padding: 1.2rem 1rem;
+        }
+        &__title {
+            font-size: 1.2rem;
+        }
+        &__year {
+            font-size: 0.9rem;
+        }
+    }
+    .filter-modal {
+        width: 25rem;
+        align-self: center;
+    }
+
+    .details-modal{
+        width: 80%;
+        max-width: 60rem;        
+    }
+}
+
+@media all and (min-width: 76rem) {
+    #root {
+        margin: 0 auto;
+        max-width: 76rem;
+    }
+    .header,
+    footer,
+    .tabs {
+        max-width: 76rem;
     }
 }

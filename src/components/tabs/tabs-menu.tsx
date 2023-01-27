@@ -20,25 +20,21 @@ export function TabsMenu() {
             >
                 <Tab
                     label={
-                        <Link to={'/home'}>
-                            {
-                                <span className="tabs__movie material-symbols-outlined">
-                                    movie_filter
-                                </span>
-                            }
-                        </Link>
+                        <span className="tabs__movie material-symbols-outlined">
+                            movie_filter
+                        </span>
                     }
+                    to="/home"
+                    component={Link}
                 />
                 <Tab
                     label={
-                        <Link to={'/favorites'}>
-                            {
-                                <span className="tabs__star material-symbols-outlined">
-                                    hotel_class
-                                </span>
-                            }
-                        </Link>
+                        <span className="tabs__star material-symbols-outlined">
+                            hotel_class
+                        </span>
                     }
+                    to="/favorites"
+                    component={Link}
                 />
             </Tabs>
         </nav>
