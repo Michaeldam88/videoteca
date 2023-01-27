@@ -14,10 +14,10 @@ export const login = async () => {
         user_type: 'public-user',
     });
     const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.idToken;
-    console.log(credential);
-    console.log(token);
+    //const credential = GoogleAuthProvider.credentialFromResult(result);
+    //const token = credential?.idToken;
+    //console.log(credential);
+    //console.log(token);
     alert(`Bienvenido ${result.user.displayName}`)
 
     
