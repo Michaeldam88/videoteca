@@ -4,7 +4,7 @@ export class TmdbApi {
     async getPopularMovies() {
         const result = await (
             await fetch(
-                'https://api.themoviedb.org/3/movie/popular?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&page=1'
+                'https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&region=ES&page=1&sort_by=popularity.desc&include_adult=false'
             )
         ).json();
         return result;
@@ -26,9 +26,17 @@ export class TmdbApi {
         movieGenres.genres.map((element: GenreStructure) =>
             result.push(element)
         );
-        tvGenres.genres.map((element: GenreStructure) =>
-            result.push(element)
-        );
+        tvGenres.genres.map((element: GenreStructure) => result.push(element));
+        return result;
+    }
+
+    async getDetails(id: number) {
+        const result = await (
+            await fetch(
+                `https://api.themoviedb.org/3/movie/${id}?api_key=80ff9fee839cee60957533079f03548c&language=es-ES`
+            )
+        ).json();
+
         return result;
     }
 

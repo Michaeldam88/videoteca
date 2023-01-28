@@ -7,30 +7,36 @@ export type UseMovies = {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     getPopularMovies: () => Promise<void>;
+    getGenres: () => Promise<void>;
+    modal: 
+    setModal;
 };
 
 export function useMovies(): UseMovies {
-    const tmdbApi = useMemo(() => new TmdbApi(), []);   
-    
-    const genreInitialState : Array<GenreStructure> = []
+    const tmdbApi = useMemo(() => new TmdbApi(), []);
+
+    const genreInitialState: Array<GenreStructure> = [];
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
+    const [modal, setModal] = useState(null);
 
+    const getGenres = useCallback(async () => {
+        const genres = await tmdbApi.getGenres();
+        setGenres(genres);
+    }, [tmdbApi]);
 
     const getPopularMovies = useCallback(async () => {
         const moviesList = await tmdbApi.getPopularMovies();
         setMovies(moviesList.results);
-        const genres = await tmdbApi.getGenres();
-        setGenres(genres);
-
-    }, [tmdbApi]);
-
-    
-    
+        getGenres();
+    }, [tmdbApi, getGenres]);
 
     return {
         getPopularMovies,
         movies,
+        getGenres,
         genres,
+        modal,
+        setModal,
     };
 }

@@ -7,12 +7,14 @@ interface MovieContextStructure {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     getPopularMovies: () => Promise<void>;
+    getGenres: () => Promise<void>;
 }
 
 const initialContext: MovieContextStructure = {
     movies: [],
     genres: [],
     getPopularMovies: async () => {},
+    getGenres: async () => {},
 };
 
 export const MovieContext = createContext(initialContext);

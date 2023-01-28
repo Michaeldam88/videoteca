@@ -4,7 +4,6 @@ import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
 
-
 export default function Home() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -31,28 +30,29 @@ export default function Home() {
 
     return (
         <main className="home">
-            <Search></Search>
-            <h1 className="home__title">Peliculas Populares</h1>
-            <ul className="movies-list">
-                {movies.map((element) => (
-                    <MovieCard
-                        key={element.id}
-                        movie={element}
-                    />
-                ))}
-            </ul>
+            <div className="container flex-column">
+                <Search></Search>
+                <h1 className="home__title">Peliculas Populares</h1>
+                <ul className="movies-list">
+                    {movies.map((element) => (
+                        <MovieCard key={element.id} movie={element} />
+                    ))}
+                </ul>
 
-            <TablePagination
-                component="div"
-                count={100}
-                page={page}
-                onPageChange={handleChangePage}
-                rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-            {/* <div className="modal">
-                <DetailsModal />
-            </div> */}
+                <TablePagination
+                    component="div"
+                    count={100}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    rowsPerPage={rowsPerPage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+                {/* {modal ? (
+                <div className="modal">
+                    {modal}
+                </div>
+            ) : null} */}
+            </div>
         </main>
     );
 }

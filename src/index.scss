@@ -5,17 +5,46 @@
     letter-spacing: 0.5px;
 }
 
+.material-symbols-outlined-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
 #root {
     position: relative;
 }
 
-%custom-container {
-    padding: 1.5rem;
+.container {
     min-width: 390px;
+    padding: 0 1.5rem;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.display-content {
+    display: contents;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.align-center{
+    align-items: center;
 }
 
 .header {
-    @extend %custom-container;
+    padding: 1.5rem 0;
     height: 3.16rem;
     background: rgb(61, 78, 169);
     background: linear-gradient(
@@ -61,16 +90,11 @@
 .tabs {
     z-index: 1;
     position: fixed;
-    padding: 0.4rem 0 1.4rem 0;
+    padding: 0.4rem 0 0rem 0;
     top: 3.16rem;
     width: 100%;
     background: rgb(255, 255, 255);
-    background: linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.199) 15%,
-        rgba(255, 255, 255, 1) 30%
-    );
+    box-shadow: 0px 11px 20px #ffffff6b;
     &__movie {
         color: #1976d2;
         font-size: 1.8rem;
@@ -82,7 +106,7 @@
 }
 
 .home {
-    @extend %custom-container;
+    padding: 1.5rem 0;
     position: relative;
     top: 7rem;
     &__search-container {
@@ -90,6 +114,7 @@
         display: flex;
         margin: auto;
         align-items: center;
+        width: 100%;
     }
 
     &__search-box {
@@ -141,7 +166,7 @@
     }
     &__top {
         position: absolute;
-        height: 3rem;
+        height: 50%;
         width: 100%;
         top: 0rem;
         right: 0rem;
@@ -151,32 +176,34 @@
         background: rgb(0, 0, 0);
         background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.3) 0%,
             rgba(0, 0, 0, 0) 100%
         );
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
     }
     &__tag {
-        position: absolute;
-        left: 1rem;
-        bottom: 4rem;
-        background-color: #3c3939;
-        padding: 0.2rem 0.4rem;
+        width: fit-content;
+        background-color: #000000bb;
+        padding: 0.3rem 0.5rem;
         border-radius: 0.3rem;
         font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        line-height: 0.8rem;
+        color: rgba(255, 255, 255, 0.842);
     }
     &__bottom {
         position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         bottom: 0;
-        height: 4.5rem;
+        height: 60%;
         width: 100%;
         background: rgb(0, 0, 0);
         background: linear-gradient(
             0deg,
-            rgb(0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0.6) 0%,
             rgba(0, 0, 0, 0) 100%
         );
         border-bottom-left-radius: 1rem;
@@ -186,9 +213,11 @@
     &__title {
         font-weight: 500;
         margin-bottom: 0.3rem;
+        height: 2.5rem;
     }
     &__year {
         font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.842);
     }
 }
 
@@ -208,7 +237,7 @@
 }
 
 .favorites {
-    @extend %custom-container;
+    padding: 1.5rem 0;
     position: relative;
     top: 5rem;
     &__title {
@@ -219,7 +248,7 @@
 }
 
 footer {
-    @extend %custom-container;
+    padding: 1.5rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,9 +259,8 @@ footer {
     color: white;
     width: 100%;
     position: fixed;
-    bottom: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    bottom: 0; 
+    text-align: center;   
 }
 .modal {
     z-index: 2;
@@ -382,22 +410,18 @@ footer {
             width: 210px;
         }
         &__top {
-            height: 4rem;
             padding: 0.8rem;
             span {
                 font-size: 2rem;
             }
         }
         &__tag {
-            bottom: 5rem;
             font-size: 1rem;
-        }
-        &__bottom {
-            height: 5.5rem;
-            padding: 1.2rem 1rem;
+            line-height: 1rem;
         }
         &__title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
         }
         &__year {
             font-size: 0.9rem;
@@ -408,20 +432,14 @@ footer {
         align-self: center;
     }
 
-    .details-modal{
+    .details-modal {
         width: 80%;
-        max-width: 60rem;        
+        max-width: 60rem;
     }
 }
 
 @media all and (min-width: 76rem) {
-    #root {
-        margin: 0 auto;
-        max-width: 76rem;
-    }
-    .header,
-    footer,
-    .tabs {
+    .container {
         max-width: 76rem;
     }
 }

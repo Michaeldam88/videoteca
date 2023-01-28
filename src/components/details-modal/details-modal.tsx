@@ -1,4 +1,7 @@
-export function DetailsModal() {
+export function DetailsModal({id}:{id:number}) {
+    
+
+
     return (
         <div className="details-modal">
             <span className="details-modal__close material-symbols-outlined">
