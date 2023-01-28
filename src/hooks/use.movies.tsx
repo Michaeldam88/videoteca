@@ -11,16 +11,17 @@ export type UseMovies = {
 
 export function useMovies(): UseMovies {
     const tmdbApi = useMemo(() => new TmdbApi(), []);   
-
+    
+    const genreInitialState : Array<GenreStructure> = []
     const [movies, setMovies] = useState([]);
-    const [genres, setGenres] = useState([]);
+    const [genres, setGenres] = useState(genreInitialState);
 
 
     const getPopularMovies = useCallback(async () => {
         const moviesList = await tmdbApi.getPopularMovies();
         setMovies(moviesList.results);
         const genres = await tmdbApi.getGenres();
-        setGenres(genres.genres);
+        setGenres(genres);
 
     }, [tmdbApi]);
 
