@@ -155,14 +155,16 @@
 }
 
 .movie-card {
-    display: flex;
+    display: flex;    
     position: relative;
+    flex-grow: 1;
     color: white;
     cursor: pointer;
 
     &__img {
         border-radius: 1rem;
         width: 160px;
+        flex-grow: 1;
     }
     &__top {
         position: absolute;
@@ -440,6 +442,10 @@ footer {
 
 @media all and (min-width: 76rem) {
     .container {
+        max-width: 76rem;
+    }
+
+    .tabs{
         max-width: 76rem;
     }
 }

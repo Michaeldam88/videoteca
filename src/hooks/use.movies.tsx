@@ -8,8 +8,7 @@ export type UseMovies = {
     genres: Array<GenreStructure>;
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
-    modal: 
-    setModal;
+    
 };
 
 export function useMovies(): UseMovies {
@@ -36,7 +35,6 @@ export function useMovies(): UseMovies {
         movies,
         getGenres,
         genres,
-        modal,
-        setModal,
+        
     };
 }
