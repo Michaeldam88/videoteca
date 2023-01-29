@@ -1,5 +1,6 @@
 import TablePagination from '@mui/material/TablePagination';
 import React, { useContext, useEffect } from 'react';
+import { DetailsModal } from '../../components/details-modal/details-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
@@ -47,11 +48,10 @@ export default function Home() {
                     rowsPerPage={rowsPerPage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-                {/* {modal ? (
+
                 <div className="modal">
-                    {modal}
+                    <DetailsModal id={555}></DetailsModal>
                 </div>
-            ) : null} */}
             </div>
         </main>
     );
