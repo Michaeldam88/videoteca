@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function DetailsModal({ id }: { id: number }) {
-    const { getDetails, details } = useContext(MovieContext);
+    const { getDetails, details, setModal } = useContext(MovieContext);
 
     useEffect(() => {
         getDetails(id);
@@ -18,11 +18,12 @@ export function DetailsModal({ id }: { id: number }) {
         ? details.genres.map((element) => element.name)
         : [''];
 
-        console.log(details)
-
     return (
         <div className="details-modal">
-            <span className="details-modal__close material-symbols-outlined">
+            <span
+                className="details-modal__close material-symbols-outlined"
+                onClick={() => setModal(null)}
+            >
                 close
             </span>
 
@@ -34,7 +35,10 @@ export function DetailsModal({ id }: { id: number }) {
                             ? details.release_date.slice(0, 4)
                             : 'Pronto en enstreno'}
                     </span>
-                    <span className="details-modal__star material-symbols-outlined">
+                    <span
+                        className="details-modal__star material-symbols-outlined"
+                        onClick={() => console.log('star-modal')}
+                    >
                         star
                     </span>
                 </div>
@@ -63,7 +67,10 @@ export function DetailsModal({ id }: { id: number }) {
                                 ? details.release_date.slice(0, 4)
                                 : 'Pronto en enstreno'}
                         </span>
-                        <span className="details-modal__star material-symbols-outlined">
+                        <span
+                            className="details-modal__star material-symbols-outlined"
+                            onClick={() => console.log('star-modal')}
+                        >
                             star
                         </span>
                     </div>
@@ -78,8 +85,10 @@ export function DetailsModal({ id }: { id: number }) {
 
                 <h3>Descripción</h3>
                 <p className="details-modal__description">{details.overview}</p>
-                
-                <p className="details-modal__vote">{details.vote_average?.toFixed(1)}</p>
+
+                <p className="details-modal__vote">
+                    {details.vote_average?.toFixed(1)}
+                </p>
             </div>
         </div>
     );

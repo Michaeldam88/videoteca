@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
-import { FilterModal } from '../filter-modal/filter-modal';
 
 export function Search() {
-    //const { setModal } = useContext(MovieContext);
+    const { setModal } = useContext(MovieContext);
 
     return (
         <div className="home__search-container">
@@ -17,7 +16,7 @@ export function Search() {
             </div>
             <span
                 className="home__filter material-symbols-outlined"
-                // onClick={setModal(<FilterModal></FilterModal>)}
+                onClick={() => setModal('filter')}
             >
                 filter_alt
             </span>

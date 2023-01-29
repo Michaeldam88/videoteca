@@ -10,6 +10,9 @@ export type UseMovies = {
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
     getDetails: (id: number) => Promise<void>;
+    modal: string | null | number;
+    setModal: React.Dispatch<React.SetStateAction<null>>;
+    
 };
 
 export function useMovies(): UseMovies {
@@ -19,6 +22,7 @@ export function useMovies(): UseMovies {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
     const [details, setDetails] = useState({});
+    const [modal, setModal] = useState(null);
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
@@ -34,7 +38,7 @@ export function useMovies(): UseMovies {
     const getDetails = useCallback(
         async (id: number) => {
             const details = await tmdbApi.getDetails(id);
-            setDetails(details)
+            setDetails(details);
         },
         [tmdbApi]
     );
@@ -45,6 +49,8 @@ export function useMovies(): UseMovies {
         getGenres,
         genres,
         getDetails,
-        details
+        details,
+        modal,
+        setModal,
     };
 }

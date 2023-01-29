@@ -10,6 +10,8 @@ interface MovieContextStructure {
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
     getDetails: (id: number) => Promise<void>;
+    modal: string | null | number;
+    setModal: React.Dispatch<React.SetStateAction<null>>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -19,6 +21,8 @@ const initialContext: MovieContextStructure = {
     getPopularMovies: async () => {},
     getGenres: async () => {},
     getDetails: async (id) => {},
+    modal: null,
+    setModal: () => {},
 };
 
 export const MovieContext = createContext(initialContext);

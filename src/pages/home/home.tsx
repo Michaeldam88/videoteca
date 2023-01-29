@@ -1,6 +1,7 @@
 import TablePagination from '@mui/material/TablePagination';
 import React, { useContext, useEffect } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
+import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
@@ -9,12 +10,12 @@ export default function Home() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const { getPopularMovies, movies } = useContext(MovieContext);
+    const { getPopularMovies, movies, modal } = useContext(MovieContext);
 
     useEffect(() => {
         getPopularMovies();
     }, [getPopularMovies]);
-
+    
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number
@@ -49,9 +50,17 @@ export default function Home() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
 
-                <div className="modal">
-                    <DetailsModal id={315162}></DetailsModal>
-                </div>
+                {modal === 'filter' ? (
+                    <div className="modal">
+                        <FilterModal></FilterModal>
+                    </div>
+                ) : null}
+
+                {typeof modal === 'number' && modal ? (
+                    <div className="modal">
+                        <DetailsModal id={modal}></DetailsModal>
+                    </div>
+                ) : null}
             </div>
         </main>
     );

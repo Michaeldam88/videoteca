@@ -3,7 +3,7 @@ import { useMovies } from '../hooks/use.movies';
 import { MovieContext } from './movie.context';
 
 export function MovieContextProvider({ children }: { children: JSX.Element }) {
-    const { movies, genres, getPopularMovies, getGenres, getDetails, details } =
+    const { movies, genres, getPopularMovies, getGenres, getDetails, details, modal, setModal } =
         useMovies();
 
     const context = useMemo(
@@ -13,9 +13,11 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             genres,
             getGenres,
             getDetails,
-            details
+            details,
+            modal,
+            setModal
         }),
-        [getPopularMovies, movies, genres, getGenres,getDetails,details]
+        [getPopularMovies, movies, genres, getGenres,getDetails,details,modal,setModal]
     );
 
     return (
