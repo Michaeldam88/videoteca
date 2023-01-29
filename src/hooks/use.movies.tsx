@@ -6,7 +6,7 @@ import { MovieStructure } from '../types/movieStructure';
 export type UseMovies = {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
-    details: MovieStructure;
+    details: Partial<MovieStructure>;
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
     getDetails: (id: number) => Promise<void>;
@@ -18,7 +18,7 @@ export function useMovies(): UseMovies {
     const genreInitialState: Array<GenreStructure> = [];
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState({});
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();

@@ -6,7 +6,7 @@ import { MovieStructure } from '../types/movieStructure';
 interface MovieContextStructure {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
-    details: MovieStructure;
+    details: Partial<MovieStructure>;
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
     getDetails: (id: number) => Promise<void>;

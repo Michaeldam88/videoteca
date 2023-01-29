@@ -227,6 +227,7 @@
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
     }
+
     &__year {
         font-size: 0.8rem;
         color: rgba(255, 255, 255, 0.842);
@@ -379,7 +380,7 @@ footer {
         color: #3c3939;
     }
     &__age {
-        margin: 0 0.6rem 0 0.4rem;
+        margin: 0 0.6rem 0 1rem;
     }
     &__star {
         font-size: 2rem;
@@ -390,29 +391,32 @@ footer {
         display: flex;
         align-items: center;
         span {
-            margin: 0 0.2rem;
-        }
-        p {
-            font-size: 0.9rem;
+            margin: 0 0.4rem;
         }
     }
+
+    &__runtime {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
     &__img {
-        border-radius: 1rem;
-        width: 200px;
+        border-radius: 1rem;        
+        width: 80%;
+        max-width: 20rem;
+        align-self: center;
     }
     h3 {
         margin-top: 1rem;
         color: black;
         font-size: 1.2rem;
     }
-
-    h4 {
-        color: black;
-        font-size: 1rem;
-    }
-    &__role {
+    &__vote {
         margin-top: 0.1rem;
-        font-size: 0.8rem;
+        font-size: 1rem;
+        padding: 1rem;
+        width: fit-content;
+        background-color: #3c3939;
+        border-radius: 1rem;
     }
 }
 

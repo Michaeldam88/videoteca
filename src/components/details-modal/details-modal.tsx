@@ -8,13 +8,17 @@ export function DetailsModal({ id }: { id: number }) {
         getDetails(id);
     }, [getDetails, id]);
 
-    console.log(details);
-
-    const time = (totalMinutes:number) => {
+    const time = (totalMinutes: number) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
         return `${hours}h ${minutes}m`;
     };
+
+    const genres = details.genres
+        ? details.genres.map((element) => element.name)
+        : [''];
+
+        console.log(details)
 
     return (
         <div className="details-modal">
@@ -35,9 +39,11 @@ export function DetailsModal({ id }: { id: number }) {
                     </span>
                 </div>
                 <div className="details-modal__info">
-                    <p>XXX</p>
+                    <p>{genres.join(', ')}</p>
                     <span>·</span>
-                    <p>{time(details.runtime)}</p>
+                    <p className="details-modal__runtime">
+                        {details.runtime ? time(details.runtime) : ''}
+                    </p>
                 </div>
             </div>
 
@@ -62,25 +68,18 @@ export function DetailsModal({ id }: { id: number }) {
                         </span>
                     </div>
                     <div className="details-modal__info">
-                        <p>Comedia</p>
+                        <p>{genres.join(', ')}</p>
                         <span>·</span>
-                        <p>{time(details.runtime)}</p>
+                        <p className="details-modal__runtime">
+                            {details.runtime ? time(details.runtime) : ''}
+                        </p>
                     </div>
                 </div>
 
                 <h3>Descripción</h3>
-                <p className="details-modal__description">
-                    Bacon ipsum dolor amet salami leberkas filet mignon pork
-                    chop biltong cupim strip steak. Kevin prosciutto porchetta
-                    bacon boudin, jowl filet mignon chislic. Tenderloin turkey
-                    rump sirloin tail burgdoggen hamburger frankfurter kevin
-                    sausage ham hock chuck prosciutto short ribs. Jerky turkey
-                    ground round pork shoulder rump. Bacon ipsum doloeeeeer amet
-                    salami leberkas filet mignon pork chop biltong cupim strip
-                    steak.
-                </p>
-                <h4>Matthew Warchus</h4>
-                <p className="details-modal__role">Director</p>
+                <p className="details-modal__description">{details.overview}</p>
+                
+                <p className="details-modal__vote">{details.vote_average?.toFixed(1)}</p>
             </div>
         </div>
     );

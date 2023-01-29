@@ -6,8 +6,8 @@ export function MovieCard({ movie }: { movie: MovieStructure }) {
     const { genres } = useContext(MovieContext);
     //const { setModal } = useContext(MovieContext);
 
-    const genreFiltered = genres.filter(
-        (element) => element.id === movie.genre_ids[0]
+    const genreFiltered = genres.filter((element) => 
+        element.id === movie.genre_ids[0]
     );
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
