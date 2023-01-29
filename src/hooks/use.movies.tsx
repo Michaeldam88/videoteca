@@ -6,9 +6,10 @@ import { MovieStructure } from '../types/movieStructure';
 export type UseMovies = {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
+    details: MovieStructure;
     getPopularMovies: () => Promise<void>;
     getGenres: () => Promise<void>;
-    
+    getDetails: (id: number) => Promise<void>;
 };
 
 export function useMovies(): UseMovies {
@@ -17,7 +18,7 @@ export function useMovies(): UseMovies {
     const genreInitialState: Array<GenreStructure> = [];
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
-    const [modal, setModal] = useState(null);
+    const [details, setDetails] = useState([]);
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
@@ -30,11 +31,20 @@ export function useMovies(): UseMovies {
         getGenres();
     }, [tmdbApi, getGenres]);
 
+    const getDetails = useCallback(
+        async (id: number) => {
+            const details = await tmdbApi.getDetails(id);
+            setDetails(details)
+        },
+        [tmdbApi]
+    );
+
     return {
         getPopularMovies,
         movies,
         getGenres,
         genres,
-        
+        getDetails,
+        details
     };
 }

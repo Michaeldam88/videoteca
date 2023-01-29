@@ -36,7 +36,6 @@ export class TmdbApi {
                 `https://api.themoviedb.org/3/movie/${id}?api_key=80ff9fee839cee60957533079f03548c&language=es-ES`
             )
         ).json();
-
         return result;
     }
 

@@ -50,7 +50,7 @@ export default function Home() {
                 />
 
                 <div className="modal">
-                    <DetailsModal id={555}></DetailsModal>
+                    <DetailsModal id={315162}></DetailsModal>
                 </div>
             </div>
         </main>
