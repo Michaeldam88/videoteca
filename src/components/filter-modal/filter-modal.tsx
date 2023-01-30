@@ -1,8 +1,12 @@
 import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
-export function FilterModal() {
-    const { genres, setFilterModal, getFilteredMovies } =
+export function FilterModal({
+    filter,
+}: {
+    filter: React.Dispatch<React.SetStateAction<string>>;
+}) {
+    const { genres, setFilterModal, getFilteredMovies, getPopularMovies } =
         useContext(MovieContext);
 
     const genresNames = genres.map((element) => element.name);
@@ -22,7 +26,11 @@ export function FilterModal() {
             <ul className="filter-modal__list">
                 <li
                     className="filter-modal__list-element filter-modal__list-element-all"
-                    onClick={() => setFilterModal(false)}
+                    onClick={() => {
+                        setFilterModal(false);
+                        getPopularMovies();
+                        filter('default');
+                    }}
                 >
                     All
                 </li>
@@ -32,6 +40,7 @@ export function FilterModal() {
                         className="filter-modal__list-element"
                         onClick={() => {
                             setFilterModal(false);
+                            filter(element);
                             getFilteredMovies(genreId(element));
                         }}
                     >

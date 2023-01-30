@@ -1,7 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
-export function DetailsModal({ id }: { id: number }) {
+export function DetailsModal({
+    id,
+    setIdDetails,
+}: {
+    id: number;
+    setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
+}) {
     const { getDetails, details } = useContext(MovieContext);
 
     useEffect(() => {
@@ -22,7 +28,7 @@ export function DetailsModal({ id }: { id: number }) {
         <div className="details-modal">
             <span
                 className="details-modal__close material-symbols-outlined"
-                // onClick={() => setModal(null)}
+                onClick={() => setIdDetails(null)}
             >
                 close
             </span>

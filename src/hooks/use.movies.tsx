@@ -45,7 +45,7 @@ export function useMovies(): UseMovies {
 
     const getFilteredMovies = useCallback(
         async (genre: string) => {
-            const filteredList = await tmdbApi.filterGenre(genre);
+            const filteredList = await tmdbApi.filterGenre(genre);            
             setMovies(filteredList.results);
         },
         [tmdbApi]

@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
@@ -7,8 +7,8 @@ import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
 
 export default function Home() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const { getPopularMovies, movies, filterModal } = useContext(MovieContext);
 
@@ -30,14 +30,25 @@ export default function Home() {
         setPage(0);
     };
 
+    const [filter, setFilter] = useState('default');
+    const [idDetail, setIdDetails] = useState<number | null>(null);
+
     return (
         <main className="home">
             <div className="container flex-column">
-                <Search></Search>
-                <h1 className="home__title">Peliculas Populares</h1>
+                <Search filter={filter}></Search>
+                <h1 className="home__title">
+                    {filter === 'default'
+                        ? 'Peliculas Populares'
+                        : `Resultado de ${filter}`}
+                </h1>
                 <ul className="movies-list">
                     {movies.map((element) => (
-                        <MovieCard key={element.id} movie={element} />
+                        <MovieCard
+                            key={element.id}
+                            movie={element}
+                            setIdDetails={setIdDetails}
+                        />
                     ))}
                 </ul>
 
@@ -52,15 +63,18 @@ export default function Home() {
 
                 {filterModal === true ? (
                     <div className="modal">
-                        <FilterModal></FilterModal>
+                        <FilterModal filter={setFilter}></FilterModal>
                     </div>
                 ) : null}
 
-                {/* {typeof modal === 'number' && modal ? (
+                {idDetail !== null ? (
                     <div className="modal">
-                        <DetailsModal id={modal}></DetailsModal>
+                        <DetailsModal
+                            id={idDetail}
+                            setIdDetails={setIdDetails}
+                        ></DetailsModal>
                     </div>
-                ) : null} */}
+                ) : null}
             </div>
         </main>
     );

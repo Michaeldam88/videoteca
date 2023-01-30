@@ -2,7 +2,13 @@ import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 import { MovieStructure } from '../../types/movieStructure';
 
-export function MovieCard({ movie }: { movie: MovieStructure }) {
+export function MovieCard({
+    movie,
+    setIdDetails,
+}: {
+    movie: MovieStructure;
+    setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
+}) {
     const { genres } = useContext(MovieContext);
 
     const genreFiltered = genres.filter(
@@ -30,14 +36,16 @@ export function MovieCard({ movie }: { movie: MovieStructure }) {
 
             <div
                 className="movie-card__bottom"
-                // onClick={() => setModal(movie.id)}
+                onClick={() => setIdDetails(movie.id)}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
-                <h2 className="movie-card__title">{movie.title}</h2>
+                <h2 className="movie-card__title">
+                    {movie.title || movie.name}
+                </h2>
                 <h3 className="movie-card__year">
                     {movie.release_date
                         ? movie.release_date.slice(0, 4)
-                        : 'Pronto en estreno'}
+                        : movie.first_air_date.slice(0, 4)}
                 </h3>
             </div>
         </li>
