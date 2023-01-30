@@ -3,7 +3,7 @@ import { MovieContext } from '../../context/movie.context';
 import { MovieStructure } from '../../types/movieStructure';
 
 export function MovieCard({ movie }: { movie: MovieStructure }) {
-    const { genres, setModal } = useContext(MovieContext);
+    const { genres } = useContext(MovieContext);
 
     const genreFiltered = genres.filter(
         (element) => element.id === movie.genre_ids[0]
@@ -30,7 +30,7 @@ export function MovieCard({ movie }: { movie: MovieStructure }) {
 
             <div
                 className="movie-card__bottom"
-                onClick={() => setModal(movie.id)}
+                // onClick={() => setModal(movie.id)}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
                 <h2 className="movie-card__title">{movie.title}</h2>

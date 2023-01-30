@@ -3,21 +3,38 @@ import { useMovies } from '../hooks/use.movies';
 import { MovieContext } from './movie.context';
 
 export function MovieContextProvider({ children }: { children: JSX.Element }) {
-    const { movies, genres, getPopularMovies, getGenres, getDetails, details, modal, setModal } =
-        useMovies();
+    const {
+        movies,
+        genres,
+        getPopularMovies,
+        getDetails,
+        details,
+        filterModal,
+        setFilterModal,
+        getFilteredMovies,
+    } = useMovies();
 
     const context = useMemo(
         () => ({
             getPopularMovies,
             movies,
             genres,
-            getGenres,
+            getFilteredMovies,
             getDetails,
             details,
-            modal,
-            setModal
+            filterModal,
+            setFilterModal,
         }),
-        [getPopularMovies, movies, genres, getGenres,getDetails,details,modal,setModal]
+        [
+            getPopularMovies,
+            movies,
+            genres,
+            getDetails,
+            details,
+            filterModal,
+            setFilterModal,
+            getFilteredMovies,
+        ]
     );
 
     return (

@@ -8,10 +8,10 @@ interface MovieContextStructure {
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
     getPopularMovies: () => Promise<void>;
-    getGenres: () => Promise<void>;
+    getFilteredMovies: (genre: string) => void;
     getDetails: (id: number) => Promise<void>;
-    modal: string | null | number;
-    setModal: React.Dispatch<React.SetStateAction<null>>;
+    filterModal: boolean;
+    setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -19,10 +19,10 @@ const initialContext: MovieContextStructure = {
     genres: [],
     details: {},
     getPopularMovies: async () => {},
-    getGenres: async () => {},
+    getFilteredMovies: async (genre) => {},
     getDetails: async (id) => {},
-    modal: null,
-    setModal: () => {},
+    filterModal: false,
+    setFilterModal: () => {},
 };
 
 export const MovieContext = createContext(initialContext);

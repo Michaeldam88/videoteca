@@ -10,12 +10,12 @@ export default function Home() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const { getPopularMovies, movies, modal } = useContext(MovieContext);
+    const { getPopularMovies, movies, filterModal } = useContext(MovieContext);
 
     useEffect(() => {
         getPopularMovies();
     }, [getPopularMovies]);
-    
+
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number
@@ -50,17 +50,17 @@ export default function Home() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
 
-                {modal === 'filter' ? (
+                {filterModal === true ? (
                     <div className="modal">
                         <FilterModal></FilterModal>
                     </div>
                 ) : null}
 
-                {typeof modal === 'number' && modal ? (
+                {/* {typeof modal === 'number' && modal ? (
                     <div className="modal">
                         <DetailsModal id={modal}></DetailsModal>
                     </div>
-                ) : null}
+                ) : null} */}
             </div>
         </main>
     );

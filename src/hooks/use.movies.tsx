@@ -8,11 +8,10 @@ export type UseMovies = {
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
     getPopularMovies: () => Promise<void>;
-    getGenres: () => Promise<void>;
     getDetails: (id: number) => Promise<void>;
-    modal: string | null | number;
-    setModal: React.Dispatch<React.SetStateAction<null>>;
-    
+    getFilteredMovies: (genre: string) => Promise<void>;
+    filterModal: boolean;
+    setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function useMovies(): UseMovies {
@@ -22,18 +21,19 @@ export function useMovies(): UseMovies {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
     const [details, setDetails] = useState({});
-    const [modal, setModal] = useState(null);
+    const [filterModal, setFilterModal] = useState(false);
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
         setGenres(genres);
     }, [tmdbApi]);
 
+    getGenres();
+
     const getPopularMovies = useCallback(async () => {
         const moviesList = await tmdbApi.getPopularMovies();
         setMovies(moviesList.results);
-        getGenres();
-    }, [tmdbApi, getGenres]);
+    }, [tmdbApi]);
 
     const getDetails = useCallback(
         async (id: number) => {
@@ -43,14 +43,22 @@ export function useMovies(): UseMovies {
         [tmdbApi]
     );
 
+    const getFilteredMovies = useCallback(
+        async (genre: string) => {
+            const filteredList = await tmdbApi.filterGenre(genre);
+            setMovies(filteredList.results);
+        },
+        [tmdbApi]
+    );
+
     return {
         getPopularMovies,
         movies,
-        getGenres,
         genres,
         getDetails,
         details,
-        modal,
-        setModal,
+        filterModal,
+        setFilterModal,
+        getFilteredMovies,
     };
 }
