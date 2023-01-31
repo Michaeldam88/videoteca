@@ -1,7 +1,7 @@
 import { SyntheticEvent, useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
-export function Search({filter}:{filter:string}) {
+export function Search({ filter }: { filter: string }) {
     const { setFilterModal, searchMovie } = useContext(MovieContext);
 
     const handleInput = (ev: SyntheticEvent) => {

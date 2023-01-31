@@ -18,8 +18,6 @@ export const login = async () => {
     //const token = credential?.idToken;
     //console.log(credential);
     //console.log(token);
-    alert(`Bienvenido ${result.user.displayName}`)
-
-    
-}
+    alert(`Bienvenido ${result.user.displayName}`);
+};
 export const exit = signOut(auth);

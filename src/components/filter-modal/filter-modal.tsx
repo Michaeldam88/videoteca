@@ -9,7 +9,7 @@ export function FilterModal({
     const { genres, setFilterModal, getFilteredMovies, getPopularMovies } =
         useContext(MovieContext);
 
-   const genreId = (genre: string) => {
+    const genreId = (genre: string) => {
         const id = genres.filter((element) => element.name === genre);
         return id[0].id.toString();
     };

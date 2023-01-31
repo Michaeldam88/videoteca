@@ -24,9 +24,9 @@ export interface MovieStructure {
     video: boolean;
     vote_average: number;
     vote_count: number;
-    first_air_date:string;
+    first_air_date: string;
     genre_ids: Array<number>;
-    name:string;
+    name: string;
 }
 
 interface Spokenlanguage {
