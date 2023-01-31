@@ -12,6 +12,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         filterModal,
         setFilterModal,
         getFilteredMovies,
+        searchMovie,
     } = useMovies();
 
     const context = useMemo(
@@ -24,6 +25,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             details,
             filterModal,
             setFilterModal,
+            searchMovie,
         }),
         [
             getPopularMovies,
@@ -34,6 +36,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             filterModal,
             setFilterModal,
             getFilteredMovies,
+            searchMovie,
         ]
     );
 

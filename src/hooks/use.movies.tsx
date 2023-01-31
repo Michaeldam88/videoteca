@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { TmdbApi } from '../services/tmdbApi';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
@@ -12,6 +12,7 @@ export type UseMovies = {
     getFilteredMovies: (genre: string) => Promise<void>;
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
+    searchMovie: (keyword: string) => Promise<void>;
 };
 
 export function useMovies(): UseMovies {
@@ -28,7 +29,9 @@ export function useMovies(): UseMovies {
         setGenres(genres);
     }, [tmdbApi]);
 
-    getGenres();
+    useEffect(() => {
+        getGenres();
+    }, [getGenres]);
 
     const getPopularMovies = useCallback(async () => {
         const moviesList = await tmdbApi.getPopularMovies();
@@ -45,10 +48,24 @@ export function useMovies(): UseMovies {
 
     const getFilteredMovies = useCallback(
         async (genre: string) => {
-            const filteredList = await tmdbApi.filterGenre(genre);            
+            const filteredList = await tmdbApi.filterGenre(genre);
             setMovies(filteredList.results);
         },
         [tmdbApi]
+    );
+
+    const searchMovie = useCallback(
+        async (keyword: string) => {
+            if (keyword.length > 3) {
+                const filteredList = await tmdbApi.searchMovie(keyword);                
+                setMovies(filteredList.results);
+            }
+
+            if (keyword.length === 0) {
+                getPopularMovies();
+            }
+        },
+        [tmdbApi, getPopularMovies]
     );
 
     return {
@@ -60,5 +77,6 @@ export function useMovies(): UseMovies {
         filterModal,
         setFilterModal,
         getFilteredMovies,
+        searchMovie,
     };
 }

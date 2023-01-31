@@ -1,8 +1,13 @@
-import { useContext } from 'react';
+import { SyntheticEvent, useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function Search({filter}:{filter:string}) {
-    const { setFilterModal } = useContext(MovieContext);
+    const { setFilterModal, searchMovie } = useContext(MovieContext);
+
+    const handleInput = (ev: SyntheticEvent) => {
+        const element = ev.target as HTMLFormElement;
+        searchMovie(element.value);
+    };
 
     return (
         <div className="home__search-container">
@@ -12,6 +17,7 @@ export function Search({filter}:{filter:string}) {
                     className="home__search"
                     type="text"
                     placeholder="Buscar"
+                    onInput={handleInput}
                 />
             </div>
             <span

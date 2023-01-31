@@ -12,6 +12,7 @@ interface MovieContextStructure {
     getDetails: (id: number) => Promise<void>;
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
+    searchMovie: (keyword: string) => Promise<void>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -23,6 +24,7 @@ const initialContext: MovieContextStructure = {
     getDetails: async (id) => {},
     filterModal: false,
     setFilterModal: () => {},
+    searchMovie: async (keyword) => {},
 };
 
 export const MovieContext = createContext(initialContext);

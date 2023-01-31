@@ -9,6 +9,7 @@ export function MovieCard({
     movie: MovieStructure;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
+    
     const { genres } = useContext(MovieContext);
 
     const genreFiltered = genres.filter(
@@ -45,7 +46,10 @@ export function MovieCard({
                 <h3 className="movie-card__year">
                     {movie.release_date
                         ? movie.release_date.slice(0, 4)
-                        : movie.first_air_date.slice(0, 4)}
+                        : ""}
+                    {movie.first_air_date
+                        ? movie.first_air_date.slice(0, 4)
+                        : ""}
                 </h3>
             </div>
         </li>

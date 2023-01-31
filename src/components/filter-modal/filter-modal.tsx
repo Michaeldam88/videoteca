@@ -9,13 +9,7 @@ export function FilterModal({
     const { genres, setFilterModal, getFilteredMovies, getPopularMovies } =
         useContext(MovieContext);
 
-    const genresNames = genres.map((element) => element.name);
-    const genresOrdered = genresNames.sort((a, b) =>
-        a > b ? 1 : a === b ? 0 : -1
-    );
-    const genresNoDuplicated = [...new Set(genresOrdered)];
-
-    const genreId = (genre: string) => {
+   const genreId = (genre: string) => {
         const id = genres.filter((element) => element.name === genre);
         return id[0].id.toString();
     };
@@ -34,17 +28,17 @@ export function FilterModal({
                 >
                     All
                 </li>
-                {genresNoDuplicated.map((element) => (
+                {genres.map((element) => (
                     <li
-                        key={element}
+                        key={element.name}
                         className="filter-modal__list-element"
                         onClick={() => {
                             setFilterModal(false);
-                            filter(element);
-                            getFilteredMovies(genreId(element));
+                            filter(element.name);
+                            getFilteredMovies(genreId(element.name));
                         }}
                     >
-                        {element}
+                        {element.name}
                     </li>
                 ))}
             </ul>
