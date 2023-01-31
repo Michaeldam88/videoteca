@@ -21,8 +21,7 @@ export default function Favorites() {
     return (
         <main className="favorites">
             <h1 className="favorites__title">Favoritas</h1>
-            <ul className="movies-list">
-            </ul>
+            <ul className="movies-list"></ul>
 
             <TablePagination
                 component="div"

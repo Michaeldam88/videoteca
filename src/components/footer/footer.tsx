@@ -1,3 +1,9 @@
 export function Footer() {
-    return <footer>Final Project of ISDI Coders Bootcamp by Michael Damiani</footer>;
+    return (
+        <footer>
+            <div className="container justify-center">
+                <p>Final Project of ISDI Coders Bootcamp by Michael Damiani</p>
+            </div>
+        </footer>
+    );
 }
