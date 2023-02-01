@@ -56,7 +56,7 @@ export function useMovies(): UseMovies {
 
     const searchMovie = useCallback(
         async (keyword: string) => {
-            if (keyword.length > 3) {
+            if (keyword.length > 0) {
                 const filteredList = await tmdbApi.searchMovie(keyword);
                 setMovies(filteredList.results);
             }

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useMovies } from '../hooks/use.movies';
+import { useUser } from '../hooks/use.user';
 import { MovieContext } from './movie.context';
 
 export function MovieContextProvider({ children }: { children: JSX.Element }) {
@@ -15,6 +16,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         searchMovie,
     } = useMovies();
 
+    const { user, setUser } = useUser();
+
     const context = useMemo(
         () => ({
             getPopularMovies,
@@ -26,6 +29,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             filterModal,
             setFilterModal,
             searchMovie,
+            user,
+            setUser,
         }),
         [
             getPopularMovies,
@@ -37,6 +42,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setFilterModal,
             getFilteredMovies,
             searchMovie,
+            user,
+            setUser,
         ]
     );
 
