@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
-import { login } from '../../services/firebaseAuth';
+import { useAuth } from '../../hooks/use.Auth';
 
 export function Header() {
-    const { getPopularMovies } = useContext(MovieContext);
+    const { getPopularMovies, user, login } = useContext(MovieContext);
+    const { logout } = useAuth();
+
+    if (user) console.log('logueado-header', user);
 
     return (
         <header className="header">
@@ -17,13 +20,28 @@ export function Header() {
                     </span>
                     <p className="header__text">Videoteca</p>
                 </div>
-
-                <span
-                    className="header__login material-symbols-outlined"
-                    onClick={() => login()}
-                >
-                    person
-                </span>
+                {user ? (
+                    <div>
+                        <p>{`Bienvenido ${user.displayName}`}</p>
+                        <img
+                            src={user.photoURL ? user.photoURL : undefined}
+                            alt="userImage"
+                        />
+                        <span
+                            className="header__login material-symbols-outlined"
+                            onClick={() => logout()}
+                        >
+                            logout
+                        </span>
+                    </div>
+                ) : (
+                    <span
+                        className="header__login material-symbols-outlined"
+                        onClick={() => login()}
+                    >
+                        person
+                    </span>
+                )}
             </div>
         </header>
     );

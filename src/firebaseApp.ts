@@ -4,13 +4,13 @@ import { getAnalytics } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyBK_ZFAbIjjs1Oi7x-GalFZZS1zCb07-Zg',
-    authDomain: 'videoteca-e0fa1.firebaseapp.com',
-    projectId: 'videoteca-e0fa1',
-    storageBucket: 'videoteca-e0fa1.appspot.com',
-    messagingSenderId: '927680059796',
-    appId: '1:927680059796:web:ecbfe171d3d2d8f25a5781',
-    measurementId: 'G-FYXW5BYTZ3',
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,    
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

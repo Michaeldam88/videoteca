@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { User } from 'firebase/auth';
 import { createContext } from 'react';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
-import { UserStructure } from '../types/userStructure';
 
 interface MovieContextStructure {
     movies: Array<MovieStructure>;
@@ -14,24 +14,22 @@ interface MovieContextStructure {
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
     searchMovie: (keyword: string) => Promise<void>;
-    user: Partial<UserStructure> | null;
-    setUser: React.Dispatch<
-        React.SetStateAction<null | Partial<UserStructure>>
-    >;
+    user: User | null;
+    login: () => Promise<void>;
 }
 
 const initialContext: MovieContextStructure = {
     movies: [],
     genres: [],
     details: {},
-    user: {},
-    setUser: () => {},
+    user: null,
     getPopularMovies: async () => {},
     getFilteredMovies: async (genre) => {},
     getDetails: async (id) => {},
     filterModal: false,
     setFilterModal: () => {},
     searchMovie: async (keyword) => {},
+    login: async () => {}
 };
 
 export const MovieContext = createContext(initialContext);

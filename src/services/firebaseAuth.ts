@@ -11,10 +11,9 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
 auth.languageCode = 'es';
 
-export const login = async () => {
-    const response = await signInWithPopup(auth, provider);
-    console.log(response.user);
+export const loginFirebase = async () => {
+    const response = await signInWithPopup(auth, provider);   
     return response.user;
 };
 
-export const logout = () => signOut(auth);
+export const logoutFirebase = () => signOut(auth);

@@ -1,20 +1,32 @@
+import { User } from 'firebase/auth';
 import { useState } from 'react';
-import { UserStructure } from '../types/userStructure';
-
-
+import { useLocalStorage } from './use.LocalStorage';
 
 export type UseUser = {
-    user: Partial<UserStructure> | null;
-    setUser: React.Dispatch<
-        React.SetStateAction<null | Partial<UserStructure>>
-    >;
+    addUser: (user: User | null) => void;
+    removeUser: () => void;
+    user: User | null;
 };
 
 export function useUser(): UseUser {
-    const [user, setUser] = useState<null | Partial<UserStructure>>(null);
+    const [user, setUser] = useState<User | null>(null);
+    const { setItem } = useLocalStorage();
+
+    if (user) console.log('logueado-user', user);
+
+    const addUser = (user: User | null) => {
+        setUser(user);
+        setItem('user', JSON.stringify(user));
+    };
+
+    const removeUser = () => {
+        setUser(null);
+        setItem('user', '');
+    };
 
     return {
-        setUser,
         user,
+        addUser,
+        removeUser,
     };
 }
