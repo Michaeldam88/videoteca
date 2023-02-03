@@ -1,27 +1,30 @@
-import { useEffect } from 'react';
+import { User } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { loginFirebase } from '../services/firebaseAuth';
 import { useLocalStorage } from './use.LocalStorage';
-import { useUser } from './use.user';
 
 export const useAuth = () => {
-    const { addUser, removeUser } = useUser();
-    const { getItem } = useLocalStorage();
-
+    const [user, setUser] = useState<User | null>(null);
+    const { getItem, setItem } = useLocalStorage();
+    
     useEffect(() => {
         const user = getItem('user');
         if (user) {
-            addUser(JSON.parse(user));
+            setUser(JSON.parse(user));
         }
-    },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const login = async () => {
         const user = await loginFirebase();
-        addUser(user);
+        setUser(user);
+        setItem('user', JSON.stringify(user));        
     };
 
     const logout = () => {
-        removeUser();
+        setUser(null);
+        setItem('user', '');
     };
 
-    return { login, logout };
+    return { login, logout, user };
 };

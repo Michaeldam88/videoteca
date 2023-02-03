@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo} from 'react';
 import { useAuth } from '../hooks/use.Auth';
 import { useMovies } from '../hooks/use.movies';
-import { useUser } from '../hooks/use.user';
 import { MovieContext } from './movie.context';
 
 export function MovieContextProvider({ children }: { children: JSX.Element }) {
@@ -17,9 +16,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         searchMovie,
     } = useMovies();
 
-    const { user } = useUser();
-    const { login } = useAuth();
-
+    const { login, logout, user } = useAuth();    
 
     const context = useMemo(
         () => ({
@@ -33,7 +30,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setFilterModal,
             searchMovie,
             user,
-            login
+            login,
+            logout
         }),
         [
             getPopularMovies,
@@ -46,7 +44,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             getFilteredMovies,
             searchMovie,
             user,
-            login
+            login,
+            logout
         ]
     );
 

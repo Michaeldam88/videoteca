@@ -15,7 +15,8 @@ interface MovieContextStructure {
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
     searchMovie: (keyword: string) => Promise<void>;
     user: User | null;
-    login: () => Promise<void>;
+    login:() => Promise<void>;
+    logout:() => void;
 }
 
 const initialContext: MovieContextStructure = {
@@ -29,7 +30,8 @@ const initialContext: MovieContextStructure = {
     filterModal: false,
     setFilterModal: () => {},
     searchMovie: async (keyword) => {},
-    login: async () => {}
+    login:async () => {},
+    logout: () => {},
 };
 
 export const MovieContext = createContext(initialContext);

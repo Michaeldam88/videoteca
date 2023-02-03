@@ -3,10 +3,8 @@ import { MovieContext } from '../../context/movie.context';
 import { useAuth } from '../../hooks/use.Auth';
 
 export function Header() {
-    const { getPopularMovies, user, login } = useContext(MovieContext);
-    const { logout } = useAuth();
-
-    if (user) console.log('logueado-header', user);
+    const { getPopularMovies } = useContext(MovieContext);
+    const { logout, login, user } = useAuth();
 
     return (
         <header className="header">
@@ -21,26 +19,30 @@ export function Header() {
                     <p className="header__text">Videoteca</p>
                 </div>
                 {user ? (
-                    <div>
-                        <p>{`Bienvenido ${user.displayName}`}</p>
+                    <div className="header__login">                        
                         <img
-                            src={user.photoURL ? user.photoURL : undefined}
+                            className="header__login-img"
+                            src={user?.photoURL ? user.photoURL : undefined}
                             alt="userImage"
                         />
+                        <p className="header__login-text">{`Bienvenido ${user.displayName}`}</p>
                         <span
-                            className="header__login material-symbols-outlined"
+                            className="header__login-logo material-symbols-outlined"
                             onClick={() => logout()}
                         >
                             logout
                         </span>
                     </div>
                 ) : (
-                    <span
-                        className="header__login material-symbols-outlined"
-                        onClick={() => login()}
-                    >
-                        person
-                    </span>
+                    <div className="header__login">
+                        <p className="header__login-text">Login</p>
+                        <span
+                            className="header__login-logo material-symbols-outlined"
+                            onClick={() => login()}
+                        >
+                            person
+                        </span>
+                    </div>
                 )}
             </div>
         </header>
