@@ -3,7 +3,7 @@ import { MovieContext } from '../../context/movie.context';
 import { useAuth } from '../../hooks/use.Auth';
 
 export function Header() {
-    const { getPopularMovies } = useContext(MovieContext);
+    const { getPopularMovies, page, setPage } = useContext(MovieContext);
     const { logout, login, user } = useAuth();
 
     return (
@@ -11,7 +11,10 @@ export function Header() {
             <div className="container align-center">
                 <div
                     className="header__logo-container"
-                    onClick={() => getPopularMovies()}
+                    onClick={() => {                        
+                        setPage(0);
+                        getPopularMovies(page + 1);
+                    }}
                 >
                     <span className="header__logo material-symbols-outlined">
                         theaters
@@ -19,7 +22,7 @@ export function Header() {
                     <p className="header__text">Videoteca</p>
                 </div>
                 {user ? (
-                    <div className="header__login">                        
+                    <div className="header__login">
                         <img
                             className="header__login-img"
                             src={user?.photoURL ? user.photoURL : undefined}

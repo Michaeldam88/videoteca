@@ -2,11 +2,12 @@ import { SyntheticEvent, useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function Search({ filter }: { filter: string }) {
-    const { setFilterModal, searchMovie } = useContext(MovieContext);
+    const { setFilterModal, searchMovie,page,setPage } = useContext(MovieContext);
 
     const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
-        searchMovie(element.value);
+        setPage(0)
+        searchMovie(element.value,page+1);
     };
 
     return (

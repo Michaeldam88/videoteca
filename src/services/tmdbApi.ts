@@ -1,8 +1,8 @@
 export class TmdbApi {
-    async getPopularMovies() {
-        const result = await (
+    async getPopularMovies(page: number) {
+        const result = await(
             await fetch(
-                'https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&region=ES&page=1&sort_by=popularity.desc&include_adult=false'
+                `https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&region=ES&page=${page}&sort_by=popularity.desc&include_adult=false`
             )
         ).json();
         return result;
@@ -27,22 +27,22 @@ export class TmdbApi {
         return result;
     }
 
-    async searchMovie(keyword: string) {
-        const result = await (
+    async searchMovie(keyword: string, page: number) {
+        const result = await(
             await fetch(
                 `https://api.themoviedb.org/3/search/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&query=${encodeURI(
                     keyword
-                )}&page=1&include_adult=false`
+                )}&page=${page}&include_adult=false`
             )
         ).json();
 
         return result;
     }
 
-    async filterGenre(genre: string) {
+    async filterGenre(genre: string, page: number) {
         const result = await (
             await fetch(
-                `https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}&with_watch_monetization_types=flatrate`
+                `https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genre}&with_watch_monetization_types=flatrate`
             )
         ).json();
 

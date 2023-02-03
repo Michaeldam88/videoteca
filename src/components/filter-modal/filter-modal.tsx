@@ -6,7 +6,7 @@ export function FilterModal({
 }: {
     filter: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { genres, setFilterModal, getFilteredMovies, getPopularMovies } =
+    const { genres, setFilterModal, getFilteredMovies, getPopularMovies,page, setPage,setActiveOperation } =
         useContext(MovieContext);
 
     const genreId = (genre: string) => {
@@ -21,8 +21,10 @@ export function FilterModal({
                 <li
                     className="filter-modal__list-element filter-modal__list-element-all"
                     onClick={() => {
+                        setActiveOperation("filter")
+                        setPage(0)
                         setFilterModal(false);
-                        getPopularMovies();
+                        getPopularMovies(page+1);
                         filter('default');
                     }}
                 >
@@ -33,9 +35,10 @@ export function FilterModal({
                         key={element.name}
                         className="filter-modal__list-element"
                         onClick={() => {
+                            setPage(0);
                             setFilterModal(false);
                             filter(element.name);
-                            getFilteredMovies(genreId(element.name));
+                            getFilteredMovies(genreId(element.name),page+1);
                         }}
                     >
                         {element.name}

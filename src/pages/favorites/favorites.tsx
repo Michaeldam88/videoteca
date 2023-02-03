@@ -40,6 +40,8 @@ export default function Favorites() {
                 )}
 
                 <TablePagination
+                    rowsPerPageOptions={[{ label: '10', value: 10 }]}
+                    labelRowsPerPage={'Peliculas por pagina'}
                     component="div"
                     count={100}
                     page={page}

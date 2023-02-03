@@ -14,6 +14,10 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         setFilterModal,
         getFilteredMovies,
         searchMovie,
+        page,
+        totPages,
+        setPage,
+        setActiveOperation
     } = useMovies();
 
     const { login, logout, user } = useAuth();    
@@ -31,7 +35,11 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             searchMovie,
             user,
             login,
-            logout
+            logout,
+            page,
+            setPage,
+            totPages,
+            setActiveOperation
         }),
         [
             getPopularMovies,
@@ -45,7 +53,11 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             searchMovie,
             user,
             login,
-            logout
+            logout,
+            page,
+            setPage,
+            totPages,
+            setActiveOperation
         ]
     );
 

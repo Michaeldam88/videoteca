@@ -8,15 +8,19 @@ interface MovieContextStructure {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
-    getPopularMovies: () => Promise<void>;
-    getFilteredMovies: (genre: string) => void;
+    getPopularMovies: (page: number) => Promise<void>;
+    getFilteredMovies: (genre: string, page: number) => void;
     getDetails: (id: number) => Promise<void>;
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
-    searchMovie: (keyword: string) => Promise<void>;
+    searchMovie: (keyword: string, page: number) => Promise<void>;
     user: User | null;
-    login:() => Promise<void>;
-    logout:() => void;
+    login: () => Promise<void>;
+    logout: () => void;
+    page: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    totPages: number;
+    setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -30,8 +34,12 @@ const initialContext: MovieContextStructure = {
     filterModal: false,
     setFilterModal: () => {},
     searchMovie: async (keyword) => {},
-    login:async () => {},
+    login: async () => {},
     logout: () => {},
+    page: 0,
+    setPage: () => {},
+    totPages:0,
+    setActiveOperation: () => {}
 };
 
 export const MovieContext = createContext(initialContext);

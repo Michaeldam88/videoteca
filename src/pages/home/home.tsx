@@ -7,14 +7,10 @@ import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
 
 export default function Home() {
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(20);
 
-    const { getPopularMovies, movies, filterModal } = useContext(MovieContext);
-
-    useEffect(() => {
-        getPopularMovies();
-    }, [getPopularMovies]);
+    const { movies, filterModal, page, setPage, totPages } =
+        useContext(MovieContext);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -53,8 +49,10 @@ export default function Home() {
                 </ul>
 
                 <TablePagination
+                    rowsPerPageOptions={[{ label: '20', value: 20 }]}
+                    labelRowsPerPage={'Peliculas por pagina'}
                     component="div"
-                    count={100}
+                    count={totPages}
                     page={page}
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}

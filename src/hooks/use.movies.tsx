@@ -7,12 +7,16 @@ export type UseMovies = {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
-    getPopularMovies: () => Promise<void>;
+    getPopularMovies: (page: number) => Promise<void>;
     getDetails: (id: number) => Promise<void>;
-    getFilteredMovies: (genre: string) => Promise<void>;
+    getFilteredMovies: (genre: string, page: number) => Promise<void>;
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
-    searchMovie: (keyword: string) => Promise<void>;
+    searchMovie: (keyword: string, page: number) => Promise<void>;
+    page: number;
+    totPages: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export function useMovies(): UseMovies {
@@ -23,6 +27,12 @@ export function useMovies(): UseMovies {
     const [genres, setGenres] = useState(genreInitialState);
     const [details, setDetails] = useState({});
     const [filterModal, setFilterModal] = useState(false);
+    const [page, setPage] = useState(0);
+    const [totPages, setTotPage] = useState(0);
+    const [activeOperation, setActiveOperation] = useState('popular');
+
+    let genre=""
+    let keyword=""
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
@@ -31,12 +41,16 @@ export function useMovies(): UseMovies {
 
     useEffect(() => {
         getGenres();
-    }, [getGenres]);
+    }, [getGenres]);    
 
-    const getPopularMovies = useCallback(async () => {
-        const moviesList = await tmdbApi.getPopularMovies();
-        setMovies(moviesList.results);
-    }, [tmdbApi]);
+    const getPopularMovies = useCallback(
+        async (page: number) => {
+            const filteredList = await tmdbApi.getPopularMovies(page);
+            setMovies(filteredList.results);
+            setTotPage(filteredList.total_pages);
+        },
+        [tmdbApi]
+    );
 
     const getDetails = useCallback(
         async (id: number) => {
@@ -47,26 +61,44 @@ export function useMovies(): UseMovies {
     );
 
     const getFilteredMovies = useCallback(
-        async (genre: string) => {
-            const filteredList = await tmdbApi.filterGenre(genre);
+        async (receivedGenre: string, page: number) => {
+            genre = receivedGenre;
+            const filteredList = await tmdbApi.filterGenre(genre, page);
             setMovies(filteredList.results);
+            setTotPage(filteredList.total_pages);
         },
         [tmdbApi]
     );
 
     const searchMovie = useCallback(
-        async (keyword: string) => {
+        async (receivedKeyword: string, page: number) => {
+            keyword = receivedKeyword;
             if (keyword.length > 0) {
-                const filteredList = await tmdbApi.searchMovie(keyword);
+                const filteredList = await tmdbApi.searchMovie(keyword, page);
                 setMovies(filteredList.results);
+                setTotPage(filteredList.total_pages);
             }
 
             if (keyword.length === 0) {
-                getPopularMovies();
+                getPopularMovies(page);
             }
         },
         [tmdbApi, getPopularMovies]
     );
+
+    useEffect(() => {
+        if (activeOperation === 'popular') getPopularMovies(page + 1);
+        if (activeOperation === 'filter') getFilteredMovies(genre, page + 1);
+        if (activeOperation === 'search') searchMovie(keyword, page + 1);
+    }, [
+        activeOperation,
+        genre,
+        getFilteredMovies,
+        getPopularMovies,
+        keyword,
+        page,
+        searchMovie,
+    ]);
 
     return {
         getPopularMovies,
@@ -78,5 +110,9 @@ export function useMovies(): UseMovies {
         setFilterModal,
         getFilteredMovies,
         searchMovie,
+        page,
+        totPages,
+        setPage,
+        setActiveOperation
     };
 }
