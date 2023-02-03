@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
+import { writeFavoritesMovie, writeWatchedMovie } from '../../services/firebaseStorage';
 import { MovieStructure } from '../../types/movieStructure';
 
 export function MovieCard({
@@ -9,7 +10,7 @@ export function MovieCard({
     movie: MovieStructure;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { genres } = useContext(MovieContext);
+    const { genres, user } = useContext(MovieContext);
 
     const genreFiltered = genres.filter(
         (element) => element.id === movie.genre_ids[0]
@@ -28,9 +29,27 @@ export function MovieCard({
             <div className="movie-card__top">
                 <span
                     className="movie-card__star material-symbols-outlined"
-                    onClick={() => console.log('star')}
+                    onClick={() =>
+                        user
+                            ? writeFavoritesMovie(user.uid, movie.id)
+                            : alert(
+                                'Para guardar tus favoritos logueate primero'
+                            )
+                    }
                 >
                     star
+                </span>
+                <span
+                    className="movie-card__star material-symbols-outlined"
+                    onClick={() =>
+                        user
+                            ? writeWatchedMovie(user.uid, movie.id)
+                            : alert(
+                                'Para guardar tus favoritos logueate primero'
+                            )
+                    }
+                >
+                    visibility
                 </span>
             </div>
 

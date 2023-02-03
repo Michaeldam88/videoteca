@@ -8,7 +8,7 @@ export function DetailsModal({
     id: number;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { getDetails, details } = useContext(MovieContext);
+    const { getDetails, details, user } = useContext(MovieContext);
 
     useEffect(() => {
         getDetails(id);
@@ -43,7 +43,13 @@ export function DetailsModal({
                     </span>
                     <span
                         className="details-modal__star material-symbols-outlined"
-                        onClick={() => console.log('star-modal')}
+                        onClick={() =>
+                            user
+                                ? console.log('star')
+                                : alert(
+                                    'Para guardar tus favoritos logueate primero'
+                                )
+                        }
                     >
                         star
                     </span>
@@ -75,7 +81,13 @@ export function DetailsModal({
                         </span>
                         <span
                             className="details-modal__star material-symbols-outlined"
-                            onClick={() => console.log('star-modal')}
+                            onClick={() =>
+                                user
+                                    ? console.log('star')
+                                    : alert(
+                                        'Para guardar tus favoritos logueate primero'
+                                    )
+                            }
                         >
                             star
                         </span>

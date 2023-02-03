@@ -279,11 +279,18 @@
 .favorites {
     padding: 1.5rem 0;
     position: relative;
-    top: 5rem;
+    top: 6rem;
     &__title {
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
         font-size: 1.4rem;
         color: #3d3d3d;
+    }
+    &__no-logged{
+        font-size: 1.5rem;
+        width: 80vw;
+        height: 50vh;
+        text-align: center;
+        padding-top: 5rem;
     }
 }
 
@@ -443,7 +450,6 @@ footer {
 }
 
 @media all and (min-width: 46rem) {
-
     .header__login-text {
         display: initial;
     }

@@ -12,7 +12,7 @@ const auth = getAuth(firebaseApp);
 auth.languageCode = 'es';
 
 export const loginFirebase = async () => {
-    const response = await signInWithPopup(auth, provider);   
+    const response = await signInWithPopup(auth, provider);
     return response.user;
 };
 
