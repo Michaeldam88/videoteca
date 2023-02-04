@@ -1,4 +1,6 @@
-import { useContext } from 'react';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
 import {
     writeFavoritesMovie,
@@ -21,11 +23,39 @@ export function MovieCard({
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
 
+    const [open, setOpen] = useState(false);
+    const [openCorrect, setOpenCorrect] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClickCorrect = () => {
+        setOpenCorrect(true);
+        if(user)writeFavoritesMovie(user.uid, movie.id);
+    };
+
+    const handleClose = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenCorrect(false);
+        setOpen(false);
+    };
+
     return (
         <li className="movie-card">
             <img
                 className="movie-card__img"
-                src={movie.poster_path?`https://image.tmdb.org/t/p/w500${movie.poster_path}`:""}
+                src={
+                    movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : ''
+                }
                 alt={movie.title}
             />
 
@@ -33,11 +63,7 @@ export function MovieCard({
                 <span
                     className="movie-card__star material-symbols-outlined"
                     onClick={() =>
-                        user
-                            ? writeFavoritesMovie(user.uid, movie.id)
-                            : alert(
-                                  'Para guardar tus favoritos logueate primero'
-                              )
+                        user ? handleClickCorrect() : handleClick()
                     }
                 >
                     star
@@ -47,9 +73,7 @@ export function MovieCard({
                     onClick={() =>
                         user
                             ? writeWatchedMovie(user.uid, movie.id)
-                            : alert(
-                                  'Para guardar tus favoritos logueate primero'
-                              )
+                            : handleClick()
                     }
                 >
                     visibility
@@ -71,6 +95,30 @@ export function MovieCard({
                         : ''}
                 </h3>
             </div>
+
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="warning"
+                    sx={{ width: '100%' }}
+                >
+                    Para guardar tus favoritos logueate primero
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={openCorrect}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Añadido a tus favoritos!
+                </Alert>
+            </Snackbar>
         </li>
     );
 }

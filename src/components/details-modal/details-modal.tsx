@@ -1,5 +1,8 @@
-import { useContext, useEffect } from 'react';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
+import { writeFavoritesMovie } from '../../services/firebaseStorage';
 
 export function DetailsModal({
     id,
@@ -24,6 +27,30 @@ export function DetailsModal({
         ? details.genres.map((element) => element.name)
         : [''];
 
+    const [open, setOpen] = useState(false);
+    const [openCorrect, setOpenCorrect] = useState(false);
+
+    
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClickCorrect = () => {
+        setOpenCorrect(true);
+        if (user) writeFavoritesMovie(user.uid, id);
+    };
+
+    const handleClose = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenCorrect(false);
+        setOpen(false);
+    };
+
     return (
         <div className="details-modal">
             <span
@@ -44,11 +71,7 @@ export function DetailsModal({
                     <span
                         className="details-modal__star material-symbols-outlined"
                         onClick={() =>
-                            user
-                                ? console.log('star')
-                                : alert(
-                                      'Para guardar tus favoritos logueate primero'
-                                  )
+                            user ? handleClickCorrect() : handleClick()
                         }
                     >
                         star
@@ -65,7 +88,11 @@ export function DetailsModal({
 
             <img
                 className="details-modal__img"
-                src={details.poster_path?`https://image.tmdb.org/t/p/w500${details.poster_path}`:""}
+                src={
+                    details.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+                        : ''
+                }
                 alt="pelicula1"
             />
             <div className="desktop-detail">
@@ -82,11 +109,7 @@ export function DetailsModal({
                         <span
                             className="details-modal__star material-symbols-outlined"
                             onClick={() =>
-                                user
-                                    ? console.log('star')
-                                    : alert(
-                                          'Para guardar tus favoritos logueate primero'
-                                      )
+                                user ? handleClickCorrect() : handleClick()
                             }
                         >
                             star
@@ -108,6 +131,29 @@ export function DetailsModal({
                     {details.vote_average?.toFixed(1)}
                 </p>
             </div>
+
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="warning"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Para guardar tus favoritos logueate primero!
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={openCorrect}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Añadido a tus favoritos!
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
