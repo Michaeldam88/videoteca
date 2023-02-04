@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TmdbApi } from '../services/tmdbApi';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
@@ -31,8 +31,8 @@ export function useMovies(): UseMovies {
     const [totPages, setTotPage] = useState(0);
     const [activeOperation, setActiveOperation] = useState('popular');
 
-    let genre=""
-    let keyword=""
+    const genre = useRef('');
+    const keyword = useRef('');
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
@@ -41,7 +41,7 @@ export function useMovies(): UseMovies {
 
     useEffect(() => {
         getGenres();
-    }, [getGenres]);    
+    }, [getGenres]);
 
     const getPopularMovies = useCallback(
         async (page: number) => {
@@ -62,8 +62,8 @@ export function useMovies(): UseMovies {
 
     const getFilteredMovies = useCallback(
         async (receivedGenre: string, page: number) => {
-            genre = receivedGenre;
-            const filteredList = await tmdbApi.filterGenre(genre, page);
+            genre.current = receivedGenre;
+            const filteredList = await tmdbApi.filterGenre(receivedGenre, page);
             setMovies(filteredList.results);
             setTotPage(filteredList.total_pages);
         },
@@ -72,14 +72,17 @@ export function useMovies(): UseMovies {
 
     const searchMovie = useCallback(
         async (receivedKeyword: string, page: number) => {
-            keyword = receivedKeyword;
-            if (keyword.length > 0) {
-                const filteredList = await tmdbApi.searchMovie(keyword, page);
+            keyword.current = receivedKeyword;
+            if (receivedKeyword.length > 0) {
+                const filteredList = await tmdbApi.searchMovie(
+                    receivedKeyword,
+                    page
+                );
                 setMovies(filteredList.results);
                 setTotPage(filteredList.total_pages);
             }
 
-            if (keyword.length === 0) {
+            if (receivedKeyword.length === 0) {
                 getPopularMovies(page);
             }
         },
@@ -88,8 +91,10 @@ export function useMovies(): UseMovies {
 
     useEffect(() => {
         if (activeOperation === 'popular') getPopularMovies(page + 1);
-        if (activeOperation === 'filter') getFilteredMovies(genre, page + 1);
-        if (activeOperation === 'search') searchMovie(keyword, page + 1);
+        if (activeOperation === 'filter')
+            getFilteredMovies(genre.current, page + 1);
+        if (activeOperation === 'search')
+            searchMovie(keyword.current, page + 1);
     }, [
         activeOperation,
         genre,
@@ -113,6 +118,6 @@ export function useMovies(): UseMovies {
         page,
         totPages,
         setPage,
-        setActiveOperation
+        setActiveOperation,
     };
 }

@@ -1,4 +1,4 @@
-import { useMemo} from 'react';
+import { useMemo } from 'react';
 import { useAuth } from '../hooks/use.Auth';
 import { useMovies } from '../hooks/use.movies';
 import { MovieContext } from './movie.context';
@@ -17,10 +17,10 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         page,
         totPages,
         setPage,
-        setActiveOperation
+        setActiveOperation,
     } = useMovies();
 
-    const { login, logout, user } = useAuth();    
+    const { login, logout, user } = useAuth();
 
     const context = useMemo(
         () => ({
@@ -39,7 +39,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             page,
             setPage,
             totPages,
-            setActiveOperation
+            setActiveOperation,
         }),
         [
             getPopularMovies,
@@ -57,7 +57,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             page,
             setPage,
             totPages,
-            setActiveOperation
+            setActiveOperation,
         ]
     );
 

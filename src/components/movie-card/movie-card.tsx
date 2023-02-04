@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
-import { writeFavoritesMovie, writeWatchedMovie } from '../../services/firebaseStorage';
+import {
+    writeFavoritesMovie,
+    writeWatchedMovie,
+} from '../../services/firebaseStorage';
 import { MovieStructure } from '../../types/movieStructure';
 
 export function MovieCard({
@@ -22,7 +25,7 @@ export function MovieCard({
         <li className="movie-card">
             <img
                 className="movie-card__img"
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                src={movie.poster_path?`https://image.tmdb.org/t/p/w500${movie.poster_path}`:""}
                 alt={movie.title}
             />
 
@@ -33,8 +36,8 @@ export function MovieCard({
                         user
                             ? writeFavoritesMovie(user.uid, movie.id)
                             : alert(
-                                'Para guardar tus favoritos logueate primero'
-                            )
+                                  'Para guardar tus favoritos logueate primero'
+                              )
                     }
                 >
                     star
@@ -45,8 +48,8 @@ export function MovieCard({
                         user
                             ? writeWatchedMovie(user.uid, movie.id)
                             : alert(
-                                'Para guardar tus favoritos logueate primero'
-                            )
+                                  'Para guardar tus favoritos logueate primero'
+                              )
                     }
                 >
                     visibility

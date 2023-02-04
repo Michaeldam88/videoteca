@@ -1,6 +1,6 @@
 export class TmdbApi {
     async getPopularMovies(page: number) {
-        const result = await(
+        const result = await (
             await fetch(
                 `https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&region=ES&page=${page}&sort_by=popularity.desc&include_adult=false`
             )
@@ -28,7 +28,7 @@ export class TmdbApi {
     }
 
     async searchMovie(keyword: string, page: number) {
-        const result = await(
+        const result = await (
             await fetch(
                 `https://api.themoviedb.org/3/search/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&query=${encodeURI(
                     keyword

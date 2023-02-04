@@ -8,7 +8,6 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
     //updates['/user/' + userUID + '/favoritesMovies/' + newPostKey] = idMovie;
     alert('guardado');
     return update(ref(database), updates);
-    
 }
 
 export function writeWatchedMovie(userUID: string, idMovie: number) {

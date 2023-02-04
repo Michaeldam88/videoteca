@@ -38,8 +38,8 @@ const initialContext: MovieContextStructure = {
     logout: () => {},
     page: 0,
     setPage: () => {},
-    totPages:0,
-    setActiveOperation: () => {}
+    totPages: 0,
+    setActiveOperation: () => {},
 };
 
 export const MovieContext = createContext(initialContext);

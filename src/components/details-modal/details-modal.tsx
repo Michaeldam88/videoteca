@@ -47,8 +47,8 @@ export function DetailsModal({
                             user
                                 ? console.log('star')
                                 : alert(
-                                    'Para guardar tus favoritos logueate primero'
-                                )
+                                      'Para guardar tus favoritos logueate primero'
+                                  )
                         }
                     >
                         star
@@ -65,7 +65,7 @@ export function DetailsModal({
 
             <img
                 className="details-modal__img"
-                src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
+                src={details.poster_path?`https://image.tmdb.org/t/p/w500${details.poster_path}`:""}
                 alt="pelicula1"
             />
             <div className="desktop-detail">
@@ -85,8 +85,8 @@ export function DetailsModal({
                                 user
                                     ? console.log('star')
                                     : alert(
-                                        'Para guardar tus favoritos logueate primero'
-                                    )
+                                          'Para guardar tus favoritos logueate primero'
+                                      )
                             }
                         >
                             star
