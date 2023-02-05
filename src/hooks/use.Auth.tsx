@@ -1,6 +1,6 @@
 import { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { loginFirebase } from '../services/firebaseAuth';
+import { loginFirebase, logoutFirebase } from '../services/firebaseAuth';
 import { useLocalStorage } from './use.LocalStorage';
 
 export const useAuth = () => {
@@ -16,13 +16,18 @@ export const useAuth = () => {
     }, []);
 
     const login = async () => {
-        const user = await loginFirebase();
-        setUser(user);
-        setItem('user', JSON.stringify(user));
+        const user = await loginFirebase().catch(() => {
+            console.error('Logueo Fallido');
+        });
+        if (user) {
+            setUser(user);
+            setItem('user', JSON.stringify(user));
+        }
     };
 
     const logout = () => {
-        setUser(null);
+        logoutFirebase();
+        setTimeout(() => setUser(null), 3500);
         setItem('user', '');
     };
 

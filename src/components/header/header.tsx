@@ -2,12 +2,17 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
-import { useAuth } from '../../hooks/use.Auth';
 
 export function Header() {
-    const { getPopularMovies, setPage, setActiveOperation } =
-        useContext(MovieContext);
-    const { logout, login, user } = useAuth();
+    const {
+        getPopularMovies,
+        setPage,
+        setActiveOperation,
+        logout,
+        login,
+        user,
+    } = useContext(MovieContext);
+
     const [open, setOpen] = useState('closed');
 
     const handleClick = (type: string) => {
@@ -64,9 +69,9 @@ export function Header() {
                 ) : (
                     <div
                         className="header__login"
-                        onClick={() => {
-                            login();
-                            handleClick('login');
+                        onClick={async () => {
+                            await login();
+                            await handleClick('login');
                         }}
                     >
                         <p className="header__login-text">Login</p>

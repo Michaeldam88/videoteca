@@ -9,7 +9,7 @@
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
-.material-symbols-fill {
+.material-symbols-outlined.--filled {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
@@ -178,7 +178,7 @@
 
 .movies-list {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     margin-top: 1.5rem;
     gap: 1rem 1rem;
@@ -189,11 +189,12 @@
     position: relative;
     flex-grow: 1;
     color: white;
+    max-width: 285px;
 
     &__img {
         border-radius: 1rem;
-        width: 160px;
         flex-grow: 1;
+        width: 160px;
     }
     &__top {
         position: absolute;

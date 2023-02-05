@@ -27,7 +27,7 @@ export function Search({ filter }: { filter: string }) {
                 className={
                     filter === 'default'
                         ? `home__filter material-symbols-outlined`
-                        : `home__filter material-symbols-fill`
+                        : `home__filter material-symbols-outlined --filled `
                 }
                 onClick={() => setFilterModal(true)}
             >

@@ -73,7 +73,7 @@ export function useMovies(): UseMovies {
     const searchMovie = useCallback(
         async (receivedKeyword: string, page: number) => {
             keyword.current = receivedKeyword;
-            if (receivedKeyword.length > 0) {
+            if (receivedKeyword.length > 2) {
                 const filteredList = await tmdbApi.searchMovie(
                     receivedKeyword,
                     page
@@ -95,15 +95,8 @@ export function useMovies(): UseMovies {
             getFilteredMovies(genre.current, page + 1);
         if (activeOperation === 'search')
             searchMovie(keyword.current, page + 1);
-    }, [
-        activeOperation,
-        genre,
-        getFilteredMovies,
-        getPopularMovies,
-        keyword,
-        page,
-        searchMovie,
-    ]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page]);
 
     return {
         getPopularMovies,
