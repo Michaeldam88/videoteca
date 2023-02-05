@@ -21,6 +21,8 @@ interface MovieContextStructure {
     setPage: React.Dispatch<React.SetStateAction<number>>;
     totPages: number;
     setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
+    reloadFavorites: (user: User) => void;
+    favorites: Array<number>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -40,6 +42,8 @@ const initialContext: MovieContextStructure = {
     setPage: () => {},
     totPages: 0,
     setActiveOperation: () => {},
+    reloadFavorites: (user) => {},
+    favorites: [],
 };
 
 export const MovieContext = createContext(initialContext);

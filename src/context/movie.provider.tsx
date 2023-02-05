@@ -20,7 +20,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         setActiveOperation,
     } = useMovies();
 
-    const { login, logout, user } = useAuth();
+    const { login, logout, reloadFavorites, user, favorites } = useAuth();
 
     const context = useMemo(
         () => ({
@@ -40,6 +40,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setPage,
             totPages,
             setActiveOperation,
+            reloadFavorites,
+            favorites,
         }),
         [
             getPopularMovies,
@@ -58,6 +60,8 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setPage,
             totPages,
             setActiveOperation,
+            reloadFavorites,
+            favorites,
         ]
     );
 

@@ -52,6 +52,7 @@ export function Header() {
                             className="header__login-img"
                             src={user.photoURL ? user.photoURL : undefined}
                             alt="userImage"
+                            referrerPolicy="no-referrer"
                         />
                         <p className="header__login-text">
                             {user.displayName ? user.displayName : ''}
@@ -105,7 +106,7 @@ export function Header() {
                         severity="success"
                         sx={{ width: '100%' }}
                     >
-                        {`Hasta pronto ${user?.displayName}!`}
+                        {`Hasta pronto!`}
                     </Alert>
                 </Snackbar>
             </div>

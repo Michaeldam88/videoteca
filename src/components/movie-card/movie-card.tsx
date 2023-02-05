@@ -15,7 +15,8 @@ export function MovieCard({
     movie: MovieStructure;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { genres, user } = useContext(MovieContext);
+    const { genres, user, favorites } = useContext(MovieContext);
+    console.log(favorites)
 
     const genreFiltered = genres.filter(
         (element) => element.id === movie.genre_ids[0]
@@ -25,6 +26,7 @@ export function MovieCard({
 
     const [open, setOpen] = useState(false);
     const [openCorrect, setOpenCorrect] = useState(false);
+    const [isFavories, setIsFavorites] = useState(false)
 
     const handleClick = () => {
         setOpen(true);
