@@ -1,11 +1,11 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FavoritesCard } from '../../components/favorites-card/favorites-card';
 import { MovieContext } from '../../context/movie.context';
 
 export default function Favorites() {
-    const { user, favorites, getDetails, details } = useContext(MovieContext);
+    const { user, favorites, getDetails, details} = useContext(MovieContext);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [idDetail, setIdDetails] = useState<number | null>(null);
@@ -24,7 +24,13 @@ export default function Favorites() {
         setPage(0);
     };
 
-    console.log("1")
+    const moviesList = favorites.map((element) => {        
+        //getDetails(element)
+        return details;
+    });
+
+    console.log(moviesList);
+
     return (
         <main className="favorites">
             <div className="container flex-column">
@@ -33,17 +39,13 @@ export default function Favorites() {
                 {user ? (
                     favorites.length > 1 ? (
                         <ul className="movies-list">
-                            {favorites.map((element) => {
-                                //getDetails(element)
-
-                                return (
-                                    <FavoritesCard
-                                        key={element}
-                                        movie={details}
-                                        setIdDetails={setIdDetails}
-                                    />
-                                );
-                            })}
+                            {moviesList.map((element) => (
+                                <FavoritesCard
+                                    key={"favorites" + element.id}
+                                    movie={element}
+                                    setIdDetails={setIdDetails}
+                                />
+                            ))}
                         </ul>
                     ) : (
                         <p className="home__no-results">

@@ -17,10 +17,7 @@ export function FavoritesCard({
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
-    const genreFiltered =
-        movie.genre_ids && movie.genre_ids[0]
-            ? genres.filter((element) => element.id === movie.genre_ids[0])
-            : [{ name: '' }];
+    const genreFiltered = genres.filter((element) => element.id === 333);
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
 
