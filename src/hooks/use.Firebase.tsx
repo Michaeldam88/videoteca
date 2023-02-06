@@ -4,7 +4,7 @@ import { loginFirebase, logoutFirebase } from '../services/firebaseAuth';
 import { getFavorites } from '../services/firebaseStorage';
 import { useLocalStorage } from './use.LocalStorage';
 
-export const useAuth = () => {
+export const useFirebase = () => {
     const [user, setUser] = useState<User | null>(null);
     const [favorites, setFavorites] = useState<Array<number>>([]);
     const { getItem, setItem } = useLocalStorage();
@@ -32,6 +32,7 @@ export const useAuth = () => {
     const logout = () => {
         logoutFirebase();
         setUser(null);
+        setFavorites([]);
         setItem('user', '');
     };
 

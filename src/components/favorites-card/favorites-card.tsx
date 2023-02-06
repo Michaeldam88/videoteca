@@ -8,18 +8,19 @@ import {
 } from '../../services/firebaseStorage';
 import { MovieStructure } from '../../types/movieStructure';
 
-export function MovieCard({
+export function FavoritesCard({
     movie,
     setIdDetails,
 }: {
-    movie: MovieStructure;
+    movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
-    const genreFiltered = genres.filter(
-        (element) => element.id === movie.genre_ids[0]
-    );
+    const genreFiltered =
+        movie.genre_ids && movie.genre_ids[0]
+            ? genres.filter((element) => element.id === movie.genre_ids[0])
+            : [{ name: '' }];
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
 
@@ -33,12 +34,12 @@ export function MovieCard({
 
     const handleClickAddedFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user) writeFavoritesMovie(user.uid, movie.id);
+        if (user && movie.id) writeFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickRemovedFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (
@@ -71,9 +72,7 @@ export function MovieCard({
                     <span
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
-                            user
-                                ? handleClickRemovedFavorites()
-                                : handleClick()
+                            user ? handleClickRemovedFavorites() : handleClick()
                         }
                     >
                         star
@@ -92,7 +91,11 @@ export function MovieCard({
 
             <div
                 className="movie-card__bottom"
-                onClick={() => setIdDetails(movie.id)}
+                onClick={() => {
+                    if (movie.id) {
+                        setIdDetails(movie.id);
+                    }
+                }}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
                 <h2 className="movie-card__title">

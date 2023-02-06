@@ -1,12 +1,14 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { DetailsModal } from '../../components/details-modal/details-modal';
+import { FavoritesCard } from '../../components/favorites-card/favorites-card';
 import { MovieContext } from '../../context/movie.context';
 
 export default function Favorites() {
-    const { user } = useContext(MovieContext);
-
+    const { user, favorites, getDetails, details } = useContext(MovieContext);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [idDetail, setIdDetails] = useState<number | null>(null);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -21,22 +23,37 @@ export default function Favorites() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    console.log("1")
     return (
         <main className="favorites">
             <div className="container flex-column">
                 <h1 className="favorites__title">Tus favoritos</h1>
+
                 {user ? (
-                    <ul className="movies-list">
-                        <li>Pelis</li>
-                    </ul>
+                    favorites.length > 1 ? (
+                        <ul className="movies-list">
+                            {favorites.map((element) => {
+                                //getDetails(element)
+
+                                return (
+                                    <FavoritesCard
+                                        key={element}
+                                        movie={details}
+                                        setIdDetails={setIdDetails}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <p className="home__no-results">
+                            ¡Todavía no tienes películas favoritas!
+                        </p>
+                    )
                 ) : (
-                    <ul className="movies-list">
-                        <li>
-                            <p className="favorites__no-logged">
-                                Haz login para visualizar tus favoritos
-                            </p>
-                        </li>
-                    </ul>
+                    <p className="favorites__no-logged">
+                        Haz login para visualizar tus favoritos
+                    </p>
                 )}
 
                 <TablePagination
@@ -49,6 +66,15 @@ export default function Favorites() {
                     rowsPerPage={rowsPerPage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
+
+                {idDetail !== null ? (
+                    <div className="modal">
+                        <DetailsModal
+                            id={idDetail}
+                            setIdDetails={setIdDetails}
+                        ></DetailsModal>
+                    </div>
+                ) : null}
             </div>
         </main>
     );

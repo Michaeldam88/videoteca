@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useAuth } from '../hooks/use.Auth';
+import { useFirebase } from '../hooks/use.Firebase';
 import { useMovies } from '../hooks/use.movies';
 import { MovieContext } from './movie.context';
 
@@ -18,9 +18,10 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         totPages,
         setPage,
         setActiveOperation,
+        activeOperation,
     } = useMovies();
 
-    const { login, logout, reloadFavorites, user, favorites } = useAuth();
+    const { login, logout, reloadFavorites, user, favorites } = useFirebase();
 
     const context = useMemo(
         () => ({
@@ -42,6 +43,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setActiveOperation,
             reloadFavorites,
             favorites,
+            activeOperation,
         }),
         [
             getPopularMovies,
@@ -62,6 +64,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setActiveOperation,
             reloadFavorites,
             favorites,
+            activeOperation,
         ]
     );
 

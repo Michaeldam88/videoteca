@@ -2,8 +2,13 @@ import { SyntheticEvent, useContext } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function Search({ filter }: { filter: string }) {
-    const { setFilterModal, searchMovie, setActiveOperation, setPage } =
-        useContext(MovieContext);
+    const {
+        setFilterModal,
+        searchMovie,
+        setActiveOperation,
+        setPage,
+        activeOperation,
+    } = useContext(MovieContext);
 
     const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
@@ -21,11 +26,12 @@ export function Search({ filter }: { filter: string }) {
                     type="text"
                     placeholder="Buscar"
                     onInput={handleInput}
+                    value={activeOperation !== "search"?"":undefined}
                 />
             </div>
             <span
                 className={
-                    filter === 'default'
+                    activeOperation !== 'filter'
                         ? `home__filter material-symbols-outlined`
                         : `home__filter material-symbols-outlined --filled `
                 }

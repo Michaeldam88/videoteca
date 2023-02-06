@@ -29,15 +29,27 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
     const newPostKey = push(child(ref(database), 'user')).key;
     const updates: { [key: string]: number } = {};
     updates['/user/' + userUID + '/favoritesMovies/' + newPostKey] = idMovie;
-    console.log('añadido');
     return update(ref(database), updates);
 }
 
-export function writeWatchedMovie(userUID: string, idMovie: number) {
+export function deleteFavoritesMovie(userUID: string, idMovie: number) {
     const database = getDatabase(firebaseApp);
-    const newPostKey = push(child(ref(database), 'user')).key;
-    const updates: { [key: string]: number } = {};
-    updates['/user/' + userUID + '/watchedMovies/' + newPostKey] = idMovie;
+
+    let idToRemove = undefined;
+
+    const topUserPostsRef = query(
+        ref(database, '/user/' + userUID + '/favoritesMovies/')
+    );
+
+    onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
+        const obj = snapshot.val();
+        idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
+    });
+
+    if (!idToRemove) return;
+
+    const updates: { [key: string]: null } = {};
+    updates['/user/' + userUID + '/favoritesMovies/' + idToRemove] = null;
     return update(ref(database), updates);
 }
 
@@ -52,8 +64,8 @@ export function getFavorites(
     );
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
-        const obj = snapshot.val();        
-        objValues = Object.keys(obj).map((key) => obj[key]);        
+        const obj = snapshot.val();
+        objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });
 

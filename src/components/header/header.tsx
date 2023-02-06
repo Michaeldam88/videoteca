@@ -1,6 +1,7 @@
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MovieContext } from '../../context/movie.context';
 
 export function Header() {
@@ -33,19 +34,23 @@ export function Header() {
     return (
         <header className="header">
             <div className="container align-center">
-                <div
-                    className="header__logo-container"
-                    onClick={() => {
-                        setPage(0);
-                        getPopularMovies(1);
-                        setActiveOperation('popular');
-                    }}
-                >
-                    <span className="header__logo material-symbols-outlined">
-                        theaters
-                    </span>
-                    <p className="header__text">Videoteca</p>
-                </div>
+                <Link to="/home">
+                    {
+                        <div
+                            className="header__logo-container"
+                            onClick={() => {
+                                setPage(0);
+                                getPopularMovies(1);
+                                setActiveOperation('popular');
+                            }}
+                        >
+                            <span className="header__logo material-symbols-outlined">
+                                theaters
+                            </span>
+                            <p className="header__text">Videoteca</p>
+                        </div>
+                    }
+                </Link>
                 {user ? (
                     <div className="header__login">
                         <img

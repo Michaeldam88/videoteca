@@ -38,19 +38,20 @@ export default function Home() {
                         ? 'Peliculas Populares'
                         : `Resultado de ${filter}`}
                 </h1>
-                <ul className="movies-list">
-                    {movies.length>1 ? (
-                        movies.map((element) => (
+
+                {movies.length > 1 ? (
+                    <ul className="movies-list">
+                        {movies.map((element) => (
                             <MovieCard
                                 key={element.id}
                                 movie={element}
                                 setIdDetails={setIdDetails}
                             />
-                        ))
-                    ) : (
-                        <p className="home__no-results">Sin resultados</p>
-                    )}
-                </ul>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="home__no-results">Sin resultados</p>
+                )}
 
                 <TablePagination
                     rowsPerPageOptions={[{ label: '20', value: 20 }]}
