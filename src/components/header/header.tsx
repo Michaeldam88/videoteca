@@ -77,7 +77,7 @@ export function Header() {
                         className="header__login"
                         onClick={async () => {
                             await login();
-                            await handleClick('login');
+                            handleClick('login');
                         }}
                     >
                         <p className="header__login-text">Login</p>

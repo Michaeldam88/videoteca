@@ -27,32 +27,33 @@ export default function Favorites() {
     };
 
     useEffect(() => {
-        getFavoritesList(favorites.slice(page * 20, page * 20 + 20));     
+        getFavoritesList(favorites.slice(page * 20, page * 20 + 20));
     }, [favorites, page, getFavoritesList]);
-    
+
+    const withFavorites =
+        favorites.length > 0 ? (
+            <ul className="movies-list">
+                {favoritesList.map((element) => (
+                    <FavoritesCard
+                        key={'favorites' + element.id}
+                        movie={element}
+                        setIdDetails={setIdDetails}
+                    />
+                ))}
+            </ul>
+        ) : (
+            <p className="home__no-results">
+                ¡Todavía no tienes películas favoritas!
+            </p>
+        );
+
     return (
         <main className="favorites">
             <div className="container flex-column">
                 <h1 className="favorites__title">Tus favoritos</h1>
 
                 {user ? (
-                    favorites.length > 0 ? (
-                        <ul className="movies-list">
-                            {favoritesList
-                                
-                                .map((element) => (
-                                    <FavoritesCard
-                                        key={'favorites' + element.id}
-                                        movie={element}
-                                        setIdDetails={setIdDetails}
-                                    />
-                                ))}
-                        </ul>
-                    ) : (
-                        <p className="home__no-results">
-                            ¡Todavía no tienes películas favoritas!
-                        </p>
-                    )
+                    withFavorites
                 ) : (
                     <p className="favorites__no-logged">
                         Haz login para visualizar tus favoritos
