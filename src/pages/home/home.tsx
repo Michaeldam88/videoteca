@@ -5,6 +5,8 @@ import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
+import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
+
 
 export default function Home() {
     const [rowsPerPage, setRowsPerPage] = useState(20);
@@ -52,6 +54,8 @@ export default function Home() {
                 ) : (
                     <p className="home__no-results">Sin resultados</p>
                 )}
+
+                <LoadingIndicator />
 
                 <TablePagination
                     rowsPerPageOptions={[{ label: '20', value: 20 }]}

@@ -19,6 +19,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         setPage,
         setActiveOperation,
         activeOperation,
+        setDetails,
     } = useMovies();
 
     const {
@@ -56,6 +57,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             liked,
             disliked,
             activeOperation,
+            setDetails,
         }),
         [
             getPopularMovies,
@@ -80,6 +82,7 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             liked,
             disliked,
             activeOperation,
+            setDetails,
         ]
     );
 

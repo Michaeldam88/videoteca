@@ -127,6 +127,7 @@ export function getWatched(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });
@@ -189,6 +190,7 @@ export function getLiked(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });
@@ -251,6 +253,7 @@ export function getDisliked(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });

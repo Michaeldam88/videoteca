@@ -17,7 +17,8 @@ export type UseMovies = {
     totPages: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
     setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
-    activeOperation:string;
+    activeOperation: string;
+    setDetails: React.Dispatch<React.SetStateAction<object>>;
 };
 
 export function useMovies(): UseMovies {
@@ -114,5 +115,6 @@ export function useMovies(): UseMovies {
         setPage,
         setActiveOperation,
         activeOperation,
+        setDetails
     };
 }

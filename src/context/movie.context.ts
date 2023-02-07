@@ -27,6 +27,7 @@ interface MovieContextStructure {
     disliked: Array<number>;
     watched: Array<number>;
     activeOperation: string;
+    setDetails: React.Dispatch<React.SetStateAction<object>>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -52,6 +53,7 @@ const initialContext: MovieContextStructure = {
     liked: [],
     disliked: [],
     activeOperation: '',
+    setDetails:()=>{}
 };
 
 export const MovieContext = createContext(initialContext);

@@ -2,6 +2,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
+import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
 import {
     writeFavoritesMovie,
     deleteFavoritesMovie,
@@ -14,7 +15,8 @@ export function DetailsModal({
     id: number;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { getDetails, details, user, favorites } = useContext(MovieContext);
+    const { getDetails, setDetails , details, user, favorites } =
+        useContext(MovieContext);
 
     useEffect(() => {
         getDetails(id);
@@ -62,9 +64,11 @@ export function DetailsModal({
 
     return (
         <div className="details-modal">
+            <LoadingIndicator />
             <span
                 className="details-modal__close material-symbols-outlined"
-                onClick={() => setIdDetails(null)}
+                onClick={() => {setIdDetails(null);setDetails({})}}
+                
             >
                 close
             </span>
