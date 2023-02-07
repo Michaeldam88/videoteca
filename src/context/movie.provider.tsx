@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useFirebase } from '../hooks/use.Firebase';
 import { useMovies } from '../hooks/use.movies';
 import { MovieContext } from './movie.context';
 
@@ -13,7 +14,25 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         setFilterModal,
         getFilteredMovies,
         searchMovie,
+        page,
+        totPages,
+        setPage,
+        setActiveOperation,
+        activeOperation,
+        setDetails,
+        getFavoritesList,
+        favoritesList,
     } = useMovies();
+
+    const {
+        login,
+        logout,
+        user,
+        favorites,
+        watched,
+        liked,
+        disliked,
+    } = useFirebase();
 
     const context = useMemo(
         () => ({
@@ -26,6 +45,21 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             filterModal,
             setFilterModal,
             searchMovie,
+            user,
+            login,
+            logout,
+            page,
+            setPage,
+            totPages,
+            setActiveOperation,
+            favorites,
+            watched,
+            liked,
+            disliked,
+            activeOperation,
+            setDetails,
+            getFavoritesList,
+            favoritesList,
         }),
         [
             getPopularMovies,
@@ -37,6 +71,21 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setFilterModal,
             getFilteredMovies,
             searchMovie,
+            user,
+            login,
+            logout,
+            page,
+            setPage,
+            totPages,
+            setActiveOperation,
+            favorites,
+            watched,
+            liked,
+            disliked,
+            activeOperation,
+            setDetails,
+            getFavoritesList,
+            favoritesList,
         ]
     );
 

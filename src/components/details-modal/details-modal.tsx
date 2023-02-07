@@ -1,5 +1,12 @@
-import { useContext, useEffect } from 'react';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
+import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
+import {
+    writeFavoritesMovie,
+    deleteFavoritesMovie,
+} from '../../services/firebaseStorage';
 
 export function DetailsModal({
     id,
@@ -8,7 +15,8 @@ export function DetailsModal({
     id: number;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { getDetails, details } = useContext(MovieContext);
+    const { getDetails, setDetails , details, user, favorites } =
+        useContext(MovieContext);
 
     useEffect(() => {
         getDetails(id);
@@ -24,11 +32,43 @@ export function DetailsModal({
         ? details.genres.map((element) => element.name)
         : [''];
 
+    const [open, setOpen] = useState(false);
+    const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
+    const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClickAddedFavorites = () => {
+        setOpenAddedFavorites(true);
+        if (user && id) writeFavoritesMovie(user.uid, id);
+    };
+
+    const handleClickRemovedFavorites = () => {
+        setOpenRemovedFavorites(true);
+        if (user && id) deleteFavoritesMovie(user.uid, id);
+    };
+
+    const handleClose = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAddedFavorites(false);
+        setOpenRemovedFavorites(false);
+        setOpen(false);
+    };
+
     return (
         <div className="details-modal">
+            <LoadingIndicator />
             <span
                 className="details-modal__close material-symbols-outlined"
-                onClick={() => setIdDetails(null)}
+                onClick={() => {setIdDetails(null);setDetails({})}}
+                
             >
                 close
             </span>
@@ -41,12 +81,29 @@ export function DetailsModal({
                             ? details.release_date.slice(0, 4)
                             : 'Pronto en enstreno'}
                     </span>
-                    <span
-                        className="details-modal__star material-symbols-outlined"
-                        onClick={() => console.log('star-modal')}
-                    >
-                        star
-                    </span>
+                    {favorites.some((element) => element === id) ? (
+                        <span
+                            className="details-modal__star material-symbols-outlined --filled"
+                            onClick={() =>
+                                user
+                                    ? handleClickRemovedFavorites()
+                                    : handleClick()
+                            }
+                        >
+                            star
+                        </span>
+                    ) : (
+                        <span
+                            className="details-modal__star material-symbols-outlined"
+                            onClick={() =>
+                                user
+                                    ? handleClickAddedFavorites()
+                                    : handleClick()
+                            }
+                        >
+                            star
+                        </span>
+                    )}
                 </div>
                 <div className="details-modal__info">
                     <p>{genres.join(', ')}</p>
@@ -56,10 +113,14 @@ export function DetailsModal({
                     </p>
                 </div>
             </div>
-
+            
             <img
                 className="details-modal__img"
-                src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
+                src={
+                    details.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+                        : ''
+                }
                 alt="pelicula1"
             />
             <div className="desktop-detail">
@@ -73,12 +134,29 @@ export function DetailsModal({
                                 ? details.release_date.slice(0, 4)
                                 : 'Pronto en enstreno'}
                         </span>
-                        <span
-                            className="details-modal__star material-symbols-outlined"
-                            onClick={() => console.log('star-modal')}
-                        >
-                            star
-                        </span>
+                        {favorites.some((element) => element === id) ? (
+                            <span
+                                className="details-modal__star material-symbols-outlined --filled"
+                                onClick={() =>
+                                    user
+                                        ? handleClickRemovedFavorites()
+                                        : handleClick()
+                                }
+                            >
+                                star
+                            </span>
+                        ) : (
+                            <span
+                                className="details-modal__star material-symbols-outlined"
+                                onClick={() =>
+                                    user
+                                        ? handleClickAddedFavorites()
+                                        : handleClick()
+                                }
+                            >
+                                star
+                            </span>
+                        )}
                     </div>
                     <div className="details-modal__info">
                         <p>{genres.join(', ')}</p>
@@ -96,6 +174,44 @@ export function DetailsModal({
                     {details.vote_average?.toFixed(1)}
                 </p>
             </div>
+
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="warning"
+                    sx={{ width: '100%' }}
+                >
+                    Para guardar tus favoritos logueate primero
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={openAddedFavorites}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Añadido a tus favoritos!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={openRemovedFavorites}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Quitado de tus favoritos!
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

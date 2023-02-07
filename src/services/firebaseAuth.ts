@@ -4,20 +4,16 @@ import {
     signInWithPopup,
     signOut,
 } from 'firebase/auth';
+
 import { firebaseApp } from '../firebaseApp';
 
+const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
+auth.languageCode = 'es';
 
-export const login = async () => {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-        user_type: 'public-user',
-    });
-    const result = await signInWithPopup(auth, provider);
-    //const credential = GoogleAuthProvider.credentialFromResult(result);
-    //const token = credential?.idToken;
-    //console.log(credential);
-    //console.log(token);
-    alert(`Bienvenido ${result.user.displayName}`);
+export const loginFirebase = async () => {
+    const response = await signInWithPopup(auth, provider);
+    return response.user;
 };
-export const exit = signOut(auth);
+
+export const logoutFirebase = () => signOut(auth);

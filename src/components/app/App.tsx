@@ -5,11 +5,11 @@ import { AppRoutes } from '../routes/app.routes';
 export function App() {
     return (
         <>
-            <Layout>
-                <MovieContextProvider>
+            <MovieContextProvider>
+                <Layout>
                     <AppRoutes></AppRoutes>
-                </MovieContextProvider>
-            </Layout>
+                </Layout>
+            </MovieContextProvider>
         </>
     );
 }

@@ -5,13 +5,11 @@
     letter-spacing: 0.5px;
 }
 
-
-
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
-.material-symbols-fill {
+.material-symbols-outlined.--filled {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
@@ -82,12 +80,29 @@
         letter-spacing: 1px;
     }
     &__login {
-        font-size: 1.3rem;
         margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+    &__login-logo {
+        font-size: 1.3rem;
         background-color: #586fc5;
         border-radius: 1rem;
         padding: 0.4rem;
+        margin-left: 0.7rem;
     }
+    &__login-text {
+        display: none;
+        font-size: 1rem;
+        margin-left: 0.7rem;
+    }
+
+    &__login-img {
+        height: 2.2rem;
+        border-radius: 1.2rem;
+        margin-left: 0.7rem;
+    }
+
     &__login:hover {
         cursor: pointer;
     }
@@ -151,11 +166,19 @@
         font-size: 1.4rem;
         color: #3d3d3d;
     }
+
+    &__no-results {
+        font-size: 1.5rem;
+        height: 300px;
+        width: 100%;
+        text-align: center;
+        padding-top: 5rem;
+    }
 }
 
 .movies-list {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 1.5rem;
     gap: 1rem 1rem;
@@ -166,21 +189,20 @@
     position: relative;
     flex-grow: 1;
     color: white;
-
+    max-width: 285px;
+    aspect-ratio: 2/3;
     &__img {
         border-radius: 1rem;
-        width: 160px;
         flex-grow: 1;
+        width: 160px;
     }
     &__top {
         position: absolute;
         height: 50%;
         width: 100%;
         top: 0rem;
-        right: 0rem;
-        text-align: right;
+        left: 0rem;        
         padding: 0.8rem;
-        color: #ffcd17;
         background: rgb(0, 0, 0);
         background: linear-gradient(
             180deg,
@@ -189,16 +211,79 @@
         );
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
+        display: flex;
+        justify-content: center;
     }
     &__star {
         cursor: pointer;
         color: #ffcd17;
-        z-index: 1;
+        margin-left: auto;
     }
     &__star:hover {
         color: #fee79b;
         font-size: 2.1rem;
     }
+
+    &__eye {
+        cursor: pointer;
+        color: #54838a; 
+        margin-right:auto;           
+    }
+    &__eye:hover {
+        color: #2ac8e0;
+        font-size: 2.1rem;
+    }
+
+    &__eye--selected {
+        cursor: pointer;
+        color: #2ac8e0; 
+        margin-right:auto;           
+    }
+    &__eye--selected:hover {
+        color: #54838a;
+        font-size: 2.1rem;
+    }
+
+    &__thumsUp {
+        cursor: pointer;
+        color: #76917d;       
+    }
+    &__thumsUp:hover {
+        color: #2cb32a;
+        font-size: 2.1rem;
+    }
+
+    &__thumsDown {
+        align-self: flex-start;
+        cursor: pointer;
+        color: #97736a; 
+        rotate: 180deg;      
+    }
+    &__thumsDown:hover {
+        color: #ff3717;
+        font-size: 2.1rem;
+    }
+
+    &__thumsUp--selected {
+        cursor: pointer;
+        color: #2cb32a;       
+    }
+
+    &__thumsUp--selected:hover {
+        color: #76917d;
+        font-size: 2.1rem;
+    }
+
+    &__thumsDown--selected {
+        cursor: pointer;
+        color: #ff3717;       
+    }
+
+    &__thumsDown--selected:hover {
+        color: #97736a;
+        font-size: 2.1rem;
+    }
+
     &__tag {
         width: fit-content;
         background-color: #000000bb;
@@ -264,11 +349,18 @@
 .favorites {
     padding: 1.5rem 0;
     position: relative;
-    top: 5rem;
+    top: 6rem;
     &__title {
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
         font-size: 1.4rem;
         color: #3d3d3d;
+    }
+    &__no-logged {
+        font-size: 1.5rem;
+        height: 300px;
+        width: 100%;
+        text-align: center;
+        padding-top: 5rem;
     }
 }
 
@@ -349,6 +441,22 @@ footer {
     }
 }
 
+.spinner-modal{
+    min-width: 390px;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000a5;
+    padding: 1rem 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .details-modal {
     position: relative;
     background-color: white;
@@ -362,7 +470,7 @@ footer {
     align-self: center;
     overflow-y: auto;
     color: #8e8e8e;
-    min-width: 300px;
+    min-width: 300px;    
     &__close {
         position: absolute;
         top: 1rem;
@@ -375,7 +483,7 @@ footer {
     }
     &__main-info {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         margin-top: 1rem;
     }
     &__title {
@@ -428,6 +536,10 @@ footer {
 }
 
 @media all and (min-width: 46rem) {
+    .header__login-text {
+        display: initial;
+    }
+
     .movie-card {
         &__img {
             border-radius: 1rem;

@@ -17,7 +17,7 @@ Requisitos del proyecto:
 -   Testing con coverage
 -   Autenticación y API privada
 
-Para su desarrollo he intentado utilizar todas las tecnologías adquiridas durante el curso:
+Para su desarrollo he intentado utilizar todas las tecnologías aprendidas durante el curso:
 
 -   Como Framework: React con patrón Flux
 -   Para el código: Typescrip,
@@ -27,7 +27,6 @@ Para su desarrollo he intentado utilizar todas las tecnologías adquiridas duran
 -   Para la persistencia: Firebase Realtime Database
 -   Para el login: Firebase Authentication
 -   Para comprobar la calidad del código: Git Action y Sonar (https://sonarcloud.io/project/overview?id=Michaeldam88_videoteca)
--   Para comprobar la oprimización de la web XXX
 
 Así es como se presenta:
 URl Screenshot

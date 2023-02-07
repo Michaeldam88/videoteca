@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TmdbApi } from '../services/tmdbApi';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
@@ -7,12 +7,20 @@ export type UseMovies = {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
-    getPopularMovies: () => Promise<void>;
+    getPopularMovies: (page: number) => Promise<void>;
     getDetails: (id: number) => Promise<void>;
-    getFilteredMovies: (genre: string) => Promise<void>;
+    getFilteredMovies: (genre: string, page: number) => Promise<void>;
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
-    searchMovie: (keyword: string) => Promise<void>;
+    searchMovie: (keyword: string, page: number) => Promise<void>;
+    page: number;
+    totPages: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
+    activeOperation: string;
+    setDetails: React.Dispatch<React.SetStateAction<object>>;
+    getFavoritesList: (ids: Array<number>) => Promise<void>;
+    favoritesList: Array<MovieStructure>;
 };
 
 export function useMovies(): UseMovies {
@@ -23,6 +31,13 @@ export function useMovies(): UseMovies {
     const [genres, setGenres] = useState(genreInitialState);
     const [details, setDetails] = useState({});
     const [filterModal, setFilterModal] = useState(false);
+    const [page, setPage] = useState(0);
+    const [totPages, setTotPage] = useState(0);
+    const [activeOperation, setActiveOperation] = useState('popular');
+    const [favoritesList, setFavoritesList] = useState<Array<MovieStructure>>([]);
+
+    const genre = useRef('');
+    const keyword = useRef('');
 
     const getGenres = useCallback(async () => {
         const genres = await tmdbApi.getGenres();
@@ -33,10 +48,14 @@ export function useMovies(): UseMovies {
         getGenres();
     }, [getGenres]);
 
-    const getPopularMovies = useCallback(async () => {
-        const moviesList = await tmdbApi.getPopularMovies();
-        setMovies(moviesList.results);
-    }, [tmdbApi]);
+    const getPopularMovies = useCallback(
+        async (page: number) => {
+            const filteredList = await tmdbApi.getPopularMovies(page);
+            setMovies(filteredList.results);
+            setTotPage(filteredList.total_pages);
+        },
+        [tmdbApi]
+    );
 
     const getDetails = useCallback(
         async (id: number) => {
@@ -46,27 +65,53 @@ export function useMovies(): UseMovies {
         [tmdbApi]
     );
 
+    const getFavoritesList = useCallback(
+        async (ids: Array<number>) => {
+            const favoritesList: Array<MovieStructure> = await Promise.all([
+                ...ids.map((element) => tmdbApi.getDetails(element)),
+            ]);
+            setFavoritesList(favoritesList);
+        },
+        [tmdbApi]
+    );
+
     const getFilteredMovies = useCallback(
-        async (genre: string) => {
-            const filteredList = await tmdbApi.filterGenre(genre);
+        async (receivedGenre: string, page: number) => {
+            genre.current = receivedGenre;
+            const filteredList = await tmdbApi.filterGenre(receivedGenre, page);
             setMovies(filteredList.results);
+            setTotPage(filteredList.total_pages);
         },
         [tmdbApi]
     );
 
     const searchMovie = useCallback(
-        async (keyword: string) => {
-            if (keyword.length > 3) {
-                const filteredList = await tmdbApi.searchMovie(keyword);
+        async (receivedKeyword: string, page: number) => {
+            keyword.current = receivedKeyword;
+            if (receivedKeyword.length > 2) {
+                const filteredList = await tmdbApi.searchMovie(
+                    receivedKeyword,
+                    page
+                );
                 setMovies(filteredList.results);
+                setTotPage(filteredList.total_pages);
             }
 
-            if (keyword.length === 0) {
-                getPopularMovies();
+            if (receivedKeyword.length === 0) {
+                getPopularMovies(page);
             }
         },
         [tmdbApi, getPopularMovies]
     );
+
+    useEffect(() => {
+        if (activeOperation === 'popular') getPopularMovies(page + 1);
+        if (activeOperation === 'filter')
+            getFilteredMovies(genre.current, page + 1);
+        if (activeOperation === 'search')
+            searchMovie(keyword.current, page + 1);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page]);
 
     return {
         getPopularMovies,
@@ -78,5 +123,13 @@ export function useMovies(): UseMovies {
         setFilterModal,
         getFilteredMovies,
         searchMovie,
+        page,
+        totPages,
+        setPage,
+        setActiveOperation,
+        activeOperation,
+        setDetails,
+        favoritesList,
+        getFavoritesList,
     };
 }

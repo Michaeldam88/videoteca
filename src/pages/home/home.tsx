@@ -1,20 +1,17 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
+import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
 
 export default function Home() {
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(20);
 
-    const { getPopularMovies, movies, filterModal } = useContext(MovieContext);
-
-    useEffect(() => {
-        getPopularMovies();
-    }, [getPopularMovies]);
+    const { movies, filterModal, page, setPage, totPages } =
+        useContext(MovieContext);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -42,19 +39,28 @@ export default function Home() {
                         ? 'Peliculas Populares'
                         : `Resultado de ${filter}`}
                 </h1>
-                <ul className="movies-list">
-                    {movies.map((element) => (
-                        <MovieCard
-                            key={element.id}
-                            movie={element}
-                            setIdDetails={setIdDetails}
-                        />
-                    ))}
-                </ul>
+
+                {movies.length > 0 ? (
+                    <ul className="movies-list">
+                        {movies.map((element) => (
+                            <MovieCard
+                                key={element.id}
+                                movie={element}
+                                setIdDetails={setIdDetails}
+                            />
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="home__no-results">Sin resultados</p>
+                )}
+
+                <LoadingIndicator />
 
                 <TablePagination
+                    rowsPerPageOptions={[{ label: '20', value: 20 }]}
+                    labelRowsPerPage={'Peliculas por pagina'}
                     component="div"
-                    count={100}
+                    count={totPages}
                     page={page}
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}
