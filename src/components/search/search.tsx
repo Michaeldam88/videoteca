@@ -29,7 +29,7 @@ export function Search({ filter }: { filter: string }) {
                     type="text"
                     placeholder="Buscar"
                     onChange={handleInput}
-                    value={inputValue}
+                    value={activeOperation !== "search"? "":inputValue}
                 />
             </div>
             <span

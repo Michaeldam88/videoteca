@@ -35,7 +35,7 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
 
 export function deleteFavoritesMovie(userUID: string, idMovie: number) {
     const database = getDatabase(firebaseApp);
-    
+
     let idToRemove = undefined;
 
     const topUserPostsRef = query(
@@ -67,7 +67,10 @@ export function getFavorites(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        if (!obj) return;
+        if (!obj) {
+            setFavorites([]);
+            return;
+        }
         objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });
@@ -132,7 +135,10 @@ export function getWatched(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        if (!obj) return;
+        if (!obj) {
+            setWatched([]);
+            return;
+        }
         objValues = Object.keys(obj).map((key) => obj[key]);
         setWatched(objValues);
     });
@@ -197,7 +203,10 @@ export function getLiked(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        if (!obj) return;
+        if (!obj) {
+            setLiked([]);
+            return;
+        }
         objValues = Object.keys(obj).map((key) => obj[key]);
         setLiked(objValues);
     });
@@ -216,7 +225,7 @@ export function writeDislikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        
+        if (!obj) return;
         exist = Object.keys(obj).some((key) => obj[key] === idMovie);
     });
 
@@ -239,7 +248,7 @@ export function deleteDislikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        
+        if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });
 
@@ -262,7 +271,10 @@ export function getDisliked(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        if (!obj) return;
+        if (!obj) {
+            setDisliked([]);
+            return;
+        }
         objValues = Object.keys(obj).map((key) => obj[key]);
         setDisliked(objValues);
     });

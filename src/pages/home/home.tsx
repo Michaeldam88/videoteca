@@ -29,7 +29,7 @@ export default function Home() {
 
     const [filter, setFilter] = useState('default');
     const [idDetail, setIdDetails] = useState<number | null>(null);
-    console.log('Home');
+
     return (
         <main className="home">
             <div className="container flex-column">

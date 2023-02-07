@@ -27,8 +27,7 @@ export default function Favorites() {
     };
 
     useEffect(() => {
-        getFavoritesList(favorites.slice(page * 20, page * 20 + 20));  
-        console.log("nada",favorites);      
+        getFavoritesList(favorites.slice(page * 20, page * 20 + 20));     
     }, [favorites, page, getFavoritesList]);
     
     return (

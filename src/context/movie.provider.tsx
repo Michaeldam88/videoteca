@@ -21,13 +21,12 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         activeOperation,
         setDetails,
         getFavoritesList,
-        favoritesList
+        favoritesList,
     } = useMovies();
 
     const {
         login,
         logout,
-        
         user,
         favorites,
         watched,
@@ -53,7 +52,6 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setPage,
             totPages,
             setActiveOperation,
-           
             favorites,
             watched,
             liked,
@@ -80,7 +78,6 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setPage,
             totPages,
             setActiveOperation,
-           
             favorites,
             watched,
             liked,

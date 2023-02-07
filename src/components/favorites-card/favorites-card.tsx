@@ -18,16 +18,15 @@ export function FavoritesCard({
     movie,
     setIdDetails,
 }: {
-    movie: Partial<MovieStructure>;
+    movie: MovieStructure;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { genres, user, favorites, watched, liked, disliked } =
+    const { user, favorites, watched, liked, disliked } =
         useContext(MovieContext);
 
-    //tengo que cambiar el 333 por movie.genre_ids[0]
-    const genreFiltered = genres.filter((element) => element.id === 333);
-
-    const genre = genreFiltered.length ? genreFiltered[0].name : '';
+    const genre = movie.genres
+        ? movie.genres[0].name
+        : [''];
 
     const [open, setOpen] = useState(false);
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);

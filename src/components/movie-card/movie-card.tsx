@@ -27,19 +27,18 @@ export function MovieCard({
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
     const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
 
-    const handleClick = () => {
+    const handleClick = () => {        
         setOpen(true);
-    };    
+    };
 
     const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user) writeFavoritesMovie(user.uid, movie.id);        
+        if (user) writeFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        
-        if (user) deleteFavoritesMovie(user.uid, movie.id);        
+        if (user) deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (
@@ -49,7 +48,6 @@ export function MovieCard({
         if (reason === 'clickaway') {
             return;
         }
-
         setOpenAddedFavorites(false);
         setOpenRemovedFavorites(false);
         setOpen(false);
