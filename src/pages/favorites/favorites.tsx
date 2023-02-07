@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FavoritesCard } from '../../components/favorites-card/favorites-card';
 import { MovieContext } from '../../context/movie.context';
@@ -24,7 +24,8 @@ export default function Favorites() {
         setPage(0);
     };
 
-    const moviesList = favorites.map((element) => {        
+    const moviesList = favorites.map((element) => {    
+        //no le puedo activar porque va en loop    
         //getDetails(element)
         return details;
     });

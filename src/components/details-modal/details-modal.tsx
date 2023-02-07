@@ -2,7 +2,10 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
-import { writeFavoritesMovie } from '../../services/firebaseStorage';
+import {
+    writeFavoritesMovie,
+    deleteFavoritesMovie,
+} from '../../services/firebaseStorage';
 
 export function DetailsModal({
     id,
@@ -11,7 +14,7 @@ export function DetailsModal({
     id: number;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { getDetails, details, user } = useContext(MovieContext);
+    const { getDetails, details, user, favorites } = useContext(MovieContext);
 
     useEffect(() => {
         getDetails(id);
@@ -28,16 +31,21 @@ export function DetailsModal({
         : [''];
 
     const [open, setOpen] = useState(false);
-    const [openCorrect, setOpenCorrect] = useState(false);
+    const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
+    const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
 
-    
     const handleClick = () => {
         setOpen(true);
     };
 
-    const handleClickCorrect = () => {
-        setOpenCorrect(true);
-        if (user) writeFavoritesMovie(user.uid, id);
+    const handleClickAddedFavorites = () => {
+        setOpenAddedFavorites(true);
+        if (user && id) writeFavoritesMovie(user.uid, id);
+    };
+
+    const handleClickRemovedFavorites = () => {
+        setOpenRemovedFavorites(true);
+        if (user && id) deleteFavoritesMovie(user.uid, id);
     };
 
     const handleClose = (
@@ -47,7 +55,8 @@ export function DetailsModal({
         if (reason === 'clickaway') {
             return;
         }
-        setOpenCorrect(false);
+        setOpenAddedFavorites(false);
+        setOpenRemovedFavorites(false);
         setOpen(false);
     };
 
@@ -68,14 +77,29 @@ export function DetailsModal({
                             ? details.release_date.slice(0, 4)
                             : 'Pronto en enstreno'}
                     </span>
-                    <span
-                        className="details-modal__star material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickCorrect() : handleClick()
-                        }
-                    >
-                        star
-                    </span>
+                    {favorites.some((element) => element === id) ? (
+                        <span
+                            className="details-modal__star material-symbols-outlined --filled"
+                            onClick={() =>
+                                user
+                                    ? handleClickRemovedFavorites()
+                                    : handleClick()
+                            }
+                        >
+                            star
+                        </span>
+                    ) : (
+                        <span
+                            className="details-modal__star material-symbols-outlined"
+                            onClick={() =>
+                                user
+                                    ? handleClickAddedFavorites()
+                                    : handleClick()
+                            }
+                        >
+                            star
+                        </span>
+                    )}
                 </div>
                 <div className="details-modal__info">
                     <p>{genres.join(', ')}</p>
@@ -106,14 +130,29 @@ export function DetailsModal({
                                 ? details.release_date.slice(0, 4)
                                 : 'Pronto en enstreno'}
                         </span>
-                        <span
-                            className="details-modal__star material-symbols-outlined"
-                            onClick={() =>
-                                user ? handleClickCorrect() : handleClick()
-                            }
-                        >
-                            star
-                        </span>
+                        {favorites.some((element) => element === id) ? (
+                            <span
+                                className="details-modal__star material-symbols-outlined --filled"
+                                onClick={() =>
+                                    user
+                                        ? handleClickRemovedFavorites()
+                                        : handleClick()
+                                }
+                            >
+                                star
+                            </span>
+                        ) : (
+                            <span
+                                className="details-modal__star material-symbols-outlined"
+                                onClick={() =>
+                                    user
+                                        ? handleClickAddedFavorites()
+                                        : handleClick()
+                                }
+                            >
+                                star
+                            </span>
+                        )}
                     </div>
                     <div className="details-modal__info">
                         <p>{genres.join(', ')}</p>
@@ -138,11 +177,12 @@ export function DetailsModal({
                     severity="warning"
                     sx={{ width: '100%' }}
                 >
-                    ¡Para guardar tus favoritos logueate primero!
+                    Para guardar tus favoritos logueate primero
                 </Alert>
             </Snackbar>
+
             <Snackbar
-                open={openCorrect}
+                open={openAddedFavorites}
                 autoHideDuration={4000}
                 onClose={handleClose}
             >
@@ -152,6 +192,20 @@ export function DetailsModal({
                     sx={{ width: '100%' }}
                 >
                     ¡Añadido a tus favoritos!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={openRemovedFavorites}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Quitado de tus favoritos!
                 </Alert>
             </Snackbar>
         </div>

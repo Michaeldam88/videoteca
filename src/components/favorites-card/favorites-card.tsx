@@ -17,6 +17,7 @@ export function FavoritesCard({
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
+    //tengo que cambiar el 333 por movie.genre_ids[0]
     const genreFiltered = genres.filter((element) => element.id === 333);
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
@@ -65,6 +66,65 @@ export function FavoritesCard({
             />
 
             <div className="movie-card__top">
+                {favorites.some((element) => element === movie.id) ? (
+                    <span
+                        className="movie-card__eye movie-card__eye--selected material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickRemovedFavorites() : handleClick()
+                        }
+                    >
+                        visibility
+                    </span>
+                ) : (
+                    <span
+                        className="movie-card__eye material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickAddedFavorites() : handleClick()
+                        }
+                    >
+                        visibility
+                    </span>
+                )}
+                {favorites.some((element) => element === movie.id) ? (
+                    <span
+                        className="movie-card__thumsDown movie-card__thumsDown--selected material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickRemovedFavorites() : handleClick()
+                        }
+                    >
+                        recommend
+                    </span>
+                ) : (
+                    <span
+                        className="movie-card__thumsDown material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickAddedFavorites() : handleClick()
+                        }
+                    >
+                        recommend
+                    </span>
+                )}
+
+                {favorites.some((element) => element === movie.id) ? (
+                    <span
+                        className="movie-card__thumsUp movie-card__thumsUp--selected material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickRemovedFavorites() : handleClick()
+                        }
+                    >
+                        recommend
+                    </span>
+                ) : (
+                    <span
+                        className="movie-card__thumsUp material-symbols-outlined"
+                        onClick={() =>
+                            user ? handleClickAddedFavorites() : handleClick()
+                        }
+                    >
+                        recommend
+                    </span>
+                )}
+
                 {favorites.some((element) => element === movie.id) ? (
                     <span
                         className="movie-card__star material-symbols-outlined --filled"
