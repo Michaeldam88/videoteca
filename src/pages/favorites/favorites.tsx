@@ -5,9 +5,9 @@ import { FavoritesCard } from '../../components/favorites-card/favorites-card';
 import { MovieContext } from '../../context/movie.context';
 
 export default function Favorites() {
-    const { user, favorites, getDetails, details} = useContext(MovieContext);
+    const { user, favorites, getDetails, details } = useContext(MovieContext);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(20);
     const [idDetail, setIdDetails] = useState<number | null>(null);
 
     const handleChangePage = (
@@ -24,10 +24,10 @@ export default function Favorites() {
         setPage(0);
     };
 
-    const moviesList = favorites.map((element) => {    
-        //no le puedo activar porque va en loop    
-        //getDetails(element)
-        return details;
+    const moviesList = favorites.map((element) => {
+        //no le puedo activar porque va en loop
+        //return details;
+        return details
     });
 
     console.log(moviesList);
@@ -40,9 +40,9 @@ export default function Favorites() {
                 {user ? (
                     favorites.length > 1 ? (
                         <ul className="movies-list">
-                            {moviesList.map((element) => (
+                            {moviesList.slice(page*20,((page*20)+19)).map((element) => (
                                 <FavoritesCard
-                                    key={"favorites" + element.id}
+                                    key={'favorites' + element.id}
                                     movie={element}
                                     setIdDetails={setIdDetails}
                                 />
@@ -60,10 +60,10 @@ export default function Favorites() {
                 )}
 
                 <TablePagination
-                    rowsPerPageOptions={[{ label: '10', value: 10 }]}
+                    rowsPerPageOptions={[{ label: '20', value: 20 }]}
                     labelRowsPerPage={'Peliculas por pagina'}
                     component="div"
-                    count={100}
+                    count={favorites.length}
                     page={page}
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}

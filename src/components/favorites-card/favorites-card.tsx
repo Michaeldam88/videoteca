@@ -5,6 +5,12 @@ import { MovieContext } from '../../context/movie.context';
 import {
     deleteFavoritesMovie,
     writeFavoritesMovie,
+    deleteWatchedMovie,
+    writeWatchedMovie,
+    deleteLikedMovie,
+    writeLikedMovie,
+    deleteDislikedMovie,
+    writeDislikedMovie,
 } from '../../services/firebaseStorage';
 import { MovieStructure } from '../../types/movieStructure';
 
@@ -15,7 +21,8 @@ export function FavoritesCard({
     movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { genres, user, favorites } = useContext(MovieContext);
+    const { genres, user, favorites, watched, liked, disliked } =
+        useContext(MovieContext);
 
     //tengo que cambiar el 333 por movie.genre_ids[0]
     const genreFiltered = genres.filter((element) => element.id === 333);
@@ -25,6 +32,8 @@ export function FavoritesCard({
     const [open, setOpen] = useState(false);
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
     const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
+    const [openAddedWatched, setOpenAddedWatched] = useState(false);
+    const [openRemovedWatched, setOpenRemovedWatched] = useState(false);
 
     const handleClick = () => {
         setOpen(true);
@@ -40,6 +49,16 @@ export function FavoritesCard({
         if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
     };
 
+    const handleClickAddedWatched = () => {
+        setOpenAddedWatched(true);
+        if (user && movie.id) writeWatchedMovie(user.uid, movie.id);
+    };
+
+    const handleClickRemovedWatched = () => {
+        setOpenRemovedWatched(true);
+        if (user && movie.id) deleteWatchedMovie(user.uid, movie.id);
+    };
+
     const handleClose = (
         event?: React.SyntheticEvent | Event,
         reason?: string
@@ -48,6 +67,8 @@ export function FavoritesCard({
             return;
         }
 
+        setOpenAddedWatched(false);
+        setOpenRemovedWatched(false);
         setOpenAddedFavorites(false);
         setOpenRemovedFavorites(false);
         setOpen(false);
@@ -66,11 +87,11 @@ export function FavoritesCard({
             />
 
             <div className="movie-card__top">
-                {favorites.some((element) => element === movie.id) ? (
+                {watched.some((element) => element === movie.id) ? (
                     <span
                         className="movie-card__eye movie-card__eye--selected material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickRemovedFavorites() : handleClick()
+                            user ? handleClickRemovedWatched() : handleClick()
                         }
                     >
                         visibility
@@ -79,17 +100,19 @@ export function FavoritesCard({
                     <span
                         className="movie-card__eye material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickAddedFavorites() : handleClick()
+                            user ? handleClickAddedWatched() : handleClick()
                         }
                     >
                         visibility
                     </span>
                 )}
-                {favorites.some((element) => element === movie.id) ? (
+                {disliked.some((element) => element === movie.id) ? (
                     <span
                         className="movie-card__thumsDown movie-card__thumsDown--selected material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickRemovedFavorites() : handleClick()
+                            user && user.uid && movie.id
+                                ? deleteDislikedMovie(user.uid, movie.id)
+                                : handleClick()
                         }
                     >
                         recommend
@@ -97,19 +120,26 @@ export function FavoritesCard({
                 ) : (
                     <span
                         className="movie-card__thumsDown material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickAddedFavorites() : handleClick()
-                        }
+                        onClick={() => {
+                            user && user.uid && movie.id
+                                ? writeDislikedMovie(user.uid, movie.id)
+                                : handleClick();
+
+                            if (user && movie.id)
+                                deleteLikedMovie(user.uid, movie.id);
+                        }}
                     >
                         recommend
                     </span>
                 )}
 
-                {favorites.some((element) => element === movie.id) ? (
+                {liked.some((element) => element === movie.id) ? (
                     <span
                         className="movie-card__thumsUp movie-card__thumsUp--selected material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickRemovedFavorites() : handleClick()
+                            user && user.uid && movie.id
+                                ? deleteLikedMovie(user.uid, movie.id)
+                                : handleClick()
                         }
                     >
                         recommend
@@ -117,9 +147,14 @@ export function FavoritesCard({
                 ) : (
                     <span
                         className="movie-card__thumsUp material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickAddedFavorites() : handleClick()
-                        }
+                        onClick={() => {
+                            user && user.uid && movie.id
+                                ? writeLikedMovie(user.uid, movie.id)
+                                : handleClick();
+
+                            if (user && movie.id)
+                                deleteDislikedMovie(user.uid, movie.id);
+                        }}
                     >
                         recommend
                     </span>
@@ -201,6 +236,33 @@ export function FavoritesCard({
                     sx={{ width: '100%' }}
                 >
                     ¡Quitado de tus favoritos!
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={openAddedWatched}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    ¡Marcado como visto!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={openRemovedWatched}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    Marcado como no visto!
                 </Alert>
             </Snackbar>
         </li>

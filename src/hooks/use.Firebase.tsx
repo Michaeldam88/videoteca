@@ -1,12 +1,20 @@
 import { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { loginFirebase, logoutFirebase } from '../services/firebaseAuth';
-import { getFavorites } from '../services/firebaseStorage';
+import {
+    getDisliked,
+    getFavorites,
+    getLiked,
+    getWatched,
+} from '../services/firebaseStorage';
 import { useLocalStorage } from './use.LocalStorage';
 
 export const useFirebase = () => {
     const [user, setUser] = useState<User | null>(null);
     const [favorites, setFavorites] = useState<Array<number>>([]);
+    const [watched, setWatched] = useState<Array<number>>([]);
+    const [liked, setLiked] = useState<Array<number>>([]);
+    const [disliked, setDisliked] = useState<Array<number>>([]);
     const { getItem, setItem } = useLocalStorage();
 
     useEffect(() => {
@@ -38,9 +46,21 @@ export const useFirebase = () => {
 
     const reloadFavorites = (user: User) => {
         if (user) {
-            getFavorites(user.uid,setFavorites);
+            getFavorites(user.uid, setFavorites);
+            getWatched(user.uid, setWatched);
+            getLiked(user.uid, setLiked);
+            getDisliked(user.uid, setDisliked);
         }
     };
 
-    return { login, logout, reloadFavorites, user, favorites };
+    return {
+        login,
+        logout,
+        reloadFavorites,
+        user,
+        favorites,
+        watched,
+        liked,
+        disliked,
+    };
 };

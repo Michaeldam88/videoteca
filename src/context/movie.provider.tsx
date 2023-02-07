@@ -21,7 +21,16 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
         activeOperation,
     } = useMovies();
 
-    const { login, logout, reloadFavorites, user, favorites } = useFirebase();
+    const {
+        login,
+        logout,
+        reloadFavorites,
+        user,
+        favorites,
+        watched,
+        liked,
+        disliked,
+    } = useFirebase();
 
     const context = useMemo(
         () => ({
@@ -43,6 +52,9 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setActiveOperation,
             reloadFavorites,
             favorites,
+            watched,
+            liked,
+            disliked,
             activeOperation,
         }),
         [
@@ -64,6 +76,9 @@ export function MovieContextProvider({ children }: { children: JSX.Element }) {
             setActiveOperation,
             reloadFavorites,
             favorites,
+            watched,
+            liked,
+            disliked,
             activeOperation,
         ]
     );

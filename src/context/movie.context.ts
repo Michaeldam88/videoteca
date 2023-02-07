@@ -23,7 +23,10 @@ interface MovieContextStructure {
     setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
     reloadFavorites: (user: User) => void;
     favorites: Array<number>;
-    activeOperation:string
+    liked: Array<number>;
+    disliked: Array<number>;
+    watched: Array<number>;
+    activeOperation: string;
 }
 
 const initialContext: MovieContextStructure = {
@@ -45,7 +48,10 @@ const initialContext: MovieContextStructure = {
     setActiveOperation: () => {},
     reloadFavorites: (user) => {},
     favorites: [],
-    activeOperation:"",
+    watched: [],
+    liked: [],
+    disliked: [],
+    activeOperation: '',
 };
 
 export const MovieContext = createContext(initialContext);
