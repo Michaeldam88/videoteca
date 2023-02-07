@@ -39,22 +39,22 @@ export function FavoritesCard({
         setOpen(true);
     };
 
-    const handleClickAddedFavorites = () => {
+    const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
         if (user && movie.id) writeFavoritesMovie(user.uid, movie.id);
     };
 
-    const handleClickRemovedFavorites = () => {
+    const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
         if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
     };
 
-    const handleClickAddedWatched = () => {
+    const handleClickAddWatched = () => {
         setOpenAddedWatched(true);
         if (user && movie.id) writeWatchedMovie(user.uid, movie.id);
     };
 
-    const handleClickRemovedWatched = () => {
+    const handleClickRemoveWatched = () => {
         setOpenRemovedWatched(true);
         if (user && movie.id) deleteWatchedMovie(user.uid, movie.id);
     };
@@ -91,7 +91,7 @@ export function FavoritesCard({
                     <span
                         className="movie-card__eye movie-card__eye--selected material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickRemovedWatched() : handleClick()
+                            user ? handleClickRemoveWatched() : handleClick()
                         }
                     >
                         visibility
@@ -100,7 +100,7 @@ export function FavoritesCard({
                     <span
                         className="movie-card__eye material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickAddedWatched() : handleClick()
+                            user ? handleClickAddWatched() : handleClick()
                         }
                     >
                         visibility
@@ -164,7 +164,7 @@ export function FavoritesCard({
                     <span
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
-                            user ? handleClickRemovedFavorites() : handleClick()
+                            user ? handleClickRemoveFavorites() : handleClick()
                         }
                     >
                         star
@@ -173,7 +173,7 @@ export function FavoritesCard({
                     <span
                         className="movie-card__star material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickAddedFavorites() : handleClick()
+                            user ? handleClickAddFavorites() : handleClick()
                         }
                     >
                         star

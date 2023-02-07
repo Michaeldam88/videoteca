@@ -1,7 +1,9 @@
-import { SyntheticEvent, useContext } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function Search({ filter }: { filter: string }) {
+    const [inputValue, setInputValue] = useState("");
+
     const {
         setFilterModal,
         searchMovie,
@@ -10,11 +12,12 @@ export function Search({ filter }: { filter: string }) {
         activeOperation,
     } = useContext(MovieContext);
 
-    const handleInput = (ev: SyntheticEvent) => {
-        const element = ev.target as HTMLFormElement;
+    const handleInput = (ev: ChangeEvent<HTMLInputElement>) => {
+        const element = ev.target
         setPage(0);
         searchMovie(element.value, 1);
         setActiveOperation('search');
+        setInputValue(element.value);
     };
 
     return (
@@ -25,8 +28,8 @@ export function Search({ filter }: { filter: string }) {
                     className="home__search"
                     type="text"
                     placeholder="Buscar"
-                    onInput={handleInput}
-                    value={activeOperation !== "search"?"":undefined}
+                    onChange={handleInput}
+                    value={inputValue}
                 />
             </div>
             <span

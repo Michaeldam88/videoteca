@@ -15,7 +15,7 @@ export const useFirebase = () => {
     const [watched, setWatched] = useState<Array<number>>([]);
     const [liked, setLiked] = useState<Array<number>>([]);
     const [disliked, setDisliked] = useState<Array<number>>([]);
-    const { getItem, setItem } = useLocalStorage();
+    const {getItem, setItem } = useLocalStorage();
 
     useEffect(() => {
         const user = getItem('user');
@@ -41,22 +41,23 @@ export const useFirebase = () => {
         logoutFirebase();
         setUser(null);
         setFavorites([]);
+        setWatched([]);
+        setLiked([]);
+        setDisliked([]);
         setItem('user', '');
     };
 
     const reloadFavorites = (user: User) => {
-        if (user) {
+        if (user) {            
             getFavorites(user.uid, setFavorites);
             getWatched(user.uid, setWatched);
             getLiked(user.uid, setLiked);
             getDisliked(user.uid, setDisliked);
         }
     };
-
     return {
         login,
-        logout,
-        reloadFavorites,
+        logout,        
         user,
         favorites,
         watched,

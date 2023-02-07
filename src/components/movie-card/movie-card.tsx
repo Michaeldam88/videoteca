@@ -29,16 +29,17 @@ export function MovieCard({
 
     const handleClick = () => {
         setOpen(true);
-    };
+    };    
 
-    const handleClickAddedFavorites = () => {
+    const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user) writeFavoritesMovie(user.uid, movie.id);
+        if (user) writeFavoritesMovie(user.uid, movie.id);        
     };
 
-    const handleClickRemovedFavorites = () => {
+    const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user) deleteFavoritesMovie(user.uid, movie.id);
+        
+        if (user) deleteFavoritesMovie(user.uid, movie.id);        
     };
 
     const handleClose = (
@@ -71,9 +72,7 @@ export function MovieCard({
                     <span
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
-                            user
-                                ? handleClickRemovedFavorites()
-                                : handleClick()
+                            user ? handleClickRemoveFavorites() : handleClick()
                         }
                     >
                         star
@@ -82,7 +81,7 @@ export function MovieCard({
                     <span
                         className="movie-card__star material-symbols-outlined"
                         onClick={() =>
-                            user ? handleClickAddedFavorites() : handleClick()
+                            user ? handleClickAddFavorites() : handleClick()
                         }
                     >
                         star

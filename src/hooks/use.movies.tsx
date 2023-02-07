@@ -19,6 +19,8 @@ export type UseMovies = {
     setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
     activeOperation: string;
     setDetails: React.Dispatch<React.SetStateAction<object>>;
+    getFavoritesList: (ids: Array<number>) => Promise<void>;
+    favoritesList: Array<MovieStructure>;
 };
 
 export function useMovies(): UseMovies {
@@ -32,6 +34,7 @@ export function useMovies(): UseMovies {
     const [page, setPage] = useState(0);
     const [totPages, setTotPage] = useState(0);
     const [activeOperation, setActiveOperation] = useState('popular');
+    const [favoritesList, setFavoritesList] = useState<Array<MovieStructure>>([]);
 
     const genre = useRef('');
     const keyword = useRef('');
@@ -58,6 +61,16 @@ export function useMovies(): UseMovies {
         async (id: number) => {
             const details = await tmdbApi.getDetails(id);
             setDetails(details);
+        },
+        [tmdbApi]
+    );
+
+    const getFavoritesList = useCallback(
+        async (ids: Array<number>) => {
+            const favoritesList: Array<MovieStructure> = await Promise.all([
+                ...ids.map((element) => tmdbApi.getDetails(element)),
+            ]);
+            setFavoritesList(favoritesList);
         },
         [tmdbApi]
     );
@@ -115,6 +128,8 @@ export function useMovies(): UseMovies {
         setPage,
         setActiveOperation,
         activeOperation,
-        setDetails
+        setDetails,
+        favoritesList,
+        getFavoritesList,
     };
 }

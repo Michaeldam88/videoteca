@@ -7,7 +7,6 @@ import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
 import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
 
-
 export default function Home() {
     const [rowsPerPage, setRowsPerPage] = useState(20);
 
@@ -30,7 +29,7 @@ export default function Home() {
 
     const [filter, setFilter] = useState('default');
     const [idDetail, setIdDetails] = useState<number | null>(null);
-
+    console.log('Home');
     return (
         <main className="home">
             <div className="container flex-column">
@@ -41,7 +40,7 @@ export default function Home() {
                         : `Resultado de ${filter}`}
                 </h1>
 
-                {movies.length > 1 ? (
+                {movies.length > 0 ? (
                     <ul className="movies-list">
                         {movies.map((element) => (
                             <MovieCard

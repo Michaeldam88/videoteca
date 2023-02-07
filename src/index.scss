@@ -190,7 +190,7 @@
     flex-grow: 1;
     color: white;
     max-width: 285px;
-
+    aspect-ratio: 2/3;
     &__img {
         border-radius: 1rem;
         flex-grow: 1;
@@ -470,7 +470,7 @@ footer {
     align-self: center;
     overflow-y: auto;
     color: #8e8e8e;
-    min-width: 300px;
+    min-width: 300px;    
     &__close {
         position: absolute;
         top: 1rem;

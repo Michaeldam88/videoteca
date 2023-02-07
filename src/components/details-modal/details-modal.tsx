@@ -113,7 +113,7 @@ export function DetailsModal({
                     </p>
                 </div>
             </div>
-
+            
             <img
                 className="details-modal__img"
                 src={

@@ -21,13 +21,15 @@ interface MovieContextStructure {
     setPage: React.Dispatch<React.SetStateAction<number>>;
     totPages: number;
     setActiveOperation: React.Dispatch<React.SetStateAction<string>>;
-    reloadFavorites: (user: User) => void;
+    
     favorites: Array<number>;
     liked: Array<number>;
     disliked: Array<number>;
     watched: Array<number>;
     activeOperation: string;
     setDetails: React.Dispatch<React.SetStateAction<object>>;
+    getFavoritesList: (ids: Array<number>) => Promise<void>;
+    favoritesList: Array<MovieStructure>;
 }
 
 const initialContext: MovieContextStructure = {
@@ -47,13 +49,15 @@ const initialContext: MovieContextStructure = {
     setPage: () => {},
     totPages: 0,
     setActiveOperation: () => {},
-    reloadFavorites: (user) => {},
+   
     favorites: [],
     watched: [],
     liked: [],
     disliked: [],
     activeOperation: '',
-    setDetails:()=>{}
+    setDetails: () => {},
+    getFavoritesList:async (ids) => {},
+    favoritesList:[],
 };
 
 export const MovieContext = createContext(initialContext);

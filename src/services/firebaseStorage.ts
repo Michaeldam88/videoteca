@@ -21,6 +21,7 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         exist = Object.keys(obj).some((key) => obj[key] === idMovie);
     });
 
@@ -34,7 +35,7 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
 
 export function deleteFavoritesMovie(userUID: string, idMovie: number) {
     const database = getDatabase(firebaseApp);
-
+    
     let idToRemove = undefined;
 
     const topUserPostsRef = query(
@@ -43,6 +44,7 @@ export function deleteFavoritesMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });
 
@@ -65,6 +67,7 @@ export function getFavorites(
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
         setFavorites(objValues);
     });
@@ -83,6 +86,7 @@ export function writeWatchedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         exist = Object.keys(obj).some((key) => obj[key] === idMovie);
     });
 
@@ -105,6 +109,7 @@ export function deleteWatchedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });
 
@@ -117,7 +122,7 @@ export function deleteWatchedMovie(userUID: string, idMovie: number) {
 
 export function getWatched(
     userUID: string,
-    setFavorites: (objValues: Array<number>) => void
+    setWatched: (objValues: Array<number>) => void
 ) {
     let objValues;
     const database = getDatabase(firebaseApp);
@@ -129,7 +134,7 @@ export function getWatched(
         const obj = snapshot.val();
         if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
-        setFavorites(objValues);
+        setWatched(objValues);
     });
 
     return objValues;
@@ -146,6 +151,7 @@ export function writeLikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         exist = Object.keys(obj).some((key) => obj[key] === idMovie);
     });
 
@@ -168,6 +174,7 @@ export function deleteLikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });
 
@@ -180,7 +187,7 @@ export function deleteLikedMovie(userUID: string, idMovie: number) {
 
 export function getLiked(
     userUID: string,
-    setFavorites: (objValues: Array<number>) => void
+    setLiked: (objValues: Array<number>) => void
 ) {
     let objValues;
     const database = getDatabase(firebaseApp);
@@ -192,7 +199,7 @@ export function getLiked(
         const obj = snapshot.val();
         if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
-        setFavorites(objValues);
+        setLiked(objValues);
     });
 
     return objValues;
@@ -209,6 +216,7 @@ export function writeDislikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        
         exist = Object.keys(obj).some((key) => obj[key] === idMovie);
     });
 
@@ -231,6 +239,7 @@ export function deleteDislikedMovie(userUID: string, idMovie: number) {
 
     onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
+        
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });
 
@@ -243,7 +252,7 @@ export function deleteDislikedMovie(userUID: string, idMovie: number) {
 
 export function getDisliked(
     userUID: string,
-    setFavorites: (objValues: Array<number>) => void
+    setDisliked: (objValues: Array<number>) => void
 ) {
     let objValues;
     const database = getDatabase(firebaseApp);
@@ -255,7 +264,7 @@ export function getDisliked(
         const obj = snapshot.val();
         if (!obj) return;
         objValues = Object.keys(obj).map((key) => obj[key]);
-        setFavorites(objValues);
+        setDisliked(objValues);
     });
 
     return objValues;
