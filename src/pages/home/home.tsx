@@ -5,7 +5,7 @@ import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Search } from '../../components/search/search';
 import { MovieContext } from '../../context/movie.context';
-import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
+import LoadingIndicator from '../../components/loadingIndicator/loadingIndicator';
 
 export default function Home() {
     const [rowsPerPage, setRowsPerPage] = useState(20);

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FavoritesCard } from '../../components/favorites-card/favorites-card';
 import { MovieContext } from '../../context/movie.context';
-import LoadingIndicator from '../../loadingIndicator/loadingIndicator';
+import LoadingIndicator from '../../components/loadingIndicator/loadingIndicator';
 
 export default function Favorites() {
     const { user, favorites, getFavoritesList, favoritesList } =

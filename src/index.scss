@@ -201,7 +201,7 @@
         height: 50%;
         width: 100%;
         top: 0rem;
-        left: 0rem;        
+        left: 0rem;
         padding: 0.8rem;
         background: rgb(0, 0, 0);
         background: linear-gradient(
@@ -219,69 +219,38 @@
         color: #ffcd17;
         margin-left: auto;
     }
-    &__star:hover {
-        color: #fee79b;
-        font-size: 2.1rem;
-    }
 
     &__eye {
         cursor: pointer;
-        color: #54838a; 
-        margin-right:auto;           
-    }
-    &__eye:hover {
-        color: #2ac8e0;
-        font-size: 2.1rem;
+        color: #54838a;
+        margin-right: auto;
     }
 
     &__eye--selected {
         cursor: pointer;
-        color: #2ac8e0; 
-        margin-right:auto;           
-    }
-    &__eye--selected:hover {
-        color: #54838a;
-        font-size: 2.1rem;
+        color: #2ac8e0;
+        margin-right: auto;
     }
 
     &__thumsUp {
         cursor: pointer;
-        color: #76917d;       
+        color: #76917d;
     }
-    &__thumsUp:hover {
-        color: #2cb32a;
-        font-size: 2.1rem;
-    }
-
     &__thumsDown {
         align-self: flex-start;
         cursor: pointer;
-        color: #97736a; 
-        rotate: 180deg;      
-    }
-    &__thumsDown:hover {
-        color: #ff3717;
-        font-size: 2.1rem;
+        color: #97736a;
+        rotate: 180deg;
     }
 
     &__thumsUp--selected {
         cursor: pointer;
-        color: #2cb32a;       
-    }
-
-    &__thumsUp--selected:hover {
-        color: #76917d;
-        font-size: 2.1rem;
+        color: #2cb32a;
     }
 
     &__thumsDown--selected {
         cursor: pointer;
-        color: #ff3717;       
-    }
-
-    &__thumsDown--selected:hover {
-        color: #97736a;
-        font-size: 2.1rem;
+        color: #ff3717;
     }
 
     &__tag {
@@ -441,7 +410,7 @@ footer {
     }
 }
 
-.spinner-modal{
+.spinner-modal {
     min-width: 390px;
     z-index: 2;
     position: fixed;
@@ -454,7 +423,6 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .details-modal {
@@ -470,7 +438,7 @@ footer {
     align-self: center;
     overflow-y: auto;
     color: #8e8e8e;
-    min-width: 300px;    
+    min-width: 300px;
     &__close {
         position: absolute;
         top: 1rem;
@@ -561,6 +529,37 @@ footer {
         }
         &__year {
             font-size: 0.9rem;
+        }
+        &__star:hover {
+            color: #fee79b;
+            font-size: 2.1rem;
+        }
+        &__eye:hover {
+            color: #2ac8e0;
+            font-size: 2.1rem;
+        }
+        &__eye--selected:hover {
+            color: #54838a;
+            font-size: 2.1rem;
+        }
+        &__thumsUp:hover {
+            color: #2cb32a;
+            font-size: 2.1rem;
+        }
+
+        &__thumsUp--selected:hover {
+            color: #76917d;
+            font-size: 2.1rem;
+        }
+
+        &__thumsDown:hover {
+            color: #ff3717;
+            font-size: 2.1rem;
+        }
+
+        &__thumsDown--selected:hover {
+            color: #97736a;
+            font-size: 2.1rem;
         }
     }
     .filter-modal {
