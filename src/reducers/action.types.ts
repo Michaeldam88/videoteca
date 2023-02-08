@@ -1,18 +1,10 @@
 export const movieActionTypes = {
-    add: 'movie@add',
-    genres: 'movie@genres',
-    details: 'movie@details',
-    filterModal: 'movie@filterModal',
-    page: 'movie@page',
-    totPages: 'movie@totPages',
-    activeOperation: 'movie@activeOperation',
-    favoritesList: 'movie@favoritesList',
+    search: 'movie@search',
+    filter: 'movie@filter',
+    popular: 'movie@popular',
 };
 
-export const firebaseActionTypes = {
-    addUser: 'firebase@addUser',
-    favorites: 'firebase@favorites',
-    watched: 'firebase@watched',
-    liked: 'firebase@liked',
-    disliked: 'firebase@disliked',
+export const userActionTypes = {
+    addUser: 'user@addUser',
+    removeUser: 'user@removeUser',
 };

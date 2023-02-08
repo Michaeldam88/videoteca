@@ -1,22 +1,21 @@
+import { MovieStructure } from '../types/movieStructure';
+import { MovieAction } from './action.creators';
+import { movieActionTypes } from './action.types';
+
 export function movieReducer(
-    state: Array<PlaceStructure>,
-    action: PlaceAction
-): Array<PlaceStructure> {
+    state: Array<MovieStructure>,
+    action: MovieAction
+): Array<MovieStructure> {
     switch (action.type) {
-        case placeActionTypes.load:
-            const loadedPlaces = action.payload as Array<PlaceStructure>;
-            return loadedPlaces;
-        case placeActionTypes.add:
-            const addedPlace = action.payload as PlaceStructure;
-            return [...state, addedPlace];
-        case placeActionTypes.update:
-            const updatePlace = action.payload as PlaceStructure;
-            return state.map((item) =>
-                item.id === updatePlace.id ? updatePlace : item
-            );
-        case placeActionTypes.delete:
-            const finalId = action.payload as PlaceStructure['id'];
-            return state.filter((item) => item.id !== finalId);
+        case movieActionTypes.popular:
+            return (state = action.payload);
+
+        case movieActionTypes.filter:
+            return (state = action.payload);
+
+        case movieActionTypes.search:
+            return (state = action.payload);
+
         default:
             return [...state];
     }

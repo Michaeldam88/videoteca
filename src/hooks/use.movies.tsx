@@ -1,4 +1,17 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+    useCallback,
+    useEffect,
+    useMemo,
+    useReducer,
+    useRef,
+    useState,
+} from 'react';
+import {
+    filterMovie,
+    popularMovie,
+    searchMovies,
+} from '../reducers/action.creators';
+import { movieReducer } from '../reducers/movie.reducer';
 import { TmdbApi } from '../services/tmdbApi';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
@@ -27,14 +40,17 @@ export function useMovies(): UseMovies {
     const tmdbApi = useMemo(() => new TmdbApi(), []);
 
     const genreInitialState: Array<GenreStructure> = [];
-    const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState(genreInitialState);
     const [details, setDetails] = useState({});
     const [filterModal, setFilterModal] = useState(false);
     const [page, setPage] = useState(0);
     const [totPages, setTotPage] = useState(0);
     const [activeOperation, setActiveOperation] = useState('popular');
-    const [favoritesList, setFavoritesList] = useState<Array<MovieStructure>>([]);
+    const [favoritesList, setFavoritesList] = useState<Array<MovieStructure>>(
+        []
+    );
+
+    const [movies, dispatch] = useReducer(movieReducer, []);
 
     const genre = useRef('');
     const keyword = useRef('');
@@ -51,7 +67,7 @@ export function useMovies(): UseMovies {
     const getPopularMovies = useCallback(
         async (page: number) => {
             const filteredList = await tmdbApi.getPopularMovies(page);
-            setMovies(filteredList.results);
+            dispatch(popularMovie(filteredList.results));
             setTotPage(filteredList.total_pages);
         },
         [tmdbApi]
@@ -78,8 +94,8 @@ export function useMovies(): UseMovies {
     const getFilteredMovies = useCallback(
         async (receivedGenre: string, page: number) => {
             genre.current = receivedGenre;
-            const filteredList = await tmdbApi.filterGenre(receivedGenre, page);
-            setMovies(filteredList.results);
+            const filteredList = await tmdbApi.filterGenre(receivedGenre, page);            
+            dispatch(filterMovie(filteredList.results));
             setTotPage(filteredList.total_pages);
         },
         [tmdbApi]
@@ -93,7 +109,8 @@ export function useMovies(): UseMovies {
                     receivedKeyword,
                     page
                 );
-                setMovies(filteredList.results);
+                
+                dispatch(searchMovies(filteredList.results));
                 setTotPage(filteredList.total_pages);
             }
 
