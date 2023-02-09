@@ -8,9 +8,9 @@ export function userReducer(
 ): User | null {
     switch (action.type) {
         case userActionTypes.addUser:
-            return (state = action.payload);
+            return action.payload
         case userActionTypes.removeUser:
-            return (state = action.payload);
+            return action.payload
         default:
             return state;
     }

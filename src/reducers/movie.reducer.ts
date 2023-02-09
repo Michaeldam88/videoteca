@@ -8,13 +8,13 @@ export function movieReducer(
 ): Array<MovieStructure> {
     switch (action.type) {
         case movieActionTypes.popular:
-            return (state = action.payload);
+            return action.payload
 
         case movieActionTypes.filter:
-            return (state = action.payload);
+            return action.payload
 
         case movieActionTypes.search:
-            return (state = action.payload);
+            return action.payload
 
         default:
             return [...state];
