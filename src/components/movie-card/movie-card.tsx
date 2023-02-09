@@ -12,14 +12,15 @@ export function MovieCard({
     movie,
     setIdDetails,
 }: {
-    movie: MovieStructure;
+    movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
+    const genre_ids= movie.genre_ids as number[]
     const genreFiltered = genres.filter(
-        (element) => element.id === movie.genre_ids[0]
-    );
+        (element) => element.id === genre_ids[0]
+    ) 
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
 
@@ -27,18 +28,18 @@ export function MovieCard({
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
     const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
 
-    const handleClick = () => {        
+    const handleClick = () => {
         setOpen(true);
     };
 
     const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user) writeFavoritesMovie(user.uid, movie.id);
+        if (user && movie.id) writeFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (
@@ -68,6 +69,7 @@ export function MovieCard({
             <div className="movie-card__top">
                 {favorites.some((element) => element === movie.id) ? (
                     <span
+                        data-testid="open-modal-btn"
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
                             user ? handleClickRemoveFavorites() : handleClick()
@@ -89,7 +91,11 @@ export function MovieCard({
 
             <div
                 className="movie-card__bottom"
-                onClick={() => setIdDetails(movie.id)}
+                onClick={() => {
+                    if (movie.id) {
+                        setIdDetails(movie.id);
+                    }
+                }}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
                 <h2 className="movie-card__title">
