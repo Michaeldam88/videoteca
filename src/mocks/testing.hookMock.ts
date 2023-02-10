@@ -36,7 +36,7 @@ export const mockMovie2 = {
     original_language: 'en',
     original_title: 'Violent Night',
     overview:
-        'está en el edificio y a punto de demostrar por qué este Santa Claus, no es ningún santo.',
+        'texto del modal',
     popularity: 847.073,
     poster_path: '/zM1aKY3uhOie3X1gLPKTl5MaEZZ.jpg',
     release_date: '2022-12-02',

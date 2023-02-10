@@ -69,7 +69,8 @@ export function MovieCard({
 
             <div className="movie-card__top">
                 {favorites.some((element) => element === movie.id) ? (
-                    <span                        
+                    <span
+                        role="button"
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
                             user ? handleClickRemoveFavorites() : handleClick()
@@ -79,6 +80,7 @@ export function MovieCard({
                     </span>
                 ) : (
                     <span
+                        role="button"
                         className="movie-card__star material-symbols-outlined"
                         onClick={() =>
                             user ? handleClickAddFavorites() : handleClick()
@@ -90,6 +92,7 @@ export function MovieCard({
             </div>
 
             <div
+                role="button"
                 className="movie-card__bottom"
                 onClick={() => {
                     if (movie.id) {
