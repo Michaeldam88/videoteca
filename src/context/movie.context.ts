@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
 
-interface MovieContextStructure {
+export interface MovieContextStructure {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;

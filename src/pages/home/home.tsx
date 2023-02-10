@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
@@ -29,6 +29,10 @@ export default function Home() {
 
     const [filter, setFilter] = useState('default');
     const [idDetail, setIdDetails] = useState<number | null>(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [page]);
 
     return (
         <main className="home">

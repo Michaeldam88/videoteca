@@ -17,10 +17,11 @@ export function MovieCard({
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
-    const genre_ids= movie.genre_ids as number[]
+    const genre_ids = movie.genre_ids as number[];
+
     const genreFiltered = genres.filter(
         (element) => element.id === genre_ids[0]
-    ) 
+    );
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
 
@@ -68,8 +69,7 @@ export function MovieCard({
 
             <div className="movie-card__top">
                 {favorites.some((element) => element === movie.id) ? (
-                    <span
-                        data-testid="open-modal-btn"
+                    <span                        
                         className="movie-card__star material-symbols-outlined --filled"
                         onClick={() =>
                             user ? handleClickRemoveFavorites() : handleClick()
