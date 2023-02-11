@@ -53,10 +53,7 @@ export function DetailsModal({
     const handleClose = (
         event?: React.SyntheticEvent | Event,
         reason?: string
-    ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    ) => {        
         setOpenAddedFavorites(false);
         setOpenRemovedFavorites(false);
         setOpen(false);
@@ -66,6 +63,7 @@ export function DetailsModal({
         <div className="details-modal">
             <LoadingIndicator />
             <span
+                role="button"
                 className="details-modal__close material-symbols-outlined"
                 onClick={() => {
                     setIdDetails(null);
@@ -81,10 +79,11 @@ export function DetailsModal({
                     <span className="details-modal__age">
                         {details.release_date
                             ? details.release_date.slice(0, 4)
-                            : 'Pronto en enstreno'}
+                            : 'Pronto en estreno'}
                     </span>
                     {favorites.some((element) => element === id) ? (
                         <span
+                            role="button"
                             className="details-modal__star material-symbols-outlined --filled"
                             onClick={() =>
                                 user
@@ -96,6 +95,7 @@ export function DetailsModal({
                         </span>
                     ) : (
                         <span
+                            role="button"
                             className="details-modal__star material-symbols-outlined"
                             onClick={() =>
                                 user
@@ -134,10 +134,11 @@ export function DetailsModal({
                         <span className="details-modal__age">
                             {details.release_date
                                 ? details.release_date.slice(0, 4)
-                                : 'Pronto en enstreno'}
+                                : 'Pronto en estreno'}
                         </span>
                         {favorites.some((element) => element === id) ? (
                             <span
+                                role="button"
                                 className="details-modal__star material-symbols-outlined --filled"
                                 onClick={() =>
                                     user
@@ -149,6 +150,7 @@ export function DetailsModal({
                             </span>
                         ) : (
                             <span
+                                role="button"
                                 className="details-modal__star material-symbols-outlined"
                                 onClick={() =>
                                     user

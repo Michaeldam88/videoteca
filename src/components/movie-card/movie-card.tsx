@@ -47,9 +47,6 @@ export function MovieCard({
         event?: React.SyntheticEvent | Event,
         reason?: string
     ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
         setOpenAddedFavorites(false);
         setOpenRemovedFavorites(false);
         setOpen(false);

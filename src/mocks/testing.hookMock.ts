@@ -8,7 +8,6 @@ export const genres = [{ id: 35, name: 'comedia' }];
 
 export const favorites = [899112];
 
-
 export const mockMovie1 = {
     adult: false,
     backdrop_path: '/sBOenwOZGRN5nZZGw4TxwtnfrEf.jpg',
@@ -27,7 +26,6 @@ export const mockMovie1 = {
     vote_count: 1132,
 };
 
-
 export const mockMovie2 = {
     adult: false,
     backdrop_path: '/sBOenwOZGRN5nZZGw4TxwtnfrEf.jpg',
@@ -35,8 +33,7 @@ export const mockMovie2 = {
     id: 8991166,
     original_language: 'en',
     original_title: 'Violent Night',
-    overview:
-        'texto del modal',
+    overview: 'texto del modal',
     popularity: 847.073,
     poster_path: '/zM1aKY3uhOie3X1gLPKTl5MaEZZ.jpg',
     release_date: '2022-12-02',
@@ -46,7 +43,73 @@ export const mockMovie2 = {
     vote_count: 1132,
 };
 
+export const details1 = {
+    adult: false,
+    backdrop_path: '/sBOenwOZGRN5nZZGw4TxwtnfrEf.jpg',
+    genres: [
+        {
+            id: 878,
+            name: 'Ciencia ficción',
+        },
+        {
+            id: 27,
+            name: 'Terror',
+        },
+        {
+            id: 35,
+            name: 'Comedia',
+        },
+    ],
+    id: 899112,
+    original_language: 'en',
+    original_title: 'Violent Night',
+    overview:
+        'está en el edificio y a punto de demostrar por qué este Santa Claus, no es ningún santo.',
+    popularity: 847.073,
+    poster_path: '/zM1aKY3uhOie3X1gLPKTl5MaEZZ.jpg',
+    release_date: '2022-12-02',
+    title: 'Noche de paz',
+    video: false,
+    vote_average: 7.6,
+    vote_count: 1132,
+    runtime: 101,
+};
+
+export const details2 = {
+    adult: false,
+    backdrop_path: '/sBOenwOZGRN5nZZGw4TxwtnfrEf.jpg',
+    genres: [
+        {
+            id: 878,
+            name: 'Ciencia ficción',
+        },
+        {
+            id: 27,
+            name: 'Terror',
+        },
+        {
+            id: 35,
+            name: 'Comedia',
+        },
+    ],
+    id: 89911233,
+    original_language: 'en',
+    original_title: 'Violent Night',
+    overview:
+        'está en el edificio y a punto de demostrar por qué este Santa Claus, no es ningún santo.',
+    popularity: 847.073,
+    poster_path: '/zM1aKY3uhOie3X1gLPKTl5MaEZZ.jpg',
+    release_date: '2022-12-02',
+    title: 'Noche de paz',
+    video: false,
+    vote_average: 7.6,
+    vote_count: 1132,
+    runtime: 101,
+};
+
 export const movies = [mockMovie1, mockMovie2];
 
+export const getDetails = (id: number) => jest.fn();
+export const setDetails = () => jest.fn();
 
-
+export const details = details1;
