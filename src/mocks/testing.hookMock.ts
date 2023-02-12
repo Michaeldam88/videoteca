@@ -2,11 +2,14 @@ export const mockNoUser = null;
 export const user = {
     displayName: 'user name',
     photoURL: 'something',
+    uid: 'xxx',
 };
 
 export const genres = [{ id: 35, name: 'comedia' }];
-
 export const favorites = [899112];
+export const watched = [899112];
+export const liked = [899112];
+export const disliked = [899112];
 
 export const mockMovie1 = {
     adult: false,
@@ -49,7 +52,7 @@ export const details1 = {
     genres: [
         {
             id: 878,
-            name: 'Ciencia ficción',
+            name: 'Comedia',
         },
         {
             id: 27,
@@ -57,7 +60,7 @@ export const details1 = {
         },
         {
             id: 35,
-            name: 'Comedia',
+            name: 'Ciencia ficción',
         },
     ],
     id: 899112,
@@ -111,5 +114,10 @@ export const movies = [mockMovie1, mockMovie2];
 
 export const getDetails = (id: number) => jest.fn();
 export const setDetails = () => jest.fn();
+export const setFilterModal = (value:boolean) => jest.fn();
+export const getFilteredMovies = (genre: string, page: number) => jest.fn();
+export const getPopularMovies = (page: number) => jest.fn();
+export const setPage = (page:number) => jest.fn();
+export const setActiveOperation = (operation:string) => jest.fn();
 
 export const details = details1;

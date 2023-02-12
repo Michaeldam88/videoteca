@@ -14,6 +14,13 @@ import {
 } from '../../mocks/testing.hookMock';
 import { DetailsModal } from './details-modal';
 
+jest.mock('../../services/firebaseStorage', () => {
+    return {
+        deleteFavoritesMovie: jest.fn(),
+        writeFavoritesMovie: jest.fn(),
+    };
+});
+
 describe('Given a detail-modal component with user logged', () => {
     const MockSetIdDetails = jest.fn();
 
