@@ -10,6 +10,7 @@ export const favorites = [899112];
 export const watched = [899112];
 export const liked = [899112];
 export const disliked = [899112];
+export const activeOperation = "filter"
 
 export const mockMovie1 = {
     adult: false,
@@ -112,12 +113,15 @@ export const details2 = {
 
 export const movies = [mockMovie1, mockMovie2];
 
-export const getDetails = (id: number) => jest.fn();
-export const setDetails = () => jest.fn();
-export const setFilterModal = (value:boolean) => jest.fn();
-export const getFilteredMovies = (genre: string, page: number) => jest.fn();
-export const getPopularMovies = (page: number) => jest.fn();
-export const setPage = (page:number) => jest.fn();
-export const setActiveOperation = (operation:string) => jest.fn();
-
+export const getDetails = jest.fn();
+export const setDetails = jest.fn();
+export const setFilterModal = jest.fn();
+export const getFilteredMovies = jest.fn();
+export const getPopularMovies = jest.fn();
+export const setPage = jest.fn();
+export const setActiveOperation = jest.fn();
+export const login = jest.fn();
+export const searchMovie = jest.fn();
+export const logout = jest.fn();
 export const details = details1;
+

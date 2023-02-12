@@ -24,10 +24,6 @@ export function Header() {
         event?: React.SyntheticEvent | Event,
         reason?: string
     ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
         setOpen('closed');
     };
 
@@ -44,7 +40,7 @@ export function Header() {
                                 setActiveOperation('popular');
                             }}
                         >
-                            <span className="header__logo material-symbols-outlined">
+                            <span role="button" className="header__logo material-symbols-outlined">
                                 theaters
                             </span>
                             <p className="header__text">Videoteca</p>
@@ -63,6 +59,7 @@ export function Header() {
                             {user.displayName ? user.displayName : ''}
                         </p>
                         <span
+                            role="button"
                             className="header__login-logo material-symbols-outlined"
                             onClick={() => {
                                 handleClick('logout');
@@ -75,13 +72,13 @@ export function Header() {
                 ) : (
                     <div
                         className="header__login"
-                        onClick={async () => {
+                        onClick={async () => {                            
                             await login();
                             handleClick('login');
                         }}
                     >
                         <p className="header__login-text">Login</p>
-                        <span className="header__login-logo material-symbols-outlined">
+                        <span role="button" className="header__login-logo material-symbols-outlined">
                             person
                         </span>
                     </div>
