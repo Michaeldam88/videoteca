@@ -66,56 +66,79 @@ export function useMovies(): UseMovies {
 
     const getPopularMovies = useCallback(
         async (page: number) => {
-            const filteredList = await tmdbApi.getPopularMovies(page);
-            dispatch(popularMovie(filteredList.results));
-            setTotPage(filteredList.total_pages);
+            try {
+                const filteredList = await tmdbApi.getPopularMovies(page);
+                dispatch(popularMovie(filteredList.results));
+                setTotPage(filteredList.total_pages);
+            } catch (error) {
+                
+            }
         },
         [tmdbApi]
     );
 
     const getDetails = useCallback(
         async (id: number) => {
-            const details = await tmdbApi.getDetails(id);
-            setDetails(details);
+            try {
+                const details = await tmdbApi.getDetails(id);
+                setDetails(details);
+            } catch (error) {
+                
+            }
         },
         [tmdbApi]
     );
 
     const getFavoritesList = useCallback(
         async (ids: Array<number>) => {
-            const favoritesList: Array<MovieStructure> = await Promise.all([
-                ...ids.map((element) => tmdbApi.getDetails(element)),
-            ]);
-            setFavoritesList(favoritesList);
+            try {
+                const favoritesList: Array<MovieStructure> = await Promise.all([
+                    ...ids.map((element) => tmdbApi.getDetails(element)),
+                ]);
+                setFavoritesList(favoritesList);
+            } catch (error) {
+                
+            }
         },
         [tmdbApi]
     );
 
     const getFilteredMovies = useCallback(
         async (receivedGenre: string, page: number) => {
-            genre.current = receivedGenre;
-            const filteredList = await tmdbApi.filterGenre(receivedGenre, page);            
-            dispatch(filterMovie(filteredList.results));
-            setTotPage(filteredList.total_pages);
+            try {
+                genre.current = receivedGenre;
+                const filteredList = await tmdbApi.filterGenre(
+                    receivedGenre,
+                    page
+                );
+                dispatch(filterMovie(filteredList.results));
+                setTotPage(filteredList.total_pages);
+            } catch (error) {
+                
+            }
         },
         [tmdbApi]
     );
 
     const searchMovie = useCallback(
         async (receivedKeyword: string, page: number) => {
-            keyword.current = receivedKeyword;
-            if (receivedKeyword.length > 2) {
-                const filteredList = await tmdbApi.searchMovie(
-                    receivedKeyword,
-                    page
-                );
-                
-                dispatch(searchMovies(filteredList.results));
-                setTotPage(filteredList.total_pages);
-            }
+            try {
+                keyword.current = receivedKeyword;
+                if (receivedKeyword.length > 2) {
+                    const filteredList = await tmdbApi.searchMovie(
+                        receivedKeyword,
+                        page
+                    );
 
-            if (receivedKeyword.length === 0) {
-                getPopularMovies(page);
+                    dispatch(searchMovies(filteredList.results));
+                    setTotPage(filteredList.total_pages);
+                }
+
+                if (receivedKeyword.length === 0) {
+                    getPopularMovies(page);
+                }
+            } catch (error) {
+                
             }
         },
         [tmdbApi, getPopularMovies]

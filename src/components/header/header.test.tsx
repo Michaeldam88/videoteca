@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import {
@@ -42,7 +42,7 @@ describe('Given a header component with user logged', () => {
     });
 
     describe('When we cick to home', () => {
-        test('Then its should call t he function setPage', () => {
+        test('Then its should call t he function setPage', async () => {
             const filmBtn = screen.getByRole('button', { name: 'theaters' });
             userEvent.click(filmBtn);
             expect(setPage).toHaveBeenCalled();
@@ -92,12 +92,14 @@ describe('Given a header component with user not logged', () => {
     });
 
     describe('When we click to login favorites', () => {
-        test('Then after we logged should give you a welcome', () => {
+        test('Then after we logged should give you a welcome', async () => {
             const loginBtn = screen.getByRole('button', {
                 name: 'person',
             });
             userEvent.click(loginBtn);
-            expect(login).toHaveBeenCalled();
-        });        
+            await waitFor(() => {
+                expect(login).toHaveBeenCalled();
+            });
+        });
     });
 });

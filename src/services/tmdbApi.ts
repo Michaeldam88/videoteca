@@ -8,7 +8,7 @@ export class TmdbApi {
                     `https://api.themoviedb.org/3/discover/movie?api_key=80ff9fee839cee60957533079f03548c&language=es-ES&region=ES&page=${page}&sort_by=popularity.desc&include_adult=false`
                 )
             )
-        ).json();
+        ).json();        
         return result;
     }
 
@@ -32,6 +32,7 @@ export class TmdbApi {
                 )
             )
         ).json();
+        
         return result;
     }
 
