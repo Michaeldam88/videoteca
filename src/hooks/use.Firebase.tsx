@@ -30,14 +30,17 @@ export const useFirebase = () => {
     }, []);
 
     const login = async () => {
-        const user = await loginFirebase().catch(() => {
-            console.error('Logueo Fallido');
-        });
+        try {
+            const user = await loginFirebase()
         if (user) {            
             dispatch(loginUser(user));
             setItem('user', JSON.stringify(user));
             reloadFavorites(user);
         }
+        } catch (error) {
+            
+        }
+        
     };
 
     const logout = () => {

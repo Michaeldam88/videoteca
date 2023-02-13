@@ -42,12 +42,12 @@ export function DetailsModal({
 
     const handleClickAddedFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user && id) writeFavoritesMovie(user.uid, id);
+        if (user && id && user.uid) writeFavoritesMovie(user.uid, id);
     };
 
     const handleClickRemovedFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user && id) deleteFavoritesMovie(user.uid, id);
+        if (user && id && user.uid) deleteFavoritesMovie(user.uid, id);
     };
 
     const handleClose = (

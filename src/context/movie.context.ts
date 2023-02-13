@@ -14,7 +14,7 @@ export interface MovieContextStructure {
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
     searchMovie: (keyword: string, page: number) => Promise<void>;
-    user: User | null;
+    user: Partial<User> | null;
     login: () => Promise<void>;
     logout: () => void;
     page: number;

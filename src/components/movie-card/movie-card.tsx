@@ -35,12 +35,13 @@ export function MovieCard({
 
     const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user && movie.id) writeFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            writeFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id) deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (

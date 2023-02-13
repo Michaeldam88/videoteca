@@ -37,17 +37,20 @@ export function FavoritesCard({
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickAddWatched = () => {
         setOpenAddedWatched(true);
-        if (user && movie.id) writeWatchedMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            writeWatchedMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveWatched = () => {
         setOpenRemovedWatched(true);
-        if (user && movie.id) deleteWatchedMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteWatchedMovie(user.uid, movie.id);
     };
 
     const handleClose = (
@@ -112,7 +115,7 @@ export function FavoritesCard({
                                 ? writeDislikedMovie(user.uid, movie.id)
                                 : handleClick();
 
-                            if (user && movie.id)
+                            if (user && user.uid && movie.id)
                                 deleteLikedMovie(user.uid, movie.id);
                         }}
                     >
@@ -141,7 +144,7 @@ export function FavoritesCard({
                                 ? writeLikedMovie(user.uid, movie.id)
                                 : handleClick();
 
-                            if (user && movie.id)
+                            if (user && user.uid && movie.id)
                                 deleteDislikedMovie(user.uid, movie.id);
                         }}
                     >
