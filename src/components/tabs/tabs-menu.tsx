@@ -13,9 +13,9 @@ export function TabsMenu() {
         if (activeOperation === 'popular') setValue(0);
     }, [activeOperation]);
 
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
-        if (newValue === 1) setActiveOperation('favorites');
+    const handleChange = (event: SyntheticEvent, newValue: number) => {        
         setValue(newValue);
+        if (newValue === 1) setActiveOperation('favorites');
     };
 
     return (
@@ -38,7 +38,7 @@ export function TabsMenu() {
                     />
                     <Tab
                         label={
-                            <span className="tabs__star material-symbols-outlined">
+                            <span role="button" className="tabs__star material-symbols-outlined">
                                 hotel_class
                             </span>
                         }

@@ -9,11 +9,12 @@ import { firebaseApp } from '../firebaseApp';
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
-auth.languageCode = 'es';
 
 export const loginFirebase = async () => {
-    const response = await signInWithPopup(auth, provider);
-    return response.user;
+    try {
+        const response = await signInWithPopup(auth, provider);
+        return response.user;
+    } catch {}
 };
 
 export const logoutFirebase = () => signOut(auth);
