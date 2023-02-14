@@ -27,6 +27,20 @@ describe('Given the firebase Storage service', () => {
         writeFavoritesMovie(user.uid, mockMovie1.id);
         expect(update).toHaveBeenCalled();
     });
+
+    test('Then it we call the writeFavoritesMovie function and the snapshot is empty it should return', () => {
+        const snapshot = {
+            val: () => null
+        };
+        (onValue as jest.Mock).mockImplementation((ref, callback) => {
+            callback(snapshot);
+            return jest.fn();
+        });
+        
+        writeFavoritesMovie(user.uid, mockMovie1.id);
+        expect(update).toHaveBeenCalled();
+    });
+
     test('Then it we call the writeLikedMovie function it should call the firebase update function', () => {
         writeLikedMovie(user.uid, mockMovie1.id);
         expect(update).toHaveBeenCalled();
@@ -42,29 +56,41 @@ describe('Given the firebase Storage service', () => {
         expect(update).toHaveBeenCalled();
     });
 
-    // test('Then it we call the deleteFavoritesMovie function it should call the firebase update function', () => {
-    //     deleteFavoritesMovie(user.uid, mockMovie1.id);
-    //     expect(update).toHaveBeenCalled();
-    // });
-
-    test('should pass', async () => {
-        let idToRemove = undefined;
-        const snapshot = { val: () => idToRemove = "111" };
+    test('Then it we call the deleteFavoritesMovie function it should call the firebase update function', async () => {
+        const snapshot = {
+            val: () => {
+                return {
+                    '-NO5N1IrHOMV85NjxF7Z': 899112,
+                };
+            },
+        };
         (onValue as jest.Mock).mockImplementation((ref, callback) => {
             callback(snapshot);
             return jest.fn();
         });
-        console.log(idToRemove);
+
         deleteFavoritesMovie(user.uid, mockMovie1.id);
-        console.log(idToRemove);
 
         expect(update).toHaveBeenCalled();
     });
 
-    // test('Then it we call the getFavorites function it should return', () => {
-    //     const setFavorites = jest.fn()
+    test('Then it we call the getFavorites function it should return', () => {
+        const setFavorites = jest.fn();
 
-    //     const result = getFavorites(user.uid, setFavorites);
-    //     expect(result).toBe("xxx");
-    // });
+        const snapshot = {
+            val: () => {
+                return {
+                    '-NO5N1IrHOMV85NjxF7Z': 899112,
+                };
+            },
+        };
+        (onValue as jest.Mock).mockImplementation((ref, callback) => {
+            callback(snapshot);
+            return jest.fn();
+        });
+
+        const result = getFavorites(user.uid, setFavorites);
+        expect(setFavorites).toHaveBeenCalled();
+        expect(result).toEqual([899112]);
+    });
 });

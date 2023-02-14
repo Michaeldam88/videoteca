@@ -43,8 +43,9 @@ export function deleteFavoritesMovie(userUID: string, idMovie: number) {
         ref(database, '/user/' + userUID + '/favoritesMovies/')
     );
 
-    onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
+    onValue(topUserPostsRef, (snapshot: DataSnapshot) => {        
         const obj = snapshot.val();
+        
         if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });

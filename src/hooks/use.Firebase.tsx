@@ -16,13 +16,12 @@ export const useFirebase = () => {
     const [watched, setWatched] = useState<Array<number>>([]);
     const [liked, setLiked] = useState<Array<number>>([]);
     const [disliked, setDisliked] = useState<Array<number>>([]);
-    const {getItem, setItem } = useLocalStorage();
-    
+    const {getItem, setItem } = useLocalStorage();    
     const [user, dispatch] = useReducer(userReducer, null);
 
     useEffect(() => {
         const user = getItem('user');
-        if (user) {
+        if (user) {            
             dispatch(loginUser(JSON.parse(user)));
             reloadFavorites(JSON.parse(user));
         }
@@ -32,6 +31,7 @@ export const useFirebase = () => {
     const login = async () => {
         try {
             const user = await loginFirebase()
+            console.log(loginFirebase,user);
         if (user) {            
             dispatch(loginUser(user));
             setItem('user', JSON.stringify(user));

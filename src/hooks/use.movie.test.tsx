@@ -13,7 +13,8 @@ TmdbApi.prototype.filterGenre = jest.fn();
 
 describe(`Given useMovies (custom hook)
             render with a virtual component`, () => {
-    const { result } = renderHook(() => useMovies());
+    const { result,rerender } = renderHook(() => useMovies());
+    console.log(result.current)
     describe(`When the api is working`, () => {
         beforeEach(mockValidRepoResponse);
 
@@ -48,10 +49,12 @@ describe(`Given useMovies (custom hook)
         });
 
         // test('Then setting a new page and the action to filter should call filter function', async () => {
+        //     rerender();
         //     await act(() => {
         //         result.current.setActiveOperation('filter');
-        //         result.current.setPage(1);
+        //         result.current.setPage(1);                
         //     });
+            
         //     expect(TmdbApi.prototype.filterGenre).toHaveBeenCalled();
         // });
 
