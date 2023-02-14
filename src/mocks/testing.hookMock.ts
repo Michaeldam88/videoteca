@@ -272,6 +272,8 @@ export const apiResponse = {
     total_results: 25102,
 };
 
+export const apiGenresResponse = {genres:[{ id: 35, name: 'comedia' }]}
+
 export const mockValidRepoResponse = () => {
     (TmdbApi.prototype.getGenres as jest.Mock).mockResolvedValue({
         genres: [
