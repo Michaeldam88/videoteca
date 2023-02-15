@@ -3,23 +3,14 @@ import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './app.routes';
 
-
-// const testLazyRoute = (index: number) => {
-//     const title = new RegExp(mockPageTitles[index], 'i'); // Antes /Test Home/i;
-//     const lazyElement = screen.getByText(title);
-//     expect(lazyElement).toBeInTheDocument();
-// };
-
 jest.mock('../../pages/home/home', () => {
-    return () => <p>{"Test Home"}</p>;
+    return () => <p>{'Test Home'}</p>;
 });
 jest.mock('../../pages/favorites/favorites', () => {
     return () => <p>{'Test Favorites'}</p>;
 });
 
-
-describe('Given AppRoutes Lazy component', () => {   
-    
+describe('Given AppRoutes Lazy component', () => {
     describe(`When we render the component 
                 And the lazy route is home`, () => {
         beforeEach(async () => {
@@ -29,7 +20,7 @@ describe('Given AppRoutes Lazy component', () => {
                         initialEntries={['/home', '/favorites']}
                         initialIndex={0}
                     >
-                        <AppRoutes/>
+                        <AppRoutes />
                     </MemoryRouter>
                 );
             });
@@ -58,5 +49,5 @@ describe('Given AppRoutes Lazy component', () => {
             const lazyElement = screen.getByText('Test Favorites');
             expect(lazyElement).toBeInTheDocument();
         });
-    });    
+    });
 });

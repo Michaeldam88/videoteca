@@ -5,7 +5,6 @@ import {
     MovieContextStructure,
 } from '../../context/movie.context';
 import {
-    activeOperation,
     searchMovie,
     setActiveOperation,
     setFilterModal,

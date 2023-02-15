@@ -104,7 +104,6 @@ describe('Given a header component with user not logged', () => {
     });
 });
 
-
 describe('Given a header component with user logged with no name and photo', () => {
     beforeEach(async () => {
         const mockContext = {
@@ -126,10 +125,8 @@ describe('Given a header component with user logged with no name and photo', () 
 
     describe('When it has been rendered', () => {
         test('Then its should render without name and photo', () => {
-            const filmBtn = screen.getByRole('button', { name  : 'theaters' });
+            const filmBtn = screen.getByRole('button', { name: 'theaters' });
             expect(filmBtn).toBeInTheDocument();
         });
     });
-
-    
 });

@@ -12,9 +12,6 @@ import {
 } from '../../mocks/testing.hookMock';
 import Favorites from './favorites';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FavoritesCard } from '../../components/favorites-card/favorites-card';
-
 jest.mock('../../components/favorites-card/favorites-card');
 
 describe('Given a home component', () => {
@@ -45,7 +42,7 @@ describe('Given a home component without favorites movies', () => {
     beforeEach(async () => {
         const mockContext = {
             user,
-            favorites:[],
+            favorites: [],
             getFavoritesList,
             favoritesList,
         } as unknown as MovieContextStructure;
@@ -69,7 +66,7 @@ describe('Given a home component without favorites movies', () => {
 describe('Given a home component with the user not logged', () => {
     beforeEach(async () => {
         const mockContext = {
-            user:null,
+            user: null,
             favorites: [],
             getFavoritesList,
             favoritesList,

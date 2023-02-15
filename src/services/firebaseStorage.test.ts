@@ -1,13 +1,4 @@
-import {
-    child,
-    DataSnapshot,
-    getDatabase,
-    onValue,
-    push,
-    query,
-    ref,
-    update,
-} from 'firebase/database';
+import { onValue, push, update } from 'firebase/database';
 import { mockMovie1, user } from '../mocks/testing.hookMock';
 import {
     deleteDislikedMovie,
@@ -181,19 +172,22 @@ describe('Given the firebase Storage service', () => {
         }
     );
 
-    test.each(getCases)('Then it we call the %p function with an empty snapshot it should return the value we gave', (argument) => {
-        const setFavorites = jest.fn();
+    test.each(getCases)(
+        'Then it we call the %p function with an empty snapshot it should return the value we gave',
+        (argument) => {
+            const setFavorites = jest.fn();
 
-        const snapshot = {
-            val: () => null,
-        };
-        (onValue as jest.Mock).mockImplementation((ref, callback) => {
-            callback(snapshot);
-            return jest.fn();
-        });
+            const snapshot = {
+                val: () => null,
+            };
+            (onValue as jest.Mock).mockImplementation((ref, callback) => {
+                callback(snapshot);
+                return jest.fn();
+            });
 
-        const result = argument(user.uid, setFavorites);
-        expect(setFavorites).toHaveBeenCalled();
-        expect(result).toEqual(undefined);
-    });
+            const result = argument(user.uid, setFavorites);
+            expect(setFavorites).toHaveBeenCalled();
+            expect(result).toEqual(undefined);
+        }
+    );
 });

@@ -54,7 +54,7 @@ describe('Given a tabs-menu component', () => {
 describe('Given a tabs-menu component with filter activeOperation selected', () => {
     beforeEach(async () => {
         const mockContext = {
-            activeOperation:"filter",
+            activeOperation: 'filter',
             setActiveOperation,
         } as unknown as MovieContextStructure;
         await render(
@@ -69,7 +69,7 @@ describe('Given a tabs-menu component with filter activeOperation selected', () 
     });
 
     describe('When it has been rendered', () => {
-        test('Then the movie tab should appear selected', () => {            
+        test('Then the movie tab should appear selected', () => {
             const favoritesTab = screen.getAllByRole('tab');
             expect(favoritesTab[0]).toHaveAttribute('aria-selected', 'true');
         });

@@ -30,8 +30,7 @@ export const useFirebase = () => {
 
     const login = async () => {
         try {
-            const user = await loginFirebase();
-            console.log('dentro', user);
+            const user = await loginFirebase();            
             if (user) {
                 dispatch(loginUser(user));
                 setItem('user', JSON.stringify(user));
@@ -39,8 +38,7 @@ export const useFirebase = () => {
             }
         } catch (error) {
         }
-    };
-    console.log('fuera', user);
+    };    
     const logout = () => {
         logoutFirebase();
         dispatch(logoutUser(null));

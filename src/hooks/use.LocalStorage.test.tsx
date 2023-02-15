@@ -26,7 +26,7 @@ describe(`Given useLocalStorage (custom hook)
 
         test('Then clicking the popular btn should call the function getPopularMovies', () => {
             result.current.setItem(mockId, JSON.stringify(mockJson));
-            
+
             expect(localStorage.getItem(mockId)).toEqual(
                 JSON.stringify(mockJson)
             );

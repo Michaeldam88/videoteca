@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -13,9 +12,6 @@ import {
     totPages,
 } from '../../mocks/testing.hookMock';
 import Home from './home';
-import { FilterModal } from '../../components/filter-modal/filter-modal';
-import { DetailsModal } from '../../components/details-modal/details-modal';
-import { MovieCard } from '../../components/movie-card/movie-card';
 
 jest.mock('../../components/filter-modal/filter-modal', () => {
     return {
