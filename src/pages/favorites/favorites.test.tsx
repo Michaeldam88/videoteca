@@ -40,3 +40,53 @@ describe('Given a home component', () => {
         });
     });
 });
+
+describe('Given a home component without favorites movies', () => {
+    beforeEach(async () => {
+        const mockContext = {
+            user,
+            favorites:[],
+            getFavoritesList,
+            favoritesList,
+        } as unknown as MovieContextStructure;
+        await render(
+            <MovieContext.Provider value={mockContext}>
+                <Favorites />
+            </MovieContext.Provider>
+        );
+    });
+
+    describe('When it has been rendered', () => {
+        test('Then it should render a message of no movie available', () => {
+            const noMovieAvailable = screen.getByText(
+                '¡Todavía no tienes películas favoritas!'
+            );
+            expect(noMovieAvailable).toBeInTheDocument();
+        });
+    });
+});
+
+describe('Given a home component with the user not logged', () => {
+    beforeEach(async () => {
+        const mockContext = {
+            user:null,
+            favorites: [],
+            getFavoritesList,
+            favoritesList,
+        } as unknown as MovieContextStructure;
+        await render(
+            <MovieContext.Provider value={mockContext}>
+                <Favorites />
+            </MovieContext.Provider>
+        );
+    });
+
+    describe('When it has been rendered', () => {
+        test('Then it should render a message of login before to see the favorites', () => {
+            const noUser = screen.getByText(
+                'Haz login para visualizar tus favoritos'
+            );
+            expect(noUser).toBeInTheDocument();
+        });
+    });
+});

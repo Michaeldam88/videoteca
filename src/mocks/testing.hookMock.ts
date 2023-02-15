@@ -33,7 +33,7 @@ export const user = {
 export const genres = [{ id: 35, name: 'comedia' }];
 export const favorites = [
     899112, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-    20, 21,
+    20, 21, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 ];
 export const watched = [899112];
 export const liked = [899112];
@@ -290,12 +290,3 @@ export const mockValidRepoResponse = () => {
     (TmdbApi.prototype.filterGenre as jest.Mock).mockResolvedValue(apiResponse);
 };
 
-// const error = new Error('Testing errors');
-
-// export const mockNoValidRepoResponse = () => {
-//     (TmdbApi.prototype.getGenres as jest.Mock).mockResolvedValue(error);
-//     (TmdbApi.prototype.getPopularMovies as jest.Mock).mockResolvedValue(error);
-//     (TmdbApi.prototype.getDetails as jest.Mock).mockResolvedValue(error);
-//     (TmdbApi.prototype.searchMovie as jest.Mock).mockResolvedValue(error);
-//     (TmdbApi.prototype.filterGenre as jest.Mock).mockResolvedValue(error);
-// };

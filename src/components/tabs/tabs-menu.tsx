@@ -13,9 +13,9 @@ export function TabsMenu() {
         if (activeOperation === 'popular') setValue(0);
     }, [activeOperation]);
 
-    const handleChange = (event: SyntheticEvent, newValue: number) => {        
-        setValue(newValue);
+    const handleChange = (event: SyntheticEvent, newValue: number) => {
         if (newValue === 1) setActiveOperation('favorites');
+        setValue(newValue);
     };
 
     return (
@@ -29,7 +29,10 @@ export function TabsMenu() {
                 >
                     <Tab
                         label={
-                            <span className="tabs__movie material-symbols-outlined">
+                            <span
+                                role="button"
+                                className="tabs__movie material-symbols-outlined"
+                            >
                                 movie_filter
                             </span>
                         }
@@ -38,7 +41,10 @@ export function TabsMenu() {
                     />
                     <Tab
                         label={
-                            <span role="button" className="tabs__star material-symbols-outlined">
+                            <span
+                                role="button"
+                                className="tabs__star material-symbols-outlined"
+                            >
                                 hotel_class
                             </span>
                         }

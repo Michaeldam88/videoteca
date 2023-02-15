@@ -4,10 +4,16 @@ import {
     MovieContext,
     MovieContextStructure,
 } from '../../context/movie.context';
-import { activeOperation, searchMovie, setActiveOperation, setFilterModal, setPage } from '../../mocks/testing.hookMock';
+import {
+    activeOperation,
+    searchMovie,
+    setActiveOperation,
+    setFilterModal,
+    setPage,
+} from '../../mocks/testing.hookMock';
 import { Search } from './search';
 
-describe('Given a movie-card component with user logged', () => {
+describe('Given a search component', () => {
     const searchMock = 'casa';
 
     beforeEach(async () => {
@@ -16,7 +22,7 @@ describe('Given a movie-card component with user logged', () => {
             searchMovie,
             setActiveOperation,
             setPage,
-            activeOperation,
+            activeOperation: 'search',
         } as unknown as MovieContextStructure;
         await render(
             <MovieContext.Provider value={mockContext}>
@@ -28,16 +34,44 @@ describe('Given a movie-card component with user logged', () => {
     describe('When it has been rendered', () => {
         test('Then if we write something it should call the function setPage', () => {
             const input = screen.getByRole('textbox');
-            userEvent.type(input,"home")
+            userEvent.type(input, 'home');
             expect(setPage).toHaveBeenCalled();
         });
     });
 
     describe('When we click on open filter modal', () => {
         test('Then it should call the function set filter modal', () => {
-            const filterBtn = screen.getByRole('button', { name: 'filter_alt' });
+            const filterBtn = screen.getByRole('button', {
+                name: 'filter_alt',
+            });
             userEvent.click(filterBtn);
             expect(setFilterModal).toHaveBeenCalled();
+        });
+    });
+});
+
+describe('Given a search component with filter action selected', () => {
+    const searchMock = 'casa';
+
+    beforeEach(async () => {
+        const mockContext = {
+            setFilterModal,
+            searchMovie,
+            setActiveOperation,
+            setPage,
+            activeOperation: 'filter',
+        } as unknown as MovieContextStructure;
+        await render(
+            <MovieContext.Provider value={mockContext}>
+                <Search filter={searchMock} />
+            </MovieContext.Provider>
+        );
+    });
+
+    describe('When it has been rendered', () => {
+        test('Then the filter button should render wit the class filled', () => {
+            const filterBtn = screen.getByRole('button');
+            expect(filterBtn).toHaveClass('material-symbols-outlined --filled');
         });
     });
 });
