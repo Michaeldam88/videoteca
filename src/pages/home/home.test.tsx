@@ -34,7 +34,7 @@ window.scrollTo = jest.fn();
 jest.mock('../../components/movie-card/movie-card');
 
 describe('Given a home component', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             movies,
             filterModal,
@@ -42,7 +42,7 @@ describe('Given a home component', () => {
             setPage,
             totPages,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Home />
             </MovieContext.Provider>
@@ -63,7 +63,7 @@ describe('Given a home component', () => {
 });
 
 describe('Given a home component with no movies', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             movies: [],
             filterModal,
@@ -71,7 +71,7 @@ describe('Given a home component with no movies', () => {
             setPage,
             totPages,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Home />
             </MovieContext.Provider>
@@ -92,7 +92,7 @@ describe('Given a home component with no movies', () => {
 });
 
 describe('Given a home component with a filter modal active', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             movies,
             filterModal: true,
@@ -100,7 +100,7 @@ describe('Given a home component with a filter modal active', () => {
             setPage,
             totPages,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Home />
             </MovieContext.Provider>

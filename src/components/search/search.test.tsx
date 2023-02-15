@@ -15,7 +15,7 @@ import { Search } from './search';
 describe('Given a search component', () => {
     const searchMock = 'casa';
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             setFilterModal,
             searchMovie,
@@ -23,7 +23,7 @@ describe('Given a search component', () => {
             setPage,
             activeOperation: 'search',
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Search filter={searchMock} />
             </MovieContext.Provider>
@@ -52,7 +52,7 @@ describe('Given a search component', () => {
 describe('Given a search component with filter action selected', () => {
     const searchMock = 'casa';
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             setFilterModal,
             searchMovie,
@@ -60,7 +60,7 @@ describe('Given a search component with filter action selected', () => {
             setPage,
             activeOperation: 'filter',
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Search filter={searchMock} />
             </MovieContext.Provider>

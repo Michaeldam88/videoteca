@@ -15,14 +15,14 @@ import Favorites from './favorites';
 jest.mock('../../components/favorites-card/favorites-card');
 
 describe('Given a home component', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user,
             favorites,
             getFavoritesList,
             favoritesList,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Favorites />
             </MovieContext.Provider>
@@ -39,14 +39,14 @@ describe('Given a home component', () => {
 });
 
 describe('Given a home component without favorites movies', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user,
             favorites: [],
             getFavoritesList,
             favoritesList,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Favorites />
             </MovieContext.Provider>
@@ -64,14 +64,14 @@ describe('Given a home component without favorites movies', () => {
 });
 
 describe('Given a home component with the user not logged', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user: null,
             favorites: [],
             getFavoritesList,
             favoritesList,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <Favorites />
             </MovieContext.Provider>

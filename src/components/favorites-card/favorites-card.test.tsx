@@ -37,14 +37,14 @@ jest.mock('../../services/firebaseStorage', () => {
 describe('Given a movie-card component with user logged', () => {
     const MockSetIdDetails = jest.fn();
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user,
             watched,
             liked,
             disliked,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <FavoritesCard
                     movie={mockMovie1}
@@ -144,14 +144,14 @@ describe('Given a movie-card component with user logged', () => {
 describe('Given a movie-card component with user logged and the movie is not liked,disliked and watched', () => {
     const MockSetIdDetails = jest.fn();
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user,
             watched,
             liked,
             disliked,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <FavoritesCard
                     movie={mockMovie2}
@@ -200,14 +200,14 @@ describe('Given a movie-card component without user', () => {
 
     const user = null;
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             user,
             watched,
             liked,
             disliked,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <FavoritesCard
                     movie={mockMovie1}

@@ -17,7 +17,7 @@ import { FilterModal } from './filter-modal';
 describe('Given a filter modal component', () => {
     const MockSetFilter = jest.fn();
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             genres,
             setFilterModal,
@@ -26,7 +26,7 @@ describe('Given a filter modal component', () => {
             setPage,
             setActiveOperation,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <FilterModal filter={MockSetFilter} />
             </MovieContext.Provider>

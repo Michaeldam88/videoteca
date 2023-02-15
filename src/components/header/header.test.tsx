@@ -16,7 +16,7 @@ import {
 import { Header } from './header';
 
 describe('Given a header component with user logged', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             getPopularMovies,
             setPage,
@@ -25,7 +25,7 @@ describe('Given a header component with user logged', () => {
             login,
             user,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <BrowserRouter>
                 <MovieContext.Provider value={mockContext}>
                     <Header />
@@ -73,7 +73,7 @@ describe('Given a header component with user logged', () => {
 });
 
 describe('Given a header component with user not logged', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             getPopularMovies,
             setPage,
@@ -82,7 +82,7 @@ describe('Given a header component with user not logged', () => {
             login,
             user: null,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <BrowserRouter>
                 <MovieContext.Provider value={mockContext}>
                     <Header />
@@ -105,7 +105,7 @@ describe('Given a header component with user not logged', () => {
 });
 
 describe('Given a header component with user logged with no name and photo', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             getPopularMovies,
             setPage,
@@ -114,7 +114,7 @@ describe('Given a header component with user logged with no name and photo', () 
             login,
             user: { ...user, displayName: '', photoURL: '' },
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <BrowserRouter>
                 <MovieContext.Provider value={mockContext}>
                     <Header />

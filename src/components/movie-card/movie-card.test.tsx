@@ -24,13 +24,13 @@ jest.mock('../../services/firebaseStorage', () => {
 describe('Given a movie-card component with user logged', () => {
     const MockSetIdDetails = jest.fn();
 
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             genres,
             user,
             favorites,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <MovieContext.Provider value={mockContext}>
                 <MovieCard movie={mockMovie1} setIdDetails={MockSetIdDetails} />
             </MovieContext.Provider>

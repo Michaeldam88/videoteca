@@ -12,12 +12,12 @@ import {
 import { TabsMenu } from './tabs-menu';
 
 describe('Given a tabs-menu component', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             activeOperation,
             setActiveOperation,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <BrowserRouter>
                 <MovieContext.Provider value={mockContext}>
                     <>
@@ -52,12 +52,12 @@ describe('Given a tabs-menu component', () => {
 });
 
 describe('Given a tabs-menu component with filter activeOperation selected', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         const mockContext = {
             activeOperation: 'filter',
             setActiveOperation,
         } as unknown as MovieContextStructure;
-        await render(
+        render(
             <BrowserRouter>
                 <MovieContext.Provider value={mockContext}>
                     <>
