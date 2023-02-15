@@ -11,17 +11,16 @@ import {
 } from '../services/firebaseStorage';
 import { useLocalStorage } from './use.LocalStorage';
 
-export const useFirebase = () => {    
+export const useFirebase = () => {
     const [favorites, setFavorites] = useState<Array<number>>([]);
     const [watched, setWatched] = useState<Array<number>>([]);
     const [liked, setLiked] = useState<Array<number>>([]);
     const [disliked, setDisliked] = useState<Array<number>>([]);
-    const {getItem, setItem } = useLocalStorage();
-    
+    const { getItem, setItem } = useLocalStorage();
     const [user, dispatch] = useReducer(userReducer, null);
 
     useEffect(() => {
-        const user = getItem('user');
+        const user = getItem('user');        
         if (user) {
             dispatch(loginUser(JSON.parse(user)));
             reloadFavorites(JSON.parse(user));
@@ -30,18 +29,18 @@ export const useFirebase = () => {
     }, []);
 
     const login = async () => {
-        const user = await loginFirebase().catch(() => {
-            console.error('Logueo Fallido');
-        });
-        if (user) {            
-            dispatch(loginUser(user));
-            setItem('user', JSON.stringify(user));
-            reloadFavorites(user);
+        try {
+            const user = await loginFirebase();            
+            if (user) {
+                dispatch(loginUser(user));
+                setItem('user', JSON.stringify(user));
+                reloadFavorites(user);
+            }
+        } catch (error) {
         }
-    };
-
+    };    
     const logout = () => {
-        logoutFirebase();        
+        logoutFirebase();
         dispatch(logoutUser(null));
         setFavorites([]);
         setWatched([]);
@@ -51,7 +50,7 @@ export const useFirebase = () => {
     };
 
     const reloadFavorites = (user: User) => {
-        if (user) {            
+        if (user) {
             getFavorites(user.uid, setFavorites);
             getWatched(user.uid, setWatched);
             getLiked(user.uid, setLiked);
@@ -60,7 +59,7 @@ export const useFirebase = () => {
     };
     return {
         login,
-        logout,        
+        logout,
         user,
         favorites,
         watched,

@@ -2,10 +2,9 @@ import { usePromiseTracker } from 'react-promise-tracker';
 import { ColorRing } from 'react-loader-spinner';
 
 export default function LoadingIndicator() {
-    const { promiseInProgress } = usePromiseTracker({ delay: 500 });
-
+    const { promiseInProgress } = usePromiseTracker({ delay: 500 });   
     return (
-        <div>
+        <div title='spinner'>
             {promiseInProgress === true ? (
                 <div className="spinner-modal">
                     <ColorRing

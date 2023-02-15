@@ -25,6 +25,7 @@ export function FilterModal({
             <h2 className="filter-modal__title">Selecciona Genero</h2>
             <ul className="filter-modal__list">
                 <li
+                    role="button"
                     className="filter-modal__list-element filter-modal__list-element-all"
                     onClick={() => {
                         setActiveOperation('popular');
@@ -38,6 +39,7 @@ export function FilterModal({
                 </li>
                 {genres.map((element) => (
                     <li
+                        role="button"
                         key={element.name}
                         className="filter-modal__list-element"
                         onClick={() => {

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import { Analytics, getAnalytics, isSupported } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,6 +13,30 @@ const firebaseConfig = {
     databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
+const analyticsMock = {
+    logEvent: () => {
+        //
+    },
+    setCurrentScreen: () => {
+        //
+    },
+    setUserId: () => {
+        //
+    },
+};
+
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(firebaseApp);
+
+export let checkSupport:boolean;
+
+export let analytics: Analytics;
+
+(async () => {
+    checkSupport = await isSupported();
+    if (checkSupport) {
+        analytics = getAnalytics(firebaseApp);
+    } else {
+        analytics = analyticsMock as unknown as Analytics;
+    }
+})();

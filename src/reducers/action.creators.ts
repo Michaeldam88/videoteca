@@ -24,10 +24,10 @@ export const popularMovie = (payload: Array<MovieStructure>): MovieAction => ({
 
 export type UserAction = {
     type: string;
-    payload: User | null;
+    payload: Partial<User> | null;
 };
 
-export const loginUser = (payload: User): UserAction => ({
+export const loginUser = (payload: Partial<User>): UserAction => ({
     type: userActionTypes.addUser,
     payload,
 });

@@ -8,8 +8,7 @@ import LoadingIndicator from '../../components/loadingIndicator/loadingIndicator
 export default function Favorites() {
     const { user, favorites, getFavoritesList, favoritesList } =
         useContext(MovieContext);
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const [page, setPage] = React.useState(0);    
     const [idDetail, setIdDetails] = useState<number | null>(null);
 
     const handleChangePage = (
@@ -17,14 +16,7 @@ export default function Favorites() {
         newPage: number
     ) => {
         setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+    };    
 
     useEffect(() => {
         getFavoritesList(favorites.slice(page * 20, page * 20 + 20));
@@ -67,8 +59,7 @@ export default function Favorites() {
                     count={favorites.length}
                     page={page}
                     onPageChange={handleChangePage}
-                    rowsPerPage={rowsPerPage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    rowsPerPage={20}                    
                 />
 
                 {idDetail !== null ? (

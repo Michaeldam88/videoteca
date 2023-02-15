@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DetailsModal } from '../../components/details-modal/details-modal';
 import { FilterModal } from '../../components/filter-modal/filter-modal';
 import { MovieCard } from '../../components/movie-card/movie-card';
@@ -8,8 +8,7 @@ import { MovieContext } from '../../context/movie.context';
 import LoadingIndicator from '../../components/loadingIndicator/loadingIndicator';
 
 export default function Home() {
-    const [rowsPerPage, setRowsPerPage] = useState(20);
-
+    
     const { movies, filterModal, page, setPage, totPages } =
         useContext(MovieContext);
 
@@ -18,17 +17,14 @@ export default function Home() {
         newPage: number
     ) => {
         setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+    };    
 
     const [filter, setFilter] = useState('default');
     const [idDetail, setIdDetails] = useState<number | null>(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [page]);
 
     return (
         <main className="home">
@@ -63,8 +59,7 @@ export default function Home() {
                     count={totPages}
                     page={page}
                     onPageChange={handleChangePage}
-                    rowsPerPage={rowsPerPage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    rowsPerPage={20}                    
                 />
 
                 {filterModal === true ? (

@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import { GenreStructure } from '../types/genreStructure';
 import { MovieStructure } from '../types/movieStructure';
 
-interface MovieContextStructure {
+export interface MovieContextStructure {
     movies: Array<MovieStructure>;
     genres: Array<GenreStructure>;
     details: Partial<MovieStructure>;
@@ -14,7 +14,7 @@ interface MovieContextStructure {
     filterModal: boolean;
     setFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
     searchMovie: (keyword: string, page: number) => Promise<void>;
-    user: User | null;
+    user: Partial<User> | null;
     login: () => Promise<void>;
     logout: () => void;
     page: number;
@@ -36,26 +36,26 @@ const initialContext: MovieContextStructure = {
     genres: [],
     details: {},
     user: null,
-    getPopularMovies: async () => {},
-    getFilteredMovies: async (genre) => {},
-    getDetails: async (id) => {},
     filterModal: false,
-    setFilterModal: () => {},
-    searchMovie: async (keyword) => {},
-    login: async () => {},
-    logout: () => {},
     page: 0,
-    setPage: () => {},
     totPages: 0,
-    setActiveOperation: () => {},
     favorites: [],
     watched: [],
     liked: [],
     disliked: [],
     activeOperation: '',
-    setDetails: () => {},
-    getFavoritesList: async (ids) => {},
     favoritesList: [],
+    getPopularMovies: async () => {},
+    getFilteredMovies: async (genre) => {},
+    getDetails: async (id) => {},
+    getFavoritesList: async (ids) => {},
+    searchMovie: async (keyword) => {},
+    login: async () => {},
+    logout: () => {},
+    setDetails: () => {},
+    setFilterModal: () => {},
+    setPage: () => {},
+    setActiveOperation: () => {},
 };
 
 export const MovieContext = createContext(initialContext);

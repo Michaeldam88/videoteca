@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
 import {
     deleteFavoritesMovie,
-    writeFavoritesMovie,
     deleteWatchedMovie,
     writeWatchedMovie,
     deleteLikedMovie,
@@ -18,15 +17,13 @@ export function FavoritesCard({
     movie,
     setIdDetails,
 }: {
-    movie: MovieStructure;
+    movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { user, favorites, watched, liked, disliked } =
+    const { user, watched, liked, disliked } =
         useContext(MovieContext);
 
-    const genre = movie.genres
-        ? movie.genres[0].name
-        : [''];
+    const genre = movie.genres ? movie.genres[0].name : [''];
 
     const [open, setOpen] = useState(false);
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
@@ -38,34 +35,28 @@ export function FavoritesCard({
         setOpen(true);
     };
 
-    const handleClickAddFavorites = () => {
-        setOpenAddedFavorites(true);
-        if (user && movie.id) writeFavoritesMovie(user.uid, movie.id);
-    };
-
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user && movie.id) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickAddWatched = () => {
         setOpenAddedWatched(true);
-        if (user && movie.id) writeWatchedMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            writeWatchedMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveWatched = () => {
         setOpenRemovedWatched(true);
-        if (user && movie.id) deleteWatchedMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteWatchedMovie(user.uid, movie.id);
     };
 
     const handleClose = (
         event?: React.SyntheticEvent | Event,
         reason?: string
     ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
         setOpenAddedWatched(false);
         setOpenRemovedWatched(false);
         setOpenAddedFavorites(false);
@@ -88,25 +79,24 @@ export function FavoritesCard({
             <div className="movie-card__top">
                 {watched.some((element) => element === movie.id) ? (
                     <span
+                        role="button"
                         className="movie-card__eye movie-card__eye--selected material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickRemoveWatched() : handleClick()
-                        }
+                        onClick={() => handleClickRemoveWatched()}
                     >
                         visibility
                     </span>
                 ) : (
                     <span
+                        role="button"
                         className="movie-card__eye material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickAddWatched() : handleClick()
-                        }
+                        onClick={() => handleClickAddWatched()}
                     >
                         visibility
                     </span>
                 )}
                 {disliked.some((element) => element === movie.id) ? (
                     <span
+                        role="button"
                         className="movie-card__thumsDown movie-card__thumsDown--selected material-symbols-outlined"
                         onClick={() =>
                             user && user.uid && movie.id
@@ -118,13 +108,14 @@ export function FavoritesCard({
                     </span>
                 ) : (
                     <span
+                        role="button"
                         className="movie-card__thumsDown material-symbols-outlined"
                         onClick={() => {
                             user && user.uid && movie.id
                                 ? writeDislikedMovie(user.uid, movie.id)
                                 : handleClick();
 
-                            if (user && movie.id)
+                            if (user && user.uid && movie.id)
                                 deleteLikedMovie(user.uid, movie.id);
                         }}
                     >
@@ -134,6 +125,7 @@ export function FavoritesCard({
 
                 {liked.some((element) => element === movie.id) ? (
                     <span
+                        role="button"
                         className="movie-card__thumsUp movie-card__thumsUp--selected material-symbols-outlined"
                         onClick={() =>
                             user && user.uid && movie.id
@@ -145,39 +137,29 @@ export function FavoritesCard({
                     </span>
                 ) : (
                     <span
+                        role="button"
                         className="movie-card__thumsUp material-symbols-outlined"
                         onClick={() => {
                             user && user.uid && movie.id
                                 ? writeLikedMovie(user.uid, movie.id)
                                 : handleClick();
 
-                            if (user && movie.id)
+                            if (user && user.uid && movie.id)
                                 deleteDislikedMovie(user.uid, movie.id);
                         }}
                     >
                         recommend
                     </span>
                 )}
-
-                {favorites.some((element) => element === movie.id) ? (
-                    <span
-                        className="movie-card__star material-symbols-outlined --filled"
-                        onClick={() =>
-                            user ? handleClickRemoveFavorites() : handleClick()
-                        }
-                    >
-                        star
-                    </span>
-                ) : (
-                    <span
-                        className="movie-card__star material-symbols-outlined"
-                        onClick={() =>
-                            user ? handleClickAddFavorites() : handleClick()
-                        }
-                    >
-                        star
-                    </span>
-                )}
+                <span
+                    role="button"
+                    className="movie-card__star material-symbols-outlined --filled"
+                    onClick={() =>
+                        user ? handleClickRemoveFavorites() : handleClick()
+                    }
+                >
+                    star
+                </span>
             </div>
 
             <div
@@ -261,7 +243,7 @@ export function FavoritesCard({
                     severity="success"
                     sx={{ width: '100%' }}
                 >
-                    Marcado como no visto!
+                    !Marcado como no visto!
                 </Alert>
             </Snackbar>
         </li>

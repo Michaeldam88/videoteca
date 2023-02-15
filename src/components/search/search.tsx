@@ -33,6 +33,7 @@ export function Search({ filter }: { filter: string }) {
                 />
             </div>
             <span
+                role="button"
                 className={
                     activeOperation !== 'filter'
                         ? `home__filter material-symbols-outlined`

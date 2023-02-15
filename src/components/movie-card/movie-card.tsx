@@ -12,13 +12,15 @@ export function MovieCard({
     movie,
     setIdDetails,
 }: {
-    movie: MovieStructure;
+    movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
     const { genres, user, favorites } = useContext(MovieContext);
 
+    const genre_ids = movie.genre_ids as number[];
+
     const genreFiltered = genres.filter(
-        (element) => element.id === movie.genre_ids[0]
+        (element) => element.id === genre_ids[0]
     );
 
     const genre = genreFiltered.length ? genreFiltered[0].name : '';
@@ -27,27 +29,26 @@ export function MovieCard({
     const [openAddedFavorites, setOpenAddedFavorites] = useState(false);
     const [openRemovedFavorites, setOpenRemovedFavorites] = useState(false);
 
-    const handleClick = () => {        
+    const handleClick = () => {
         setOpen(true);
     };
 
     const handleClickAddFavorites = () => {
         setOpenAddedFavorites(true);
-        if (user) writeFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            writeFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (
         event?: React.SyntheticEvent | Event,
         reason?: string
     ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
         setOpenAddedFavorites(false);
         setOpenRemovedFavorites(false);
         setOpen(false);
@@ -68,15 +69,15 @@ export function MovieCard({
             <div className="movie-card__top">
                 {favorites.some((element) => element === movie.id) ? (
                     <span
+                        role="button"
                         className="movie-card__star material-symbols-outlined --filled"
-                        onClick={() =>
-                            user ? handleClickRemoveFavorites() : handleClick()
-                        }
+                        onClick={() => handleClickRemoveFavorites()}
                     >
                         star
                     </span>
                 ) : (
                     <span
+                        role="button"
                         className="movie-card__star material-symbols-outlined"
                         onClick={() =>
                             user ? handleClickAddFavorites() : handleClick()
@@ -88,18 +89,18 @@ export function MovieCard({
             </div>
 
             <div
+                role="button"
                 className="movie-card__bottom"
-                onClick={() => setIdDetails(movie.id)}
+                onClick={() => {
+                    if (movie.id) {
+                        setIdDetails(movie.id);
+                    }
+                }}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
-                <h2 className="movie-card__title">
-                    {movie.title || movie.name}
-                </h2>
+                <h2 className="movie-card__title">{movie.title}</h2>
                 <h3 className="movie-card__year">
                     {movie.release_date ? movie.release_date.slice(0, 4) : ''}
-                    {movie.first_air_date
-                        ? movie.first_air_date.slice(0, 4)
-                        : ''}
                 </h3>
             </div>
 
