@@ -14,7 +14,7 @@ TmdbApi.prototype.filterGenre = jest.fn();
 describe(`Given useMovies (custom hook)
             render with a virtual component`, () => {
     const { result,rerender } = renderHook(() => useMovies());
-    console.log(result.current)
+    //console.log(result.current)
     describe(`When the api is working`, () => {
         beforeEach(mockValidRepoResponse);
 

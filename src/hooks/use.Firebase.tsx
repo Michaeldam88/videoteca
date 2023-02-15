@@ -31,7 +31,7 @@ export const useFirebase = () => {
     const login = async () => {
         try {
             const user = await loginFirebase()
-            console.log(loginFirebase,user);
+            //console.log(loginFirebase,user);
         if (user) {            
             dispatch(loginUser(user));
             setItem('user', JSON.stringify(user));

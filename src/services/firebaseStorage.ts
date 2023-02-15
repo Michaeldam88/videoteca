@@ -12,7 +12,7 @@ import { firebaseApp } from '../firebaseApp';
 
 export function writeFavoritesMovie(userUID: string, idMovie: number) {
     const database = getDatabase(firebaseApp);
-    
+
     let exist = false;
 
     const topUserPostsRef = query(
@@ -28,7 +28,7 @@ export function writeFavoritesMovie(userUID: string, idMovie: number) {
     if (exist) return;
 
     const newPostKey = push(child(ref(database), 'user')).key;
-    
+
     const updates: { [key: string]: number } = {};
     updates['/user/' + userUID + '/favoritesMovies/' + newPostKey] = idMovie;
     return update(ref(database), updates);
@@ -43,9 +43,9 @@ export function deleteFavoritesMovie(userUID: string, idMovie: number) {
         ref(database, '/user/' + userUID + '/favoritesMovies/')
     );
 
-    onValue(topUserPostsRef, (snapshot: DataSnapshot) => {        
+    onValue(topUserPostsRef, (snapshot: DataSnapshot) => {
         const obj = snapshot.val();
-        
+
         if (!obj) return;
         idToRemove = Object.keys(obj).find((key) => obj[key] === idMovie);
     });

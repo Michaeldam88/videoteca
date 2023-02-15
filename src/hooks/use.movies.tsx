@@ -143,7 +143,7 @@ export function useMovies(): UseMovies {
         },
         [tmdbApi, getPopularMovies]
     );
-    console.log(page, activeOperation);
+    //console.log(page, activeOperation);
     useEffect(() => {        
         if (activeOperation === 'popular') getPopularMovies(page + 1);
         if (activeOperation === 'filter')
