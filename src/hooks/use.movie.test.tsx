@@ -1,4 +1,11 @@
-import { act, renderHook } from '@testing-library/react';
+import {
+    act,
+    render,
+    renderHook,
+    screen,
+    waitFor,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { mockValidRepoResponse } from '../mocks/testing.hookMock';
 import { TmdbApi } from '../services/tmdbApi';
 import { useMovies } from './use.movies';
@@ -11,10 +18,9 @@ TmdbApi.prototype.getDetails = jest.fn();
 TmdbApi.prototype.searchMovie = jest.fn();
 TmdbApi.prototype.filterGenre = jest.fn();
 
-describe(`Given useMovies (custom hook)
-            render with a virtual component`, () => {
-    const { result,rerender } = renderHook(() => useMovies());
-    //console.log(result.current)
+describe(`Given useMovies (custom hook)`, () => {
+    const { result } = renderHook(() => useMovies());
+
     describe(`When the api is working`, () => {
         beforeEach(mockValidRepoResponse);
 
@@ -47,23 +53,48 @@ describe(`Given useMovies (custom hook)
             await act(() => result.current.searchMovie('', 1));
             expect(TmdbApi.prototype.getPopularMovies).toHaveBeenCalled();
         });
+    });
+});
 
-        // test('Then setting a new page and the action to filter should call filter function', async () => {
-        //     rerender();
-        //     await act(() => {
-        //         result.current.setActiveOperation('filter');
-        //         result.current.setPage(1);                
-        //     });
-            
-        //     expect(TmdbApi.prototype.filterGenre).toHaveBeenCalled();
-        // });
+describe(`Given useMovies (custom hook)
+            render with a virtual component`, () => {
+    let TestComponent: () => JSX.Element;
+    let buttons: Array<HTMLElement>;
+    beforeEach(() => {
+        TestComponent = () => {
+            const { setPage, setActiveOperation } = useMovies();
+            return (
+                <>
+                    <button onClick={() => setPage(1)}>set page</button>
+                    <button onClick={() => setActiveOperation('filter')}>
+                        set active to filter
+                    </button>
+                    <button onClick={() => setActiveOperation('search')}>
+                        set active to search
+                    </button>
+                </>
+            );
+        };
+        render(<TestComponent />);
+        buttons = screen.getAllByRole('button');
+    });
 
-        // test('Then setting a new page and the action to search should call popular function as the is no text written', async () => {
-        //     result.current.activeOperation = 'search';
-        //     console.log(result.current.activeOperation);
+    describe(`When we change the page and the activo operation is filter`, () => {
+        test('Then should call the function getFilteredMovies', async () => {
+            userEvent.click(buttons[1]);
+            userEvent.click(buttons[0]);
+            expect(TmdbApi.prototype.filterGenre).toHaveBeenCalled();
+        });
+    });
 
-        //     await act(() => result.current.setPage(2));
-        //     expect(TmdbApi.prototype.getPopularMovies).toHaveBeenCalled();
-        // });
+    describe(`When we change the page and the activo operation is search`, () => {
+        test('Then should call the function getPopularMovies', async () => {
+            userEvent.click(buttons[2]);
+            userEvent.click(buttons[0]);
+
+            await waitFor(() => {
+                expect(TmdbApi.prototype.getPopularMovies).toHaveBeenCalled();
+            });
+        });
     });
 });

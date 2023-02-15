@@ -41,7 +41,8 @@ export function MovieCard({
 
     const handleClickRemoveFavorites = () => {
         setOpenRemovedFavorites(true);
-        if (user && user.uid && movie.id) deleteFavoritesMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id)
+            deleteFavoritesMovie(user.uid, movie.id);
     };
 
     const handleClose = (
@@ -70,9 +71,7 @@ export function MovieCard({
                     <span
                         role="button"
                         className="movie-card__star material-symbols-outlined --filled"
-                        onClick={() =>
-                            user ? handleClickRemoveFavorites() : handleClick()
-                        }
+                        onClick={() => handleClickRemoveFavorites()}
                     >
                         star
                     </span>
@@ -99,14 +98,9 @@ export function MovieCard({
                 }}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
-                <h2 className="movie-card__title">
-                    {movie.title || movie.name}
-                </h2>
+                <h2 className="movie-card__title">{movie.title}</h2>
                 <h3 className="movie-card__year">
                     {movie.release_date ? movie.release_date.slice(0, 4) : ''}
-                    {movie.first_air_date
-                        ? movie.first_air_date.slice(0, 4)
-                        : ''}
                 </h3>
             </div>
 

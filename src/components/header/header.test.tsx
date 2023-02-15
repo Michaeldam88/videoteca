@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import {
@@ -41,7 +41,7 @@ describe('Given a header component with user logged', () => {
         });
     });
 
-    describe('When we cick to home', () => {
+    describe('When we click to home', () => {
         test('Then its should call t he function setPage', async () => {
             const filmBtn = screen.getByRole('button', { name: 'theaters' });
             userEvent.click(filmBtn);
@@ -49,7 +49,7 @@ describe('Given a header component with user logged', () => {
         });
     });
 
-    describe('When we cick to logout', () => {
+    describe('When we click to logout', () => {
         test('it shoul call the function logout', () => {
             const logoutBtn = screen.getByRole('button', {
                 name: 'logout',
@@ -102,4 +102,34 @@ describe('Given a header component with user not logged', () => {
             });
         });
     });
+});
+
+
+describe('Given a header component with user logged with no name and photo', () => {
+    beforeEach(async () => {
+        const mockContext = {
+            getPopularMovies,
+            setPage,
+            setActiveOperation,
+            logout,
+            login,
+            user: { ...user, displayName: '', photoURL: '' },
+        } as unknown as MovieContextStructure;
+        await render(
+            <BrowserRouter>
+                <MovieContext.Provider value={mockContext}>
+                    <Header />
+                </MovieContext.Provider>
+            </BrowserRouter>
+        );
+    });
+
+    describe('When it has been rendered', () => {
+        test('Then its should render without name and photo', () => {
+            const filmBtn = screen.getByRole('button', { name  : 'theaters' });
+            expect(filmBtn).toBeInTheDocument();
+        });
+    });
+
+    
 });

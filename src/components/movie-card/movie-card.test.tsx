@@ -131,7 +131,7 @@ describe('Given a movie-card component without user', () => {
         const mockContext = {
             genres,
             user,
-            favorites,
+            favorites:[],
         } as unknown as MovieContextStructure;
         render(
             <MovieContext.Provider value={mockContext}>

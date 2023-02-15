@@ -70,9 +70,7 @@ export function useMovies(): UseMovies {
                 const filteredList = await tmdbApi.getPopularMovies(page);
                 dispatch(popularMovie(filteredList.results));
                 setTotPage(filteredList.total_pages);
-            } catch (error) {
-                
-            }
+            } catch (error) {}
         },
         [tmdbApi]
     );
@@ -82,9 +80,7 @@ export function useMovies(): UseMovies {
             try {
                 const details = await tmdbApi.getDetails(id);
                 setDetails(details);
-            } catch (error) {
-                
-            }
+            } catch (error) {}
         },
         [tmdbApi]
     );
@@ -96,9 +92,7 @@ export function useMovies(): UseMovies {
                     ...ids.map((element) => tmdbApi.getDetails(element)),
                 ]);
                 setFavoritesList(favoritesList);
-            } catch (error) {
-                
-            }
+            } catch (error) {}
         },
         [tmdbApi]
     );
@@ -113,9 +107,7 @@ export function useMovies(): UseMovies {
                 );
                 dispatch(filterMovie(filteredList.results));
                 setTotPage(filteredList.total_pages);
-            } catch (error) {
-                
-            }
+            } catch (error) {}
         },
         [tmdbApi]
     );
@@ -137,14 +129,12 @@ export function useMovies(): UseMovies {
                 if (receivedKeyword.length === 0) {
                     getPopularMovies(page);
                 }
-            } catch (error) {
-                
-            }
+            } catch (error) {}
         },
         [tmdbApi, getPopularMovies]
     );
-    //console.log(page, activeOperation);
-    useEffect(() => {        
+
+    useEffect(() => {
         if (activeOperation === 'popular') getPopularMovies(page + 1);
         if (activeOperation === 'filter')
             getFilteredMovies(genre.current, page + 1);
