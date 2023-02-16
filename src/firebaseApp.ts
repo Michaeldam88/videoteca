@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { initializeApp } from 'firebase/app';
-import { Analytics, getAnalytics, isSupported } from 'firebase/analytics';
+import { getAnalytics} from 'firebase/analytics';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -12,31 +12,5 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
-
-const analyticsMock = {
-    logEvent: () => {
-        //
-    },
-    setCurrentScreen: () => {
-        //
-    },
-    setUserId: () => {
-        //
-    },
-};
-
-// Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
-
-export let checkSupport:boolean;
-
-export let analytics: Analytics;
-
-(async () => {
-    checkSupport = await isSupported();
-    if (checkSupport) {
-        analytics = getAnalytics(firebaseApp);
-    } else {
-        analytics = analyticsMock as unknown as Analytics;
-    }
-})();
+export const analytics = getAnalytics(firebaseApp);

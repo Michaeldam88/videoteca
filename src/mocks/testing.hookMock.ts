@@ -81,20 +81,7 @@ export const mockMovie2 = {
 export const details1 = {
     adult: false,
     backdrop_path: '/sBOenwOZGRN5nZZGw4TxwtnfrEf.jpg',
-    genres: [
-        {
-            id: 878,
-            name: 'Comedia',
-        },
-        {
-            id: 27,
-            name: 'Terror',
-        },
-        {
-            id: 35,
-            name: 'Ciencia ficción',
-        },
-    ],
+    genres: undefined,
     id: 899112,
     original_language: 'en',
     original_title: 'Violent Night',
@@ -107,7 +94,7 @@ export const details1 = {
     video: false,
     vote_average: 7.6,
     vote_count: 1132,
-    runtime: 101,
+    runtime: undefined,
 };
 
 export const details2 = {
@@ -133,8 +120,8 @@ export const details2 = {
     overview:
         'está en el edificio y a punto de demostrar por qué este Santa Claus, no es ningún santo.',
     popularity: 847.073,
-    poster_path: '/zM1aKY3uhOie3X1gLPKTl5MaEZZ.jpg',
-    release_date: '2022-12-02',
+    poster_path: '',
+    release_date: '',
     title: 'Noche de paz',
     video: false,
     vote_average: 7.6,
