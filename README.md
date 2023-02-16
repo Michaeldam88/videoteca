@@ -29,6 +29,7 @@ Para su desarrollo he intentado utilizar todas las tecnologías aprendidas duran
 -   Para comprobar la calidad del código: Git Action y Sonar (https://sonarcloud.io/project/overview?id=Michaeldam88_videoteca)
 
 Así es como se presenta:
-URl Screenshot
+![This is an image](https://github.com/Michaeldam88/videoteca/blob/main/public/assets/videoteca-desktop-image.png)
+![This is an image](https://github.com/Michaeldam88/videoteca/blob/main/public/assets/videoteca-mobile-image.png)
 
 La podéis probar aquí: https://michaeldam88-videoteca.netlify.app/

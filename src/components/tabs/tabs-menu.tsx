@@ -19,7 +19,7 @@ export function TabsMenu() {
             setActiveOperation('favorites');
         } else {            
             setActiveOperation('popular');
-            setPage(1);
+            setPage(0);
         }
         setValue(newValue);
     };
