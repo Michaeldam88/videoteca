@@ -7,14 +7,20 @@ import { MovieContext } from '../../context/movie.context';
 export function TabsMenu() {
     const [value, setValue] = useState(0);
 
-    const { activeOperation, setActiveOperation } = useContext(MovieContext);
+    const { activeOperation, setActiveOperation, setPage } =
+        useContext(MovieContext);
 
     useEffect(() => {
         if (activeOperation === 'popular') setValue(0);
     }, [activeOperation]);
 
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
-        if (newValue === 1) setActiveOperation('favorites');
+    const handleChange = (event: SyntheticEvent, newValue: number) => {        
+        if (newValue === 1) {
+            setActiveOperation('favorites');
+        } else {            
+            setActiveOperation('popular');
+            setPage(1);
+        }
         setValue(newValue);
     };
 

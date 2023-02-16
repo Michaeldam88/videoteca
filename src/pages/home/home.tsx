@@ -24,8 +24,8 @@ export default function Home() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [page]);
-
+    }, [page]);    
+    
     return (
         <main className="home">
             <div className="container flex-column">

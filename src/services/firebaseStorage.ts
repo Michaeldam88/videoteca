@@ -12,7 +12,6 @@ import { firebaseApp } from '../firebaseApp';
 
 const checkAndUpdateWrite = (userUID:string, idMovie:number, url:string) => {
     const database = getDatabase(firebaseApp);
-
     let exist = false;
 
     const topUserPostsRef = query(ref(database, '/user/' + userUID + url));
@@ -24,7 +23,7 @@ const checkAndUpdateWrite = (userUID:string, idMovie:number, url:string) => {
     });
 
     if (exist) return;
-
+    
     const newPostKey = push(child(ref(database), 'user')).key;
 
     const updates: { [key: string]: number } = {};
@@ -62,11 +61,11 @@ export function deleteFavoritesMovie(userUID: string, idMovie: number) {
 }
 
 export function writeWatchedMovie(userUID: string, idMovie: number) {
-    checkAndUpdateWrite(userUID, idMovie, '/favoritesMovies/');
+    checkAndUpdateWrite(userUID, idMovie, '/watchedMovies/');
 }
 
 export function deleteWatchedMovie(userUID: string, idMovie: number) {
-    checkAndUpdateDelete(userUID, idMovie, '/favoritesMovies/');
+    checkAndUpdateDelete(userUID, idMovie, '/watchedMovies/');
 }
 
 export function writeLikedMovie(userUID: string, idMovie: number) {
