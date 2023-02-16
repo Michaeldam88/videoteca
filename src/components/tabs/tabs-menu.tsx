@@ -14,10 +14,10 @@ export function TabsMenu() {
         if (activeOperation === 'popular') setValue(0);
     }, [activeOperation]);
 
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
+    const handleChange = (event: SyntheticEvent, newValue: number) => {        
         if (newValue === 1) {
             setActiveOperation('favorites');
-        } else {
+        } else {            
             setActiveOperation('popular');
             setPage(1);
         }
