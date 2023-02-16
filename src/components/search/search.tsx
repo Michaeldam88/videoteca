@@ -2,7 +2,7 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
 export function Search({ filter }: { filter: string }) {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState('');
 
     const {
         setFilterModal,
@@ -13,13 +13,12 @@ export function Search({ filter }: { filter: string }) {
     } = useContext(MovieContext);
 
     const handleInput = (ev: ChangeEvent<HTMLInputElement>) => {
-        const element = ev.target
+        const element = ev.target;
         setPage(0);
         searchMovie(element.value, 1);
         setActiveOperation('search');
         setInputValue(element.value);
     };
-
     return (
         <div className="home__search-container">
             <div className="home__search-box">
@@ -29,7 +28,7 @@ export function Search({ filter }: { filter: string }) {
                     type="text"
                     placeholder="Buscar"
                     onChange={handleInput}
-                    value={activeOperation !== "search"? "":inputValue}
+                    value={activeOperation !== 'search' ? '' : inputValue}
                 />
             </div>
             <span
