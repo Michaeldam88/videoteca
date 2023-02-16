@@ -141,7 +141,7 @@ export function useMovies(): UseMovies {
         if (activeOperation === 'search')
             searchMovie(keyword.current, page + 1);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page]);
+    }, [page, activeOperation]);
 
     return {
         getPopularMovies,
