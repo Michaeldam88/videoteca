@@ -5,10 +5,11 @@ import {
     MovieContextStructure,
 } from '../../context/movie.context';
 import {
+    details1,
+    details2,
     disliked,
     liked,
     mockMovie1,
-    mockMovie2,
     user,
     watched,
 } from '../../mocks/testing.hookMock';
@@ -47,7 +48,7 @@ describe('Given a movie-card component with user logged', () => {
         render(
             <MovieContext.Provider value={mockContext}>
                 <FavoritesCard
-                    movie={mockMovie1}
+                    movie={details1}
                     setIdDetails={MockSetIdDetails}
                 />
             </MovieContext.Provider>
@@ -141,6 +142,50 @@ describe('Given a movie-card component with user logged', () => {
     });
 });
 
+describe('Given a movie-card component with user logged and no movie id', () => {
+    const MockSetIdDetails = jest.fn();
+
+    beforeEach(() => {
+        const mockContext = {
+            user,
+            watched,
+            liked,
+            disliked,
+        } as unknown as MovieContextStructure;
+        render(
+            <MovieContext.Provider value={mockContext}>
+                <FavoritesCard
+                    movie={{ ...details1, id: undefined }}
+                    setIdDetails={MockSetIdDetails}
+                />
+            </MovieContext.Provider>
+        );
+    });
+
+    describe('When it has been rendered', () => {
+        test('Then if we click the buttons it should do nothing', () => {
+            const removeFavoritesBtn = screen.getByRole('button', {
+                name: 'star',
+            });
+            const removeVisibility = screen.getByRole('button', {
+                name: 'visibility',
+            });
+            const openModal = screen.getByRole('heading', {
+                level: 3,
+                name: '2022',
+            });
+            const removeLikedBtn = screen.getAllByRole('button', {
+                name: 'recommend',
+            });
+            userEvent.click(removeLikedBtn[0]);
+            userEvent.click(removeLikedBtn[1]);
+            userEvent.click(openModal);
+            userEvent.click(removeFavoritesBtn);
+            userEvent.click(removeVisibility);
+        });
+    });
+});
+
 describe('Given a movie-card component with user logged and the movie is not liked,disliked and watched', () => {
     const MockSetIdDetails = jest.fn();
 
@@ -154,7 +199,7 @@ describe('Given a movie-card component with user logged and the movie is not lik
         render(
             <MovieContext.Provider value={mockContext}>
                 <FavoritesCard
-                    movie={mockMovie2}
+                    movie={details2}
                     setIdDetails={MockSetIdDetails}
                 />
             </MovieContext.Provider>
@@ -197,12 +242,9 @@ describe('Given a movie-card component with user logged and the movie is not lik
 
 describe('Given a movie-card component without user', () => {
     const MockSetIdDetails = jest.fn();
-
-    const user = null;
-
     beforeEach(() => {
         const mockContext = {
-            user,
+            user: null,
             watched,
             liked,
             disliked,

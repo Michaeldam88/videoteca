@@ -49,13 +49,11 @@ export const useFirebase = () => {
         setItem('user', '');
     };
 
-    const reloadFavorites = (user: User) => {
-        if (user) {
+    const reloadFavorites = (user: User) => {        
             getFavorites(user.uid, setFavorites);
             getWatched(user.uid, setWatched);
             getLiked(user.uid, setLiked);
-            getDisliked(user.uid, setDisliked);
-        }
+            getDisliked(user.uid, setDisliked);        
     };
     return {
         login,

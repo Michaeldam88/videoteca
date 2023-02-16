@@ -20,8 +20,7 @@ export function FavoritesCard({
     movie: Partial<MovieStructure>;
     setIdDetails: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-    const { user, watched, liked, disliked } =
-        useContext(MovieContext);
+    const { user, watched, liked, disliked } = useContext(MovieContext);
 
     const genre = movie.genres ? movie.genres[0].name : [''];
 
@@ -43,8 +42,7 @@ export function FavoritesCard({
 
     const handleClickAddWatched = () => {
         setOpenAddedWatched(true);
-        if (user && user.uid && movie.id)
-            writeWatchedMovie(user.uid, movie.id);
+        if (user && user.uid && movie.id) writeWatchedMovie(user.uid, movie.id);
     };
 
     const handleClickRemoveWatched = () => {
@@ -98,11 +96,10 @@ export function FavoritesCard({
                     <span
                         role="button"
                         className="movie-card__thumsDown movie-card__thumsDown--selected material-symbols-outlined"
-                        onClick={() =>
-                            user && user.uid && movie.id
-                                ? deleteDislikedMovie(user.uid, movie.id)
-                                : handleClick()
-                        }
+                        onClick={() => {
+                            if (user && user.uid && movie.id)
+                                deleteDislikedMovie(user.uid, movie.id);
+                        }}
                     >
                         recommend
                     </span>
@@ -111,9 +108,8 @@ export function FavoritesCard({
                         role="button"
                         className="movie-card__thumsDown material-symbols-outlined"
                         onClick={() => {
-                            user && user.uid && movie.id
-                                ? writeDislikedMovie(user.uid, movie.id)
-                                : handleClick();
+                            if (user && user.uid && movie.id)
+                                writeDislikedMovie(user.uid, movie.id);
 
                             if (user && user.uid && movie.id)
                                 deleteLikedMovie(user.uid, movie.id);
@@ -127,11 +123,10 @@ export function FavoritesCard({
                     <span
                         role="button"
                         className="movie-card__thumsUp movie-card__thumsUp--selected material-symbols-outlined"
-                        onClick={() =>
-                            user && user.uid && movie.id
-                                ? deleteLikedMovie(user.uid, movie.id)
-                                : handleClick()
-                        }
+                        onClick={() => {
+                            if (user && user.uid && movie.id)
+                                deleteLikedMovie(user.uid, movie.id);
+                        }}
                     >
                         recommend
                     </span>
@@ -140,9 +135,8 @@ export function FavoritesCard({
                         role="button"
                         className="movie-card__thumsUp material-symbols-outlined"
                         onClick={() => {
-                            user && user.uid && movie.id
-                                ? writeLikedMovie(user.uid, movie.id)
-                                : handleClick();
+                            if (user && user.uid && movie.id)
+                                writeLikedMovie(user.uid, movie.id);
 
                             if (user && user.uid && movie.id)
                                 deleteDislikedMovie(user.uid, movie.id);
@@ -171,14 +165,9 @@ export function FavoritesCard({
                 }}
             >
                 <h4 className="movie-card__tag">{genre}</h4>
-                <h2 className="movie-card__title">
-                    {movie.title || movie.name}
-                </h2>
+                <h2 className="movie-card__title">{movie.title}</h2>
                 <h3 className="movie-card__year">
                     {movie.release_date ? movie.release_date.slice(0, 4) : ''}
-                    {movie.first_air_date
-                        ? movie.first_air_date.slice(0, 4)
-                        : ''}
                 </h3>
             </div>
 
