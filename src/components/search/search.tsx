@@ -1,7 +1,11 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { MovieContext } from '../../context/movie.context';
 
-export function Search({ filter }: { filter: string }) {
+export function Search({
+    filter,
+}: {
+    filter: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const [inputValue, setInputValue] = useState('');
 
     const {
@@ -15,6 +19,7 @@ export function Search({ filter }: { filter: string }) {
     const handleInput = (ev: ChangeEvent<HTMLInputElement>) => {
         const element = ev.target;
         setPage(0);
+        filter(element.value);
         searchMovie(element.value, 1);
         setActiveOperation('search');
         setInputValue(element.value);

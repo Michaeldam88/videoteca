@@ -13,7 +13,7 @@ import {
 import { Search } from './search';
 
 describe('Given a search component', () => {
-    const searchMock = 'casa';
+    const MockSetFilter = jest.fn();
 
     beforeEach(() => {
         const mockContext = {
@@ -25,7 +25,7 @@ describe('Given a search component', () => {
         } as unknown as MovieContextStructure;
         render(
             <MovieContext.Provider value={mockContext}>
-                <Search filter={searchMock} />
+                <Search filter={MockSetFilter} />
             </MovieContext.Provider>
         );
     });
@@ -50,7 +50,7 @@ describe('Given a search component', () => {
 });
 
 describe('Given a search component with filter action selected', () => {
-    const searchMock = 'casa';
+    const MockSetFilter = jest.fn();
 
     beforeEach(() => {
         const mockContext = {
@@ -62,7 +62,7 @@ describe('Given a search component with filter action selected', () => {
         } as unknown as MovieContextStructure;
         render(
             <MovieContext.Provider value={mockContext}>
-                <Search filter={searchMock} />
+                <Search filter={MockSetFilter} />
             </MovieContext.Provider>
         );
     });

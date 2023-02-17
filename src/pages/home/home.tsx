@@ -29,7 +29,7 @@ export default function Home() {
     return (
         <main className="home">
             <div className="container flex-column">
-                <Search filter={filter}></Search>
+                <Search filter={setFilter}></Search>
                 <h1 className="home__title">
                     {filter === 'default'
                         ? 'Peliculas Populares'
@@ -59,7 +59,7 @@ export default function Home() {
                     count={totPages}
                     page={page}
                     onPageChange={handleChangePage}
-                    rowsPerPage={20}                    
+                    rowsPerPage={20}
                 />
 
                 {filterModal === true ? (

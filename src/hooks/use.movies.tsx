@@ -127,7 +127,7 @@ export function useMovies(): UseMovies {
                 }
 
                 if (receivedKeyword.length === 0) {
-                    getPopularMovies(page);
+                    getPopularMovies(page)                    
                 }
             } catch (error) {}
         },
