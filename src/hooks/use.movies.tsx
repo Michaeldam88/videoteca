@@ -70,6 +70,7 @@ export function useMovies(): UseMovies {
                 const filteredList = await tmdbApi.getPopularMovies(page);
                 dispatch(popularMovie(filteredList.results));
                 setTotPage(filteredList.total_pages);
+                setActiveOperation('popular');
             } catch (error) {}
         },
         [tmdbApi]
@@ -127,7 +128,7 @@ export function useMovies(): UseMovies {
                 }
 
                 if (receivedKeyword.length === 0) {
-                    getPopularMovies(page)                    
+                    getPopularMovies(page);
                 }
             } catch (error) {}
         },

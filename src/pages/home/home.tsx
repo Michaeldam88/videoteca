@@ -8,8 +8,7 @@ import { MovieContext } from '../../context/movie.context';
 import LoadingIndicator from '../../components/loadingIndicator/loadingIndicator';
 
 export default function Home() {
-    
-    const { movies, filterModal, page, setPage, totPages } =
+    const { movies, filterModal, page, setPage, totPages, activeOperation } =
         useContext(MovieContext);
 
     const handleChangePage = (
@@ -17,15 +16,16 @@ export default function Home() {
         newPage: number
     ) => {
         setPage(newPage);
-    };    
+    };
 
     const [filter, setFilter] = useState('default');
     const [idDetail, setIdDetails] = useState<number | null>(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [page]);    
-    
+        if (activeOperation === 'popular') setFilter('default');        
+    }, [page, activeOperation]);
+
     return (
         <main className="home">
             <div className="container flex-column">
