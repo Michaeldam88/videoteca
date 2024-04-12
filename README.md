@@ -2,9 +2,9 @@
 
 # Videoteca
 
-Para el proyecto final de mi bootcamp en ISDI Coders he decidido desarrollar una web donde podremos buscar películas y series. Ahí veremos los detalles y también podremos añadir a nuestros favoritos las que más nos gusten. Seguramente nos vendrá bien en esos días en que no sepamos que escoger.
+Web para buscar películas y series. Podemos ver detalles y añadir a favoritos las que más nos gusten.
 
-Requisitos del proyecto:
+Proyecto:
 
 -   Diseño en Figma
 -   Crear una SPA con varias páginas en React, gestionando el estado común con context + reducer. La app debe ser responsive (mobile + desktop) / mobile first.
