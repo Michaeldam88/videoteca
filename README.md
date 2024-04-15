@@ -1,5 +1,3 @@
-# Isdi coders Proyecto Final
-
 # Videoteca
 
 Web para buscar películas y series. Podemos ver detalles y añadir a favoritos las que más nos gusten.
